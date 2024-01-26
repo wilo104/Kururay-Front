@@ -13,17 +13,18 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class LoginComponent {
       loginObj : Login;
-      constructor(private http:HttpClient){
+      constructor(private http:HttpClient, private router:Router){
         this.loginObj=new Login();
       }
       onLogin() {
         this.http.post('http://localhost:3000/login', this.loginObj).subscribe(
           {
             next:resp=>{
-              alert("Login Success")
+              alert("Login Success");
+              this.router.navigateByUrl("/dashboard")
             },
             error:err=>{
-              console.log(err.error.msg);
+              alert(err.error.message);
             }
           }
         );
