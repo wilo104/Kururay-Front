@@ -1,18 +1,18 @@
-// auth.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000';  // La URL del servidor Express
+  private role: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor() { }
 
-  login(dni: string, password: string): Observable<any> {
-    const body = { dni, password };
-    return this.http.post(`${this.apiUrl}/login`, body);
+  setRole(role: string) {
+    this.role = role;
+  }
+
+  getRole() {
+    return this.role;
   }
 }
