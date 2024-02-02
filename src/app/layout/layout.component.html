@@ -2,29 +2,34 @@
 <aside id="sidebar">
     <nav>
       <ul>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh' "><a href="/voluntarios">Voluntarios</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh'"><a href="/voluntariados">Voluntariados</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh'"><a href="/beneficiarios">Beneficiarios</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh'"><a href="/benefactores">Benefactores</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh'"><a href="/control-financiero">Control Financiero</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'"><a href="/reportes">Reportes</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'"><a href="/usuarios">Usuarios</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'"><a href="/variables-sistema">Variables del Sistema</a></li>
-        <li *ngIf="rol === 'ADMINISTRADOR'|| rol === 'rrhh'"><a href="/actualizar-contrasena">Actualizar Mi Contraseña</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh' "><a href="/voluntarios">Voluntarios</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh'"><a href="/voluntariados">Voluntariados</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh'"><a href="/beneficiarios">Beneficiarios</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh'"><a href="/benefactores">Benefactores</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh'"><a href="/conttipo_usuario-financiero">Conttipo_usuario Financiero</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'"><a href="/reportes">Reportes</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'"><a href="/usuarios">Usuarios</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'"><a href="/variables-sistema">Variables del Sistema</a></li>
+        <li *ngIf="tipo_usuario === 'ADMINISTRADOR'|| tipo_usuario === 'rrhh'"><a href="/actualizar-contrasena">Actualizar Mi Contraseña</a></li>
       </ul>
     </nav>
 
-    <nav *ngIf="rol==='voluntario'">
+    <nav *ngIf="tipo_usuario==='voluntario'">
       <ul>
         <li><a href="/voluntarios">Mis Voluntariados</a></li>
         <li><a href="/voluntarios">Mis Datos</a></li>
         <li><a href="/actualizar-contrasena">Actualizar Mi Contraseña</a></li>
       </ul>
     </nav>
-    <nav *ngIf="rol==='mentor'">
+    <nav *ngIf="tipo_usuario==='mentor'">
       <ul>
         <li><a href="/voluntarios">Voluntariados</a></li>
         <li><a href="/actualizar-contrasena">Actualizar Mi Contraseña</a></li>
       </ul>
     </nav>
+
   </aside>
+
+  <div class="logout-button">
+    <button (click)="logout()">Cerrar Sesión</button>
+  </div>

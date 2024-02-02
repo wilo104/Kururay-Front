@@ -25,3 +25,18 @@
   #sidebar nav ul li a:hover {
     background-color: #555;
   }
+  .logout-button {
+    text-align: right;
+    padding: 10px;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .logout-button button {
+    background-color: #f44336; /* Color de fondo rojo, puedes personalizarlo */
+    color: #fff; /* Color del texto blanco, puedes personalizarlo */
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }

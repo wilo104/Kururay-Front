@@ -1,67 +1,71 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { NotificationService } from '../notificaciones.service';
+import { ReactiveFormsModule } from '@angular/forms'; 
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AuthGuard } from '../auth.guard';
+import { ModalComponent } from '../modal/modal.component';
+
 @Component({
   selector: 'app-login',
   standalone:true,
-  imports:[CommonModule,FormsModule,HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule],
+  providers: [AuthService, HttpClient, AuthGuard,NotificationService,ModalComponent],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
   
-      loginObj : Login;
-      
-   
-      constructor(private http:HttpClient, private router:Router ,private authService: AuthService ){
-        this.loginObj=new Login();
+    isLoading = false;
+    loginForm = this.fb.group({
+      dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // Patrón para un DNI peruano
+      password: ['', [Validators.required, Validators.minLength(8)]]
+    });
+  
+    constructor(
+      private authService: AuthService,
+      private notificationService: NotificationService,
+      private router: Router,
+      private fb: FormBuilder
+    ) {}
+  
+    onLogin() {
+      if (this.loginForm.invalid) {
+        console.log("Aqui esta entrando y no hace nada mas")
+        return;
+        
       }
-      onLogin() {
-        interface LoginResponse {
-            token: string;
-            tipo_usuario: string;
+  
+      this.isLoading = true;
+      const loginObj = {
+        dni: this.loginForm.value.dni!,
+        password: this.loginForm.value.password!
+      };
+  
+      this.authService.login(loginObj).subscribe({
+        next: resp => {
+          this.isLoading = false;
+          this.notificationService.showSuccess("Login Successful");
+          this.authService.settipo_usuario(resp.tipo_usuario);
+          this.authService.settoken(resp.token);
+          console.log(resp.token);
+         this.navigateBasedOnRole(resp.tipo_usuario);
+        },
+        error: err => {
+          this.isLoading = false;
+          this.notificationService.showError(err.error.message);
         }
-    
-        this.http.post<LoginResponse>('http://localhost:3000/login', this.loginObj).subscribe(
-            {
-                next: (resp: LoginResponse) => {
-                    console.log(resp);
-                    alert("Login Success");
-    
-                    // Acceder al token y al rol
-                    const token = resp.token;
-                    const tipo_usuario = resp.tipo_usuario;
-                    console.log(resp)
-                    this.authService.setRole(tipo_usuario);
-                    // Guardar el token, manejar el rol, etc.
-                    // Ejemplo: redirigir según el rol
-                    // if (role === 'administrador') {
-                        // this.router.navigateByUrl("/admin-dashboard");
-
-                        this.router.navigateByUrl("/dashboard");
-                    // } else {
-                    //     this.router.navigateByUrl("/dashboard");
-                    // }
-                },
-                error: err => {
-                    alert(err.error.message);
-                }
-            }
-        );
+      });
     }
-
-}
-export class Login{
-
-    dni:string;
-    password:string;
-   constructor(){
-    this.dni='';
-    this.password='';
-   }
-
-}
+  
+    private navigateBasedOnRole(tipo_usuario: string) {
+      if (tipo_usuario === 'ADMINISTRADOR') {
+        this.router.navigateByUrl('/dashboard');
+      } else {
+        this.router.navigateByUrl('/dashboard');
+      }
+    }
+  }
