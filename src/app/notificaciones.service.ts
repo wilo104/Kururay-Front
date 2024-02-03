@@ -1,22 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ModalComponent } from './modal/modal.component';
+import { ModalService } from './modal.service';
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  constructor(private modalComponent: ModalComponent) { }
+  constructor(private modalService: ModalService) { }
+
   showSuccess(message: string) {
     console.log(message);
-    this.modalComponent.message = message;
-    this.modalComponent.ngOnInit();
-    //this.modalComponent.open(); // Llama a la función open del componente ModalComponent
+    this.modalService.changeMessage(message);
+    this.modalService.show();
   }
 
   showError(message: string) {
     console.log(message);
-    this.modalComponent.message = message;
-    this.modalComponent.ngOnInit();
-    // this.modalComponent.isSuccess = false;
-    // this.modalComponent.open(); // Llama a la función open del componente ModalComponent
+    this.modalService.changeMessage(message);
+    this.modalService.show();
   }
 }

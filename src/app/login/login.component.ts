@@ -1,29 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { NotificationService } from '../notificaciones.service';
 import { ReactiveFormsModule } from '@angular/forms'; 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from '../auth.guard';
-import { ModalComponent } from '../modal/modal.component';
+import { ModalComponent } from "../modal/modal.component";
 
 @Component({
-  selector: 'app-login',
-  standalone:true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule],
-  providers: [AuthService, HttpClient, AuthGuard,NotificationService,ModalComponent],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+    selector: 'app-login',
+    standalone: true,
+    providers: [AuthService, AuthGuard, NotificationService],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
+    imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule, ModalComponent]
 })
 export class LoginComponent {
-  
+  @Output() confirm = new EventEmitter<void>();
+     tipo_usuario:string | undefined;
     isLoading = false;
     loginForm = this.fb.group({
       dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // Patrón para un DNI peruano
       password: ['', [Validators.required, Validators.minLength(8)]]
     });
+  loggedInUserType: string="";
   
     constructor(
       private authService: AuthService,
@@ -31,7 +33,7 @@ export class LoginComponent {
       private router: Router,
       private fb: FormBuilder
     ) {}
-  
+
     onLogin() {
       if (this.loginForm.invalid) {
         console.log("Aqui esta entrando y no hace nada mas")
@@ -48,11 +50,12 @@ export class LoginComponent {
       this.authService.login(loginObj).subscribe({
         next: resp => {
           this.isLoading = false;
-          this.notificationService.showSuccess("Login Successful");
+          // this.notificationService.showSuccess("Login Successful");
           this.authService.settipo_usuario(resp.tipo_usuario);
           this.authService.settoken(resp.token);
-          console.log(resp.token);
+          this.tipo_usuario=resp.tipo_usuario;
          this.navigateBasedOnRole(resp.tipo_usuario);
+         this.loggedInUserType=resp.tipo_usuario;
         },
         error: err => {
           this.isLoading = false;
@@ -60,6 +63,12 @@ export class LoginComponent {
         }
       });
     }
+    onModalConfirm() {
+      // Aquí la lógica que deseas realizar después de confirmar el modal
+      console.log(this.loggedInUserType);
+      this.navigateBasedOnRole(this.loggedInUserType);
+    }
+
   
     private navigateBasedOnRole(tipo_usuario: string) {
       if (tipo_usuario === 'ADMINISTRADOR') {
