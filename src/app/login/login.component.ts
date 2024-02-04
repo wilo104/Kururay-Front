@@ -60,6 +60,7 @@ export class LoginComponent {
         error: err => {
           this.isLoading = false;
           this.notificationService.showError(err.error.message);
+          this.loginForm.reset();
         }
       });
     }
