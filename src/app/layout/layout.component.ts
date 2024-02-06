@@ -1,34 +1,32 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from '../auth.service';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import {HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
+import { UsuariosComponent } from "../usuarios/usuarios.component";
 
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  providers: [AuthService, HttpClient,AuthGuard],
-  imports: [RouterOutlet,CommonModule,HttpClientModule],
+  providers: [AuthService, AuthGuard],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrls: ['./layout.component.css'], // Asegúrate de que sea 'styleUrls' en plural
+  imports: [RouterOutlet, CommonModule, HttpClientModule, UsuariosComponent, RouterModule]
 })
-export class LayoutComponent {
-
-
+export class LayoutComponent implements OnInit {
   tipo_usuario: string | null = "";
   token: string | null = "";
- 
-      constructor(private AuthServise:AuthService , private router: Router,){
-        this.tipo_usuario = this.AuthServise.gettipo_usuario();
-        this.token = this.AuthServise.gettoken();
-      console.log(this.AuthServise.gettipo_usuario())
-      console.log(this.token);
-      }
-      logout() {
-        this.AuthServise.logout();
-        this.router.navigateByUrl('/login');
-        
-       }
+
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit() {
+    this.tipo_usuario = this.authService.gettipo_usuario();
+    this.token = this.authService.gettoken();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigateByUrl('/login');
+  }
 }

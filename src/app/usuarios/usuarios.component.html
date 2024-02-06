@@ -1,0 +1,52 @@
+<div *ngIf="isLoading; else userList">
+  <p>Cargando usuarios...</p>
+</div>
+
+<ng-template #userList>
+  <div class="card-container">
+      <div class="card">
+          <div class="table-responsive">
+              <table class="table table-striped table-hover">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>ID</th>
+                          <th>Nombre</th>
+                          <th>Usuario</th>
+                          <th>Correo</th>
+                          <th>Teléfono</th>
+                          <th>Tipo Usuario</th>
+                          <th>Estado de usuario</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let usuario of usuarios">
+                          <td>{{ usuario.id }}</td>
+                          <td>{{ usuario.nombre }} {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}</td>
+                          <td>{{ usuario.dni }}</td>
+                          <td>{{ usuario.correo }}</td>
+                          <td>{{ usuario.telefono }}</td>
+                          <td>{{ usuario.tipo_usuario }}</td>
+                          <td>
+                              <span class="badge" [ngClass]="usuario.estado_usuario ? 'badge-success' : 'badge-danger'" style="color: white;">
+                                {{ usuario.estado_usuario ? 'ACTIVO' : 'INACTIVO' }}
+                            </span>
+                          </td>
+                          <td>
+                            <button class="btn btn-primary btn-sm" (click)="editarUsuario(usuario)">Editar</button>
+                          </td>
+                          <td>
+                            <button class="btn btn-sm" [ngClass]="usuario.estado_usuario ? 'btn-danger' : 'btn-success'" (click)="cambiarEstado(usuario)">
+                              {{ usuario.estado_usuario ? 'Dar de Baja' : 'Dar de Alta' }}
+                          </button>
+                          </td>
+                          
+                      
+
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+          <pagination-controls class="pagination justify-content-center" (pageChange)="p = $event"></pagination-controls>
+      </div>
+  </div>
+</ng-template>

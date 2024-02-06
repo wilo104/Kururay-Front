@@ -1,0 +1,15 @@
+.badge {
+    color: white;
+    background-color: #007bff; /* Ejemplo para un color de fondo azul */
+}
+
+.badge-success {
+    background-color: green; /* o cualquier otro color que prefieras */
+}
+
+.badge-danger {
+    background-color: red; /* o cualquier otro color que prefieras */
+}
+.card-container {
+    margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
