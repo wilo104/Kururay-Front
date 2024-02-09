@@ -15,6 +15,12 @@ import { UsuariosComponent } from "../usuarios/usuarios.component";
   imports: [RouterOutlet, CommonModule, HttpClientModule, UsuariosComponent, RouterModule]
 })
 export class LayoutComponent implements OnInit {
+  sidebarActive: boolean = true;
+
+  toggleSidebar() {
+    this.sidebarActive = !this.sidebarActive;
+  }
+
   tipo_usuario: string | null = "";
   token: string | null = "";
 

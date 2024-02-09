@@ -15,8 +15,12 @@ export class UsuarioService {
   }
 
   cambiarEstadoUsuario(id: number, estado: string): Observable<any> {
-    return this.http.patch(`${this.apiUrl}/${id}`, { estado });
+    const url = `${this.apiUrl}/${id}/estado`; // Construye la URL correctamente
+    return this.http.put(url, { nuevoEstado: estado }); // Utiliza PUT en lugar de PATCH si el backend lo espera así
   }
-
+  actualizarUsuario(id: number, usuario: any): Observable<any> {
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put(url, usuario);
+  }
   // Otros métodos relacionados con los usuarios...
 }

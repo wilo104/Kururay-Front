@@ -4,6 +4,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component'; // Asegúrate de importar tu UsuariosComponent
 import { AuthGuard } from './auth.guard';
+import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 
 export const routes: Routes = [
     {
@@ -25,6 +26,11 @@ export const routes: Routes = [
             {
                 path: 'usuarios', // Agregar la ruta para usuarios
                 component: UsuariosComponent
+            },
+            {
+                path: 'registro', // Ruta para el registro de nuevos usuarios
+                component: RegistroUsuarioComponent
+  
             }
             // ... puedes agregar más rutas hijos aquí
         ]

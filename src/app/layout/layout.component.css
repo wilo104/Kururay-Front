@@ -1,56 +1,103 @@
-
-  #sidebar {
-    width: 250px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100%;
-    background: #333; /* Color de fondo oscuro */
-    color: white;
-    overflow-y: auto;
-  }
-  
-  #sidebar nav ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  #sidebar nav ul li a {
-    display: block;
-    padding: 10px;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  #sidebar nav ul li a:hover, #sidebar nav ul li a:focus {
-    background-color: #555; /* Color de fondo al pasar el mouse */
-    color: white;
-  }
-  .flex-container {
-    display: flex;
+/* Estilos básicos para el layout */
+.flex-container {
+  display: flex;
 }
 
+#sidebar {
+  width: 250px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #333;
+  color: white;
+  z-index: 1000; /* Asegura que el sidebar esté sobre otros elementos */
+  transition: left 0.3s ease;
+  padding-top: 20px; /* Espacio en la parte superior */
+}
+
+.sidebar-header {
+  padding-left: 10px; /* Margen interno al inicio del sidebar */
+  display: flex;
+  align-items: center;
+}
+
+.brand {
+  display: inline-block;
+  margin-left: 10px; /* Espacio después del botón de alternancia */
+}
+
+/* Ajusta el contenido principal para no ser ocultado por el sidebar */
 .content {
-    margin-left: 250px; /* Mismo ancho que el sidebar */
-    padding: 20px; /* Añade un poco de espacio */
-    /* Añade más estilos si lo necesitas */
+  margin-left: 250px;
+  padding: 20px;
+  width: calc(100% - 250px); /* Asegura que el contenido no se estire más allá de la pantalla */
 }
-  .logout-button {
-    text-align: right;
-    padding: 10px;
-    position: absolute;
-    top: 0;
-    right: 0;
+
+/* Estilos para el botón de alternancia */
+.toggle-button {
+  border: none;
+  background: transparent;
+}
+
+.menu-icon {
+  font-size: 24px; /* Tamaño del ícono del menú */
+  color: white; /* Color del ícono */
+}
+
+/* Estilos para ocultar el sidebar en pantallas pequeñas y ajustar el contenido */
+@media (max-width: 768px) {
+  #sidebar {
+      left: -250px; /* Oculta el sidebar por defecto en pantallas pequeñas */
   }
-  
-  .logout-button button {
-    background-color: #f44336; /* Color de fondo rojo */
-    color: white; /* Color del texto blanco */
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 4px;
+
+  #sidebar.active {
+      left: 0; /* Muestra el sidebar cuando está activo */
   }
-  
-  
+
+  .content {
+      margin-left: 0;
+      width: 100%; /* Ajusta el contenido para pantallas pequeñas */
+  }
+
+  .toggle-button {
+      position: absolute; /* Posiciona el botón de alternancia absolutamente */
+      top: 10px;
+      left: 10px; /* Ajusta el botón de alternancia para que sea visible en pantallas pequeñas */
+      z-index: 1010; /* Asegura que el botón esté sobre el sidebar */
+  }
+}
+
+/* Estilos para el botón de cerrar sesión */
+.logout-button {
+  position: fixed;
+  right: 10px;
+  top: 10px; /* Cambiado de 'bottom' a 'top' */
+  z-index: 1001; /* Asegura que el botón de cerrar sesión sea accesible */
+}
+#sidebar {
+  /* ... tus estilos ... */
+  padding-left: 15px; /* Agrega un poco de padding a la izquierda */
+}
+
+#sidebar.active {
+  width: 250px; /* Ancho cuando está expandido */
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    left: -250px; /* Estado inicial "comprimido" */
+  }
+
+  #sidebar.active {
+    left: 0; /* Estado "expandido" */
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .content.active {
+    margin-left: 250px; /* Margen para el contenido cuando el sidebar está expandido */
+  }
+}
