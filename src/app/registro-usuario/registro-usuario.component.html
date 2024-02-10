@@ -100,9 +100,9 @@
           <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
           <select class="form-select" id="tipo_usuario" formControlName="tipo_usuario">
             <option value="" disabled>Selecciona un tipo de usuario</option>
-            <option value="administrador_del_sistema">Administrador del Sistema</option>
-            <option value="rrhh">RRHH</option>
-            <option value="voluntario">Voluntario</option>
+            <option value="ADMINISTRADOR">Administrador del Sistema</option>
+            <option value="RRHH">RRHH</option>
+            <option value="VOLUNTARIO">VOLUNTARIO</option>
           </select>
           <div *ngIf="registroForm.controls['tipo_usuario'].invalid && (registroForm.controls['tipo_usuario'].dirty || registroForm.controls['tipo_usuario'].touched)" class="text-danger">
             Debes seleccionar un tipo de usuario.
@@ -110,7 +110,7 @@
         </div>
       </div>
 
-      <app-modal *ngIf="showModal">{{ modalMessage }}</app-modal>
+      <app-modal id="RegistroModal"></app-modal>
       
       <div class="row mb-3">
         <div class="col">

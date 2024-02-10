@@ -1,0 +1,51 @@
+<div class="container mt-3">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h2>Actualizar Usuario</h2>
+        <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+          
+          <!-- Campo DNI (deshabilitado) -->
+          <div class="mb-3">
+            <label for="dni" class="form-label">DNI</label>
+            <input type="text" class="form-control" id="dni" formControlName="dni" >
+          </div>
+  
+          <!-- Campo Nombre -->
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" formControlName="nombre" required>
+          </div>
+          
+          <!-- Campo Correo -->
+          <div class="mb-3">
+            <label for="correo" class="form-label">Correo</label>
+            <input type="email" class="form-control" id="correo" formControlName="correo" required>
+          </div>
+          
+          <!-- Campo Teléfono -->
+          <div class="mb-3">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefono" formControlName="telefono" required>
+          </div>
+  
+          <!-- Selector Tipo de Usuario -->
+          <div class="mb-3">
+            <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
+            <select class="form-select" id="tipo_usuario" formControlName="tipo_usuario" required>
+              <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+              <option value="RRHH">RRHH</option>
+              <option value="VOLUNTARIO">VOLUNTARIO</option>
+            </select>
+          </div>
+  
+          <!-- Botones de Acción -->
+          <div class="mb-3">
+            <button type="submit" class="btn btn-primary" [disabled]="!editUserForm.valid">Actualizar</button>
+            <button type="button" class="btn btn-secondary" (click)="router.navigate(['/usuarios'])">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <app-modal id="ActualizarUsuarioModal"></app-modal>
+      

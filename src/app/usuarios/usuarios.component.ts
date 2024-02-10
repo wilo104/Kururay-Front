@@ -32,8 +32,8 @@ cambiarEstado(usuario: any) {
   );
 }
 
-editarUsuario(_t23: any) {
-throw new Error('Method not implemented.');
+editarUsuario(usuario: any) {
+  this.router.navigate([`/usuarios/${usuario.id}/editar`])
 }
   p: number = 1;
   usuarios: any[] = [];

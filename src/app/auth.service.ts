@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
+import internal from 'stream';
   interface LoginResponse {
+  id: any;
   token: string;
   tipo_usuario: string;
 }
@@ -13,6 +15,7 @@ export class AuthService {
   private readonly loginUrl = 'http://localhost:3000/login';
   private tipo_usuario: string = '';
   private token:string='';
+  private id: any;
   constructor(private http: HttpClient) {}
 
   login(loginObj: { dni: string; password: string }): Observable<LoginResponse> {
@@ -25,6 +28,15 @@ export class AuthService {
 
     // Logic to handle the tipo_usuario
   }
+  getid_usuario(): string | null {
+    return localStorage.getItem('id');
+  }
+  setid_usuario(id:any){
+    this.id=id;
+    localStorage.setItem('id',id);
+  }
+
+
   gettipo_usuario(): string | null {
     return localStorage.getItem('usertipo_usuario');
   }

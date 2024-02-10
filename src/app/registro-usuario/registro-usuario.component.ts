@@ -62,7 +62,8 @@ export class RegistroUsuarioComponent implements OnInit {
         },
         (error) => {
           // Mostrar mensaje de error
-          this.notificationService.showError(error.error.message);
+          this.notificationService.showError("RegistroModal",error.error.message);
+          this.showModal=true;
           console.error('Error en el registro:', error);
         }
       );
@@ -71,7 +72,7 @@ export class RegistroUsuarioComponent implements OnInit {
       
       this.showModal = true;
       this.modalMessage = 'No es posible realizar el registro';
-      this.notificationService.showError(this.modalMessage);
+      this.notificationService.showError("RegistroModal",this.modalMessage);
       Object.values(this.registroForm.controls).forEach(control => {
         control.markAsTouched();
       });

@@ -23,12 +23,14 @@ export class LayoutComponent implements OnInit {
 
   tipo_usuario: string | null = "";
   token: string | null = "";
+  id: string | null = "";
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.tipo_usuario = this.authService.gettipo_usuario();
     this.token = this.authService.gettoken();
+    this.id=this.authService.getid_usuario();
   }
 
   logout() {

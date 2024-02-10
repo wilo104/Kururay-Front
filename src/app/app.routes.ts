@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { UsuariosComponent } from './usuarios/usuarios.component'; // Asegúrate de importar tu UsuariosComponent
 import { AuthGuard } from './auth.guard';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
+import { ActualizarUsuarioComponent } from './actualizar-usuario/actualizar-usuario.component';
+import { ActualizarClaveComponent } from './actualizar-clave/actualizar-clave.component';
 
 export const routes: Routes = [
     {
@@ -30,8 +32,20 @@ export const routes: Routes = [
             {
                 path: 'registro', // Ruta para el registro de nuevos usuarios
                 component: RegistroUsuarioComponent
-  
-            }
+            },
+            { 
+                path: 'usuarios/:id/editar', 
+                component: ActualizarUsuarioComponent 
+            },
+            { 
+                path: 'usuarios/:id/actualizar-clave', 
+                component: ActualizarClaveComponent
+            },
+            // { 
+            //     path: '/usuarios/:id/cambiar-contrasena', 
+            //     component: ActualizarClaveComponent 
+            // }    
+
             // ... puedes agregar más rutas hijos aquí
         ]
     },

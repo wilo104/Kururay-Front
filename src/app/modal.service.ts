@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ModalService {
   private messageSource = new BehaviorSubject<string>('');
-  private isVisibleSource = new BehaviorSubject<boolean>(false);
+  // Cambiamos isVisibleSource para manejar un objeto con id y visibilidad
+  private isVisibleSource = new BehaviorSubject<{id: string, visible: boolean}>({id: '', visible: false});
 
   currentMessage = this.messageSource.asObservable();
   isVisible = this.isVisibleSource.asObservable();
@@ -17,11 +18,12 @@ export class ModalService {
     this.messageSource.next(message);
   }
 
-  show() {
-    this.isVisibleSource.next(true);
+  // Ahora show y hide necesitan un id para identificar el modal específico
+  show(id: string) {
+    this.isVisibleSource.next({id: id, visible: true});
   }
 
-  hide() {
-    this.isVisibleSource.next(false);
+  hide(id: string) {
+    this.isVisibleSource.next({id: id, visible: false});
   }
 }

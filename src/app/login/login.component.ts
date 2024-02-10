@@ -20,6 +20,7 @@ import { ModalComponent } from "../modal/modal.component";
 export class LoginComponent {
   @Output() confirm = new EventEmitter<void>();
      tipo_usuario:string | undefined;
+     Id: any;
     isLoading = false;
     loginForm = this.fb.group({
       dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // Patrón para un DNI peruano
@@ -53,13 +54,15 @@ export class LoginComponent {
           // this.notificationService.showSuccess("Login Successful");
           this.authService.settipo_usuario(resp.tipo_usuario);
           this.authService.settoken(resp.token);
+          this.authService.setid_usuario(resp.id)
           this.tipo_usuario=resp.tipo_usuario;
          this.navigateBasedOnRole(resp.tipo_usuario);
          this.loggedInUserType=resp.tipo_usuario;
+         console.log(resp.id);
         },
         error: err => {
           this.isLoading = false;
-          this.notificationService.showError(err.error.message);
+          this.notificationService.showError('LoginModal',err.error.message);
           this.loginForm.reset();
         }
       });

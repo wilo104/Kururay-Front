@@ -18,9 +18,19 @@ export class UsuarioService {
     const url = `${this.apiUrl}/${id}/estado`; // Construye la URL correctamente
     return this.http.put(url, { nuevoEstado: estado }); // Utiliza PUT en lugar de PATCH si el backend lo espera así
   }
+  obtenerUsuarioPorId(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
   actualizarUsuario(id: number, usuario: any): Observable<any> {
     const url = `${this.apiUrl}/${id}`;
     return this.http.put(url, usuario);
   }
+
+  actualizarContrasena(id: number, contrasenaActual: string, nuevaContrasena: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}/cambiar-contrasena`;
+    return this.http.put(url, { contrasenaActual, nuevaContrasena });
+  }
+
+
   // Otros métodos relacionados con los usuarios...
 }
