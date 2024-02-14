@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/usuarios'; // URL de tu API
+  private apiUrl = 'http://localhost:3000/usuarios'; // URL del api
 
   constructor(private http: HttpClient) {}
 
@@ -30,7 +30,7 @@ export class UsuarioService {
     const url = `${this.apiUrl}/${id}/cambiar-contrasena`;
     return this.http.put(url, { contrasenaActual, nuevaContrasena });
   }
-
+  
 
   // Otros métodos relacionados con los usuarios...
 }

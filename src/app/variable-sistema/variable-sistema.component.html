@@ -1,0 +1,54 @@
+<div *ngIf="isLoading; else userList">
+    <p>Cargando Variables...</p>
+  </div>
+  
+  <ng-template #userList>
+    <div class="card-container">
+      <div class="mb-2">
+         <button class="btn btn-success" (click)="nuevaVariable()">Nueva Variable</button> 
+      </div>
+  
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th class="d-none d-sm-table-cell">ID</th>
+                <th class="d-none d-sm-table-cell">Nombre</th>
+                <th class="d-none d-md-table-cell">Descripcion</th>
+                <th class="d-none d-md-table-cell">Valor 1</th>
+                <th class="d-none d-lg-table-cell">Valor 2</th>
+                <th class="d-none d-lg-table-cell">Valor 3</th>
+                <th class="d-none d-xl-table-cell">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let variable of variables">
+                <td class="d-none d-sm-table-cell">{{ variable.id }}</td>
+                <td class="d-none d-sm-table-cell">{{ variable.nombre }} </td>
+                <td class="d-none d-md-table-cell">{{ variable.descripcion }}</td>
+                <td class="d-none d-md-table-cell">{{ variable.valor1}}</td>
+                <td class="d-none d-lg-table-cell">{{ variable.valor2 }}</td>
+                <td class="d-none d-lg-table-cell">{{ variable.valor3 }}</td>
+                <td class="d-none d-xl-table-cell">
+                  <span class="badge" [ngClass]="variable.estado ? 'badge-success' : 'badge-danger'" style="color: white;">
+                    {{ variable.estado ? 'ACTIVO' : 'INACTIVO' }}
+                  </span>
+                </td>
+                <td>
+                  <button class="btn btn-primary btn-sm" (click)="editarUsuario(variable)">Editar</button>
+                </td>
+                <td>
+                  <button class="btn btn-sm" [ngClass]="variable.estado ? 'btn-danger' : 'btn-success'" (click)="cambiarEstado(variable)">
+                    {{ variable.estado ? 'Baja' : 'Alta' }}
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <pagination-controls class="pagination justify-content-center" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </ng-template>
+  

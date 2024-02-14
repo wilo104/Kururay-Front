@@ -51,7 +51,7 @@ export class LoginComponent {
       this.authService.login(loginObj).subscribe({
         next: resp => {
           this.isLoading = false;
-          // this.notificationService.showSuccess("Login Successful");
+         // this.notificationService.showSuccess("LoginModal","Login Successful");
           this.authService.settipo_usuario(resp.tipo_usuario);
           this.authService.settoken(resp.token);
           this.authService.setid_usuario(resp.id)

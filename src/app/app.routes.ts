@@ -7,6 +7,8 @@ import { AuthGuard } from './auth.guard';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { ActualizarUsuarioComponent } from './actualizar-usuario/actualizar-usuario.component';
 import { ActualizarClaveComponent } from './actualizar-clave/actualizar-clave.component';
+import { VariableSistemaComponent } from './variable-sistema/variable-sistema.component';
+import { VariableRegistroComponent } from './variable-registro/variable-registro.component';
 
 export const routes: Routes = [
     {
@@ -41,12 +43,16 @@ export const routes: Routes = [
                 path: 'usuarios/:id/actualizar-clave', 
                 component: ActualizarClaveComponent
             },
-            // { 
-            //     path: '/usuarios/:id/cambiar-contrasena', 
-            //     component: ActualizarClaveComponent 
-            // }    
-
-            // ... puedes agregar más rutas hijos aquí
+            { 
+                path: 'variables-sistema', 
+                component: VariableSistemaComponent
+            },
+            { 
+                path: 'variable-registro', 
+                component: VariableRegistroComponent
+            },
+           
+           
         ]
     },
      //   { path: 'test-usuarios', component: UsuariosComponent },

@@ -15,7 +15,7 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class UsuariosComponent {
 nuevoUsuario() {
-  this.router.navigate(['/registro']); // Asegúrate de que la ruta '/registro' esté configurada en tu módulo de rutas
+  this.router.navigate(['/registro']); 
 
 }
 cambiarEstado(usuario: any) {

@@ -1,0 +1,28 @@
+.badge {
+    color: white;
+    background-color: #007bff; /* Ejemplo para un color de fondo azul */
+}
+
+.badge-success {
+    background-color: green; /* o cualquier otro color que prefieras */
+}
+
+.badge-danger {
+    background-color: red; /* o cualquier otro color que prefieras */
+}
+.card-container {
+    margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
+/* Estilos para el botón "Nuevo Usuario" */
+.nuevo-usuario-btn {
+    /* Ajusta los estilos según tus preferencias */
+    font-size: 1.2rem;
+    background-color: #28a745; /* Color verde */
+    border-color: #28a745;
+    color: #fff; /* Texto en blanco */
+  }
+  
+  /* Estilos adicionales para hacer la tabla responsiva */
+  .table-responsive {
+    overflow-x: auto;
+  }
