@@ -23,7 +23,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios">
+            <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: p, id: 'usuarios-pagination' }">
+
               <td class="d-none d-sm-table-cell">{{ usuario.id }}</td>
               <td class="d-none d-sm-table-cell">{{ usuario.nombre }}</td>
               <td class="d-none d-md-table-cell">{{ usuario.dni }}</td>
@@ -47,7 +48,7 @@
           </tbody>
         </table>
       </div>
-      <pagination-controls class="pagination justify-content-center" (pageChange)="p = $event"></pagination-controls>
+      <pagination-controls class="pagination justify-content-center" id="usuarios-pagination" (pageChange)="p = $event"></pagination-controls>
     </div>
   </div>
 </ng-template>
