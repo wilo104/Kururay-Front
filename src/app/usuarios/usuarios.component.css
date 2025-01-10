@@ -26,3 +26,28 @@
   .table-responsive {
     overflow-x: auto;
   }
+  th span {
+    vertical-align: middle; /* Alinea las flechas verticalmente con el texto */
+    margin-left: 5px; /* Añade un poco de espacio entre el texto y las flechas */
+    font-size: 0.85em; /* Ajusta el tamaño de las flechas, si es necesario */
+    color: #007bff; /* Cambia el color de las flechas, si lo deseas */
+  }
+
+  .custom-btn {
+    display: block; /* Hace que el botón ocupe toda la celda */
+    width: 100%; /* Asegura que el botón se expanda para llenar la celda */
+    white-space: nowrap; /* Previene que el texto se ajuste a líneas nuevas */
+    overflow: hidden; /* Oculta el contenido que se desborde */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si el contenido se desborda */
+    margin: auto; /* Centra el botón dentro de la celda si hay espacio adicional */
+  }
+  .btn-container {
+    display: flex;
+    justify-content: start;
+    gap: 10px; /* Controla el espacio entre botones */
+  }
+  .btn-container {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 10px; /* Controla el espacio entre botones */
+  }

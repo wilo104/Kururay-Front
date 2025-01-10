@@ -1,0 +1,33 @@
+<div *ngIf="isLoading; else feedbackList">
+    <p>Cargando feedback...</p>
+  </div>
+  
+  <ng-template #feedbackList>
+    <div class="card-container">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Reconocimiento</th>
+              <th>Oportunidad de Mejora</th>
+              <th>Adicional</th>
+              <th>Mentor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.feedback_id }}</td>
+              <td>{{ feedback.feedback_fecha | date }}</td>
+              <td>{{ feedback.reconocimiento }}</td>
+              <td>{{ feedback.oportunidad_mejora }}</td>
+              <td>{{ feedback.adicional }}</td>
+              <td>{{ feedback.mentor }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </ng-template>
+  

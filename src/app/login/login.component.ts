@@ -21,6 +21,7 @@ export class LoginComponent {
   @Output() confirm = new EventEmitter<void>();
      tipo_usuario:string | undefined;
      Id: any;
+    clave_dni:boolean | undefined;
     isLoading = false;
     loginForm = this.fb.group({
       dni: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]], // Patrón para un DNI peruano
@@ -52,12 +53,25 @@ export class LoginComponent {
         next: resp => {
           this.isLoading = false;
          // this.notificationService.showSuccess("LoginModal","Login Successful");
+         
           this.authService.settipo_usuario(resp.tipo_usuario);
           this.authService.settoken(resp.token);
           this.authService.setid_usuario(resp.id)
           this.tipo_usuario=resp.tipo_usuario;
-         this.navigateBasedOnRole(resp.tipo_usuario);
+        
+          if (resp['clave_dni']) {
+            // Uso de template literals para construir la ruta dinámicamente
+            this.router.navigateByUrl(`/usuarios/${resp.id}/actualizar-clave`);
+            console.log("esta entrando aquí");
+          } else {
+            console.log("esta entrando aquí pe");
+            this.router.navigateByUrl('/dashboard');
+          }
+    
+         
+        //  this.navigateBasedOnRole(resp.tipo_usuario);
          this.loggedInUserType=resp.tipo_usuario;
+        
          console.log(resp.id);
         },
         error: err => {
@@ -67,18 +81,18 @@ export class LoginComponent {
         }
       });
     }
-    onModalConfirm() {
-      // Aquí la lógica que deseas realizar después de confirmar el modal
-      console.log(this.loggedInUserType);
-      this.navigateBasedOnRole(this.loggedInUserType);
-    }
+    // onModalConfirm() {
+    //   // Aquí la lógica que deseas realizar después de confirmar el modal
+    //   console.log(this.loggedInUserType);
+    //   this.navigateBasedOnRole(this.loggedInUserType);
+    // }
 
   
-    private navigateBasedOnRole(tipo_usuario: string) {
-      if (tipo_usuario === 'ADMINISTRADOR') {
-        this.router.navigateByUrl('/dashboard');
-      } else {
-        this.router.navigateByUrl('/dashboard');
-      }
-    }
+    // private navigateBasedOnRole(tipo_usuario: string) {
+    //   if (tipo_usuario === 'ADMINISTRADOR') {
+    //     this.router.navigateByUrl('/dashboard');
+    //   } else {
+    //     this.router.navigateByUrl('/dashboard');
+    //   }
+    // }
   }

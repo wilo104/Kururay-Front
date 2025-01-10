@@ -28,6 +28,8 @@ export class ActualizarUsuarioComponent implements OnInit{
     this.editUserForm = this.fb.group({
       dni: [{value: '', disabled: true}, [Validators.required, Validators.pattern(/^\d{8}$/)]],
       nombre: ['', [Validators.required]],
+      apellido_paterno: ['', [Validators.required]],
+      apellido_materno: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
       tipo_usuario: ['', [Validators.required]],

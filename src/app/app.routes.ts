@@ -9,52 +9,70 @@ import { ActualizarUsuarioComponent } from './actualizar-usuario/actualizar-usua
 import { ActualizarClaveComponent } from './actualizar-clave/actualizar-clave.component';
 import { VariableSistemaComponent } from './variable-sistema/variable-sistema.component';
 import { VariableRegistroComponent } from './variable-registro/variable-registro.component';
+import { ActualizarVariableComponent } from './actualizar-variable/actualizar-variable.component';
+import { VoluntariosComponent } from './voluntarios/voluntarios.component';
+import { MisVoluntariadosComponent } from './mis-voluntariados/mis-voluntariados.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 export const routes: Routes = [
     {
-        path:'',redirectTo:'login', pathMatch:'full'
+        path: '', redirectTo: 'login', pathMatch: 'full'
     },
     {
-        path:'login',
+        path: 'login',
         component: LoginComponent
     },
     {
-        path:'',
+        path: '',
         component: LayoutComponent,
-        canActivate: [AuthGuard], // Aplicar el guardia de autenticación a esta ruta
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'dashboard',
                 component: DashboardComponent
             },
             {
-                path: 'usuarios', // Agregar la ruta para usuarios
+                path: 'usuarios',
                 component: UsuariosComponent
             },
             {
-                path: 'registro', // Ruta para el registro de nuevos usuarios
+                path: 'registro',
                 component: RegistroUsuarioComponent
             },
-            { 
-                path: 'usuarios/:id/editar', 
-                component: ActualizarUsuarioComponent 
+            {
+                path: 'usuarios/:id/editar',
+                component: ActualizarUsuarioComponent
             },
-            { 
-                path: 'usuarios/:id/actualizar-clave', 
+            {
+                path: 'usuarios/:id/actualizar-clave',
                 component: ActualizarClaveComponent
             },
-            { 
-                path: 'variables-sistema', 
+            {
+                path: 'variables-sistema',
                 component: VariableSistemaComponent
             },
-            { 
-                path: 'variable-registro', 
+            {
+                path: 'variable-registro',
                 component: VariableRegistroComponent
             },
-           
-           
+            {
+                path: 'variable-sistema/:id/editar',
+                component: ActualizarVariableComponent
+            },
+            {
+                path: 'voluntarios',
+                component: VoluntariosComponent
+            },
+            {
+                path:'mis-voluntariados',
+                component: MisVoluntariadosComponent
+            },
+            {
+                path: 'feedback/:voluntariadoId',
+                component: FeedbackComponent   
+            },
         ]
     },
-     //   { path: 'test-usuarios', component: UsuariosComponent },
-    // ... otras rutas
+    // Esta es la línea crucial: la ruta comodín
+    { path: '**', redirectTo: '/dashboard', pathMatch: 'full' } // Redirige a /dashboard por defecto
 ];

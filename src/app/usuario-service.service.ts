@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -10,8 +10,16 @@ export class UsuarioService {
 
   constructor(private http: HttpClient) {}
 
-  obtenerUsuarios(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+  // obtenerUsuarios(): Observable<any[]> {
+  //   return this.http.get<any[]>(this.apiUrl);
+  // }
+  obtenerUsuarios(ordenPor: string = 'id', direccion: string = 'ASC'): Observable<any[]> {
+    // Agregar parámetros de consulta para el ordenamiento
+    let params = new HttpParams();
+    params = params.append('ordenPor', ordenPor);
+    params = params.append('direccion', direccion);
+
+    return this.http.get<any[]>(this.apiUrl, { params });
   }
 
   cambiarEstadoUsuario(id: number, estado: string): Observable<any> {
@@ -30,7 +38,30 @@ export class UsuarioService {
     const url = `${this.apiUrl}/${id}/cambiar-contrasena`;
     return this.http.put(url, { contrasenaActual, nuevaContrasena });
   }
-  
+  registrarUsuario(usuario: any, cvFile?: File): Observable<any> {
+    const formData = new FormData();
+    // Agregar los datos del usuario al formData
+    Object.keys(usuario).forEach(key => {
+      formData.append(key, usuario[key]);
+    });
+    // Agregar el archivo CV al formData si está presente
+    if (cvFile) {
+      const blob = new Blob([cvFile], { type: cvFile.type });
+    formData.append('cv', blob, cvFile.name);
+      if (formData.has('cv')) {
+        console.log('Archivo CV agregado correctamente al FormData');
+      } else {
+        console.error('No se agregó el archivo CV al FormData');
+      }
+    }
+
+    return this.http.post(`${this.apiUrl}/registro`, formData);
+  }
+
+  obtenerCVUsuario(id: number): Observable<Blob> {
+    const url = `${this.apiUrl}/${id}/cv`; // Construye la URL para obtener el CV
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
   // Otros métodos relacionados con los usuarios...
 }

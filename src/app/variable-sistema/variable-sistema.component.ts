@@ -17,33 +17,11 @@ nuevaVariable() {
   this.router.navigate(['/variable-registro']); // Asegúrate de que la ruta '/registro' esté configurada en tu módulo de rutas
 
 }
-cambiarEstado(_t24: any) {
-throw new Error('Method not implemented.');
+
+editarVariable(variable: { id: any; }) {
+  this.router.navigate([`/variable-sistema/${variable.id}/editar`])
 }
-editarUsuario(arg0: any) {
-throw new Error('Method not implemented.');
-}
-  // nuevaVariable() {
-  //   this.router.navigate(['/registro']); // Asegúrate de que la ruta '/registro' esté configurada en tu módulo de rutas
   
-  // }
-  // cambiarEstado(usuario: any) {
-  //   const nuevoEstado = usuario.estado_usuario ? 'baja' : 'alta';
-  //   this.usuarioService.cambiarEstadoUsuario(usuario.id, nuevoEstado).subscribe(
-  //     (response) => {
-  //       console.log('Estado del usuario cambiado exitosamente:', response);
-  //       usuario.estado_usuario = !usuario.estado_usuario; // Actualizar el estado del usuario en el arreglo local
-  //     },
-  //     (error) => {
-  //       console.error('Error al cambiar el estado del usuario:', error);
-  //       // Manejar el error adecuadamente, por ejemplo, mostrar un mensaje de error al usuario
-  //     }
-  //   );
-  // }
-  
-  // editarUsuario(usuario: any) {
-  //   this.router.navigate([`/usuarios/${usuario.id}/editar`])
-  // }
     p: number = 1;
     variables: any[] = [];
     isLoading = false;
@@ -51,10 +29,10 @@ throw new Error('Method not implemented.');
     constructor(private variableService: VariablesService,private router: Router) {}
   
     ngOnInit(): void {
-      this.obtenerListaUsuarios();
+      this.obtenerListaVariables();
     }
   
-    obtenerListaUsuarios() {
+    obtenerListaVariables() {
       this.isLoading = true;
       this.variableService.obtenerVariables().subscribe(
         (data: any[]) => {
@@ -62,10 +40,24 @@ throw new Error('Method not implemented.');
           this.isLoading = false;
         },
         (error: any) => {
-          console.error('Error al obtener la lista de usuarios:', error);
+          console.error('Error al obtener la lista de Variables:', error);
           this.isLoading = false;
         }
       );
     }
+    cambiarEstado(variable: any) {
+      const nuevoEstado = variable.estado ? 'baja' : 'alta';
+      this.variableService.cambiarEstadoVariable(variable.id, nuevoEstado).subscribe(
+        (response) => {
+          console.log('Estado del variable cambiado exitosamente:', response);
+          variable.estado = !variable.estado; // Actualizar el estado del variable en el arreglo local
+        },
+        (error) => {
+          console.error('Error al cambiar el estado del variable:', error);
+          // Manejar el error adecuadamente, por ejemplo, mostrar un mensaje de error al variable
+        }
+      );
+    }
+    
   
 }

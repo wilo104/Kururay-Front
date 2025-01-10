@@ -1,1 +1,51 @@
-<p>variable-registro works!</p>
+<div class="container mt-3">
+    <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+        <div class="row mb-3">
+            <div class="col">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre">
+              <div *ngIf="registroForm.controls['nombre'].invalid && (registroForm.controls['nombre'].dirty || registroForm.controls['nombre'].touched)" class="text-danger">
+                El nombre es requerido.
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" formControlName="descripcion" placeholder="descripcion">
+           
+          </div>
+      
+      <div class="col">
+        <label for="nombre" class="form-label">Valor 1</label>
+        <input type="text" class="form-control" id="valor1" formControlName="valor1" placeholder="valor1">
+        <div *ngIf="registroForm.controls['valor1'].invalid && (registroForm.controls['valor1'].dirty || registroForm.controls['valor1'].touched)" class="text-danger">
+          El Valor 1 es requerido.
+        </div>
+      </div>
+    
+      <div class="col">
+        <label for="valor2" class="form-label">Valor 2</label>
+        <input type="text" class="form-control" id="valor2" formControlName="valor2" placeholder="valor2">
+       
+      </div>
+
+      <div class="col">
+        <label for="valor3" class="form-label">Valor 3</label>
+        <input type="text" class="form-control" id="valor3" formControlName="valor3" placeholder="valor3">
+       
+      </div>
+
+  
+    
+
+      <app-modal id="RegistroModal"></app-modal>
+      
+      <div class="row mb-3">
+        <div class="col">
+          <button type="submit" class="btn btn-primary" [disabled]="registroForm.invalid">Guardar</button>
+          <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+        </div>
+      </div>
+    </form>
+</div>
+

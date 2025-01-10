@@ -24,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let usuario of usuarios | paginate: { itemsPerPage: 10, currentPage: p, id: 'usuarios-pagination' }">
+            <tr *ngFor="let usuario of voluntarios | paginate: { itemsPerPage: 10, currentPage: p, id: 'usuarios-pagination' }">
               <td class="d-none d-sm-table-cell">{{ usuario.id }}</td>
               <td class="d-none d-sm-table-cell">{{usuario.apellido_paterno}} {{usuario.apellido_materno}} {{ usuario.nombre}}  </td>
                 <td class="d-none d-md-table-cell">{{ usuario.dni }}</td>

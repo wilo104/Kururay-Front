@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterModule, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -11,26 +11,43 @@ import { UsuariosComponent } from "../usuarios/usuarios.component";
   standalone: true,
   providers: [AuthService, AuthGuard],
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'], // Asegúrate de que sea 'styleUrls' en plural
-  imports: [RouterOutlet, CommonModule, HttpClientModule, UsuariosComponent, RouterModule]
+  styleUrls: ['./layout.component.css'],
+  imports: [RouterOutlet, CommonModule, HttpClientModule, RouterModule]
 })
 export class LayoutComponent implements OnInit {
   sidebarActive: boolean = true;
-
-  toggleSidebar() {
-    this.sidebarActive = !this.sidebarActive;
-  }
-
-  tipo_usuario: string | null = "";
-  token: string | null = "";
-  id: string | null = "";
+  sidebarCollapsed: boolean = false; // Propiedad para controlar el estado comprimido
+  tipo_usuario: string | null | undefined;
+  token: string | null | undefined;
+  id: string | null | undefined;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.tipo_usuario = this.authService.gettipo_usuario();
     this.token = this.authService.gettoken();
-    this.id=this.authService.getid_usuario();
+    this.id = this.authService.getid_usuario();
+    this.checkScreenWidth(); // Comprueba el tamaño de la pantalla al iniciar
+  }
+
+  // Escucha los cambios de tamaño de la ventana y ajusta el estado sidebarCollapsed
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkScreenWidth();
+  }
+
+  // Comprueba el ancho de la pantalla para ajustar el estado del sidebar
+  checkScreenWidth() {
+    if (window.innerWidth <= 768) {
+      this.sidebarCollapsed = true;
+    } else {
+      this.sidebarCollapsed = false;
+    }
+  }
+
+  toggleSidebar() {
+    // Alternar el estado del sidebar
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
   logout() {

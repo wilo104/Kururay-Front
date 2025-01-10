@@ -2,102 +2,128 @@
 .flex-container {
   display: flex;
 }
-
 #sidebar {
-  width: 250px;
+  transition: width 0.3s ease;
+  width: 250px; /* Ancho por defecto */
   position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
-  background: #333;
-  color: white;
-  z-index: 1000; /* Asegura que el sidebar esté sobre otros elementos */
-  transition: left 0.3s ease;
-  padding-top: 20px; /* Espacio en la parte superior */
+  background: rgb(180, 0, 54); /* Fondo rojo oscuro */
+  color: #ffffff; /* Texto en color blanco para un contraste óptimo */
+  z-index: 1000;
+  padding-top: 20px;
+  font-family: 'Roboto', sans-serif; /* Mejora en el tipo de letra */
+  font-size: 15px; /* Tamaño de letra aumentado para mejor legibilidad */
+}
+
+span {
+  color: #ffffff; /* Mantenemos el color dorado para elementos span */
+  /* Considera aumentar el tamaño de la letra o cambiar el tipo de letra si es necesario */
+}
+
+/* Si deseas cambiar el estilo de los enlaces o texto adicional dentro de sidebar para mejorar la legibilidad */
+#sidebar a, #sidebar .text {
+  color: #EFEFEF; /* Un color claro que contrasta bien con el fondo oscuro */
+  text-decoration: none; /* Opcional: elimina el subrayado de los enlaces */
+  font-size: 14px; /* Ajusta según necesidad para mejorar legibilidad */
+ 
+}
+#sidebar a:hover  {
+  color: #d88911; /* Cambia el color de los enlaces a dorado al pasar el mouse */
+}
+#sidebar a span:hover  {
+  color:  #d88911; /* Cambia el color de los enlaces a dorado al pasar el mouse */
 }
 
 .sidebar-header {
-  padding-left: 10px; /* Margen interno al inicio del sidebar */
+  padding-left: 15px;
   display: flex;
   align-items: center;
 }
-
-.brand {
-  display: inline-block;
-  margin-left: 10px; /* Espacio después del botón de alternancia */
+#sidebar{
+  padding-left: 15px;
+}
+#sidebar.collapsed {
+  width: 80px; /* Ancho para estado comprimido */
 }
 
-/* Ajusta el contenido principal para no ser ocultado por el sidebar */
+#sidebar.collapsed .sidebar-header .nav-link,
+#sidebar.collapsed .sidebar-header .logo-icon {
+  display: none; /* Oculta el nombre cuando el sidebar está colapsado */
+}
+
+#sidebar.collapsed .sidebar-header .logo-icon {
+  display: inline-block; /* Muestra el ícono del logo cuando el sidebar está colapsado */
+}
+
 .content {
+  transition: margin-left 0.3s ease;
   margin-left: 250px;
-  padding: 20px;
-  width: calc(100% - 250px); /* Asegura que el contenido no se estire más allá de la pantalla */
 }
 
-/* Estilos para el botón de alternancia */
+#sidebar:not(.collapsed) ~ .content {
+  margin-left: 250px;
+}
+
+#sidebar.collapsed ~ .content {
+  margin-left: 80px;
+}
+
 .toggle-button {
   border: none;
   background: transparent;
 }
 
 .menu-icon {
-  font-size: 24px; /* Tamaño del ícono del menú */
-  color: white; /* Color del ícono */
+  font-size: 24px;
+  color: #fff;
 }
 
 /* Estilos para ocultar el sidebar en pantallas pequeñas y ajustar el contenido */
 @media (max-width: 768px) {
   #sidebar {
-      left: -250px; /* Oculta el sidebar por defecto en pantallas pequeñas */
+    width: 80px; /* Ajusta automáticamente el sidebar para pantallas pequeñas */
   }
 
-  #sidebar.active {
-      left: 0; /* Muestra el sidebar cuando está activo */
+  #sidebar .link-text,
+  #sidebar:not(.active) .sidebar-header .nav-link {
+    display: none;
   }
 
-  .content {
-      margin-left: 0;
-      width: 100%; /* Ajusta el contenido para pantallas pequeñas */
+  .content, .content.active {
+    margin-left: 80px; /* Ajusta el contenido principal automáticamente */
   }
 
   .toggle-button {
-      position: absolute; /* Posiciona el botón de alternancia absolutamente */
-      top: 10px;
-      left: 10px; /* Ajusta el botón de alternancia para que sea visible en pantallas pequeñas */
-      z-index: 1010; /* Asegura que el botón esté sobre el sidebar */
+    display: block; /* Asegura que el botón de alternancia sea visible */
   }
 }
-
 /* Estilos para el botón de cerrar sesión */
 .logout-button {
-  position: fixed;
-  right: 10px;
-  top: 10px; /* Cambiado de 'bottom' a 'top' */
-  z-index: 1001; /* Asegura que el botón de cerrar sesión sea accesible */
-}
-#sidebar {
-  /* ... tus estilos ... */
-  padding-left: 15px; /* Agrega un poco de padding a la izquierda */
+  position: fixed; /* Posicionamiento fijo en la pantalla */
+  right: 10px; /* A la derecha de la pantalla */
+  top: 10px; /* En la parte superior de la pantalla */
+  z-index: 1001; /* Asegura que esté por encima de otros elementos */
 }
 
-#sidebar.active {
-  width: 250px; /* Ancho cuando está expandido */
+.logout-button button {
+  background-color: #f8f9fa; /* Fondo claro para el botón, ajusta según tu esquema de color */
+  color: #333; /* Color del texto, ajusta según necesidad */
+  border: 1px solid #ddd; /* Borde sutil, ajusta según tu diseño */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espaciado interno */
+  font-size: 14px; /* Tamaño del texto */
+  cursor: pointer; /* Cursor tipo puntero para indicar clickeabilidad */
 }
 
+.logout-button button:hover {
+  background-color: #e2e6ea; /* Color al pasar el mouse por encima, ajusta según tu esquema de color */
+}
+
+/* Ajustes para cuando el sidebar está colapsado o en pantallas pequeñas */
 @media (max-width: 768px) {
-  #sidebar {
-    left: -250px; /* Estado inicial "comprimido" */
-  }
-
-  #sidebar.active {
-    left: 0; /* Estado "expandido" */
-  }
-
-  .content {
-    margin-left: 0;
-  }
-
-  .content.active {
-    margin-left: 250px; /* Margen para el contenido cuando el sidebar está expandido */
+  .logout-button {
+    right: 20px; /* Ajusta la posición hacia la derecha para evitar solapamientos */
   }
 }
