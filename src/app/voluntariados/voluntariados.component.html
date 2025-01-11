@@ -1,0 +1,58 @@
+<div *ngIf="isAdmin || isRecursosHumanos || isMentor; else accesoRestringido">
+    <div class="card-container">
+      <div class="mb-2">
+        <button *ngIf="isAdmin || isRecursosHumanos" 
+                class="btn btn-success" 
+                (click)="router.navigate(['/voluntariados/nuevo'])" 
+                [disabled]="!isAdmin && isRecursosHumanos">
+          Nuevo Voluntariado
+        </button>
+      </div>
+  
+      <div class="card">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Fecha Inicio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let voluntariado of voluntariados">
+                <td>{{ voluntariado.id }}</td>
+                <td>{{ voluntariado.nombre }}</td>
+                <td>{{ voluntariado.tipo }}</td>
+                <td>{{ voluntariado.fecha_inicio }}</td>
+                <td>
+                  <span class="badge" [ngClass]="voluntariado.estado_voluntario ? 'badge-success' : 'badge-danger'" style="color: white;">
+                    {{ voluntariado.estado_voluntario ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </td>
+                <td>
+                  <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="editarVoluntariado(voluntariado)">Editar</button>
+                  <button *ngIf="isAdmin || isRecursosHumanos" 
+                          class="btn btn-sm" 
+                          [ngClass]="voluntariado.estado_voluntario ? 'btn-danger' : 'btn-success'" 
+                          (click)="cambiarEstado(voluntariado)">
+                    {{ voluntariado.estado_voluntario ? 'Baja' : 'Alta' }}
+                  </button>
+                  <button *ngIf="isMentor" class="btn btn-info btn-sm">Ver</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <pagination-controls class="pagination justify-content-center" id="voluntariados-pagination" (pageChange)="p = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #accesoRestringido>
+    <p class="alert alert-danger">Acceso Restringido</p>
+  </ng-template>
+  

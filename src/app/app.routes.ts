@@ -13,6 +13,7 @@ import { ActualizarVariableComponent } from './actualizar-variable/actualizar-va
 import { VoluntariosComponent } from './voluntarios/voluntarios.component';
 import { MisVoluntariadosComponent } from './mis-voluntariados/mis-voluntariados.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { VoluntariadosComponent } from './voluntariados/voluntariados.component';
 
 export const routes: Routes = [
     {
@@ -70,6 +71,10 @@ export const routes: Routes = [
             {
                 path: 'feedback/:voluntariadoId',
                 component: FeedbackComponent   
+            },
+            {
+                path: 'voluntariados',
+                component: VoluntariadosComponent   
             },
         ]
     },

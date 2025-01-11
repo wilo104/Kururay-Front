@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export class VoluntariosService {
   private apiUrl = 'http://localhost:3000/voluntarios'; // URL del backend
   private apiurl2= 'http://localhost:3000/usuarios';
-
   constructor(private http: HttpClient) {}
 
   // Obtener la lista de voluntarios
@@ -58,5 +57,6 @@ export class VoluntariosService {
     return this.http.get(`${this.apiUrl}/${voluntariadoId}/feedback`);
   }
   
+
 
 }
