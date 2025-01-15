@@ -1,16 +1,72 @@
-import { TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
+import { catchError } from 'rxjs/operators';
 
-import { VolutariadosService } from './volutariados.service';
+@Injectable({
+  providedIn: 'root',
+})
+export class VoluntariadosService {
+  private baseUrl = 'http://localhost:3000/voluntariados';
 
-describe('VolutariadosService', () => {
-  let service: VolutariadosService;
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(VolutariadosService);
-  });
+  // Método para crear un voluntariado
+  crearVoluntariado(data: any): Observable<any> {
+    const token = this.authService.gettoken();
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    if (!token) {
+      return throwError('Token no disponible');
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Incluye el token automáticamente
+    });
+
+    return this.http.post(this.baseUrl, data, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error al crear voluntariado:', error);
+        return throwError('Error al crear voluntariado');
+      })
+    );
+  }
+
+  getVoluntariado(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get(`${this.baseUrl}/${id}`, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error al obtener voluntariado:', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  updateVoluntariado(id: number, data: any): Observable<any> {
+    const token = localStorage.getItem('token'); // Asegúrate de que el token esté almacenado en localStorage
+    if (!token) {
+      return throwError('Token no disponible');
+    }
+  
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+  
+    return this.http.put(`${this.baseUrl}/${id}`, data, { headers }).pipe(
+      catchError((error) => {
+        console.error('Error al actualizar voluntariado:', error);
+        return throwError('Error al actualizar voluntariado');
+      })
+    );
+  }
+  
+
+
+  
+
+
+}

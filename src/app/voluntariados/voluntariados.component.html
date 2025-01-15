@@ -3,7 +3,7 @@
       <div class="mb-2">
         <button *ngIf="isAdmin || isRecursosHumanos" 
                 class="btn btn-success" 
-                (click)="router.navigate(['/voluntariados/nuevo'])" 
+                (click)="registrarVoluntariado()" 
                 [disabled]="!isAdmin && isRecursosHumanos">
           Nuevo Voluntariado
         </button>
@@ -23,7 +23,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let voluntariado of voluntariados">
+              <!-- Aplicar la directiva paginate -->
+              <tr *ngFor="let voluntariado of voluntariados | paginate: { id: 'voluntariados-pagination', itemsPerPage: 10, currentPage: p }">
                 <td>{{ voluntariado.id }}</td>
                 <td>{{ voluntariado.nombre }}</td>
                 <td>{{ voluntariado.tipo }}</td>
@@ -47,7 +48,11 @@
             </tbody>
           </table>
         </div>
-        <pagination-controls class="pagination justify-content-center" id="voluntariados-pagination" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls 
+          class="pagination justify-content-center" 
+          id="voluntariados-pagination" 
+          (pageChange)="p = $event">
+        </pagination-controls>
       </div>
     </div>
   </div>

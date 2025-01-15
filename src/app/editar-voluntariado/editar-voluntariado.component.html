@@ -1,0 +1,126 @@
+<div class="container mt-4">
+    <h2>Editar Voluntariado</h2>
+    <form [formGroup]="voluntariadoForm" (ngSubmit)="guardar()">
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="nombre">Nombre del voluntariado</label>
+        <input
+          type="text"
+          id="nombre"
+          class="form-control"
+          formControlName="nombre"
+          placeholder="Ingrese el nombre del voluntariado"
+        />
+        <div *ngIf="voluntariadoForm.get('nombre')?.invalid && voluntariadoForm.get('nombre')?.touched" class="text-danger">
+          El nombre es obligatorio y debe tener al menos 3 caracteres.
+        </div>
+      </div>
+  
+      <!-- Tipo -->
+      <div class="form-group">
+        <label for="tipo">Tipo de voluntariado</label>
+        <select id="tipo" class="form-control" formControlName="tipo">
+          <option value="" disabled>Seleccione un tipo</option>
+          <option *ngFor="let tipo of tiposVoluntariado" [value]="tipo">
+            {{ tipo }}
+          </option>
+        </select>
+        <div *ngIf="voluntariadoForm.get('tipo')?.invalid && voluntariadoForm.get('tipo')?.touched" class="text-danger">
+          Seleccione un tipo de voluntariado.
+        </div>
+      </div>
+      
+      
+  
+      <!-- Fechas -->
+      <div class="form-group">
+        <label for="fechaInicio">Fecha de inicio</label>
+        <input type="date" id="fechaInicio" class="form-control" formControlName="fecha_inicio" />
+      </div>
+  
+      <div class="form-group">
+        <label for="fechaFin">Fecha de cierre proyectada</label>
+        <input type="date" id="fechaFin" class="form-control" formControlName="fecha_fin" />
+      </div>
+  
+      <!-- Objetivo general -->
+      <div class="form-group">
+        <label for="objetivoGeneral">Objetivo general</label>
+        <input type="text" id="objetivoGeneral" class="form-control" formControlName="objetivoGeneral" />
+      </div>
+  
+      <!-- Objetivos específicos -->
+      <div *ngFor="let i of [1, 2, 3, 4, 5]; let index = index" class="form-group">
+        <label [for]="'objetivoEspecifico' + (index + 1)">Objetivo específico {{ index + 1 }}</label>
+        <input
+          type="text"
+          [id]="'objetivoEspecifico' + (index + 1)"
+          class="form-control"
+          [formControlName]="'objetivoEspecifico' + (index + 1)"
+          placeholder="Ingrese el objetivo específico {{ index + 1 }}"
+        />
+      </div>
+  
+      <!-- Público objetivo -->
+      <div class="form-group">
+        <label for="publicoObjetivo">Público objetivo</label>
+        <input
+          type="text"
+          id="publicoObjetivo"
+          class="form-control"
+          formControlName="publicoObjetivo"
+        />
+      </div>
+  
+      <!-- Beneficiarios directos -->
+      <div class="form-group">
+        <label for="beneficiariosDirectos">Beneficiarios directos</label>
+        <input
+          type="number"
+          id="beneficiariosDirectos"
+          class="form-control"
+          formControlName="beneficiariosDirectos"
+        />
+      </div>
+  
+      <!-- Beneficiarios indirectos -->
+      <div class="form-group">
+        <label for="beneficiariosIndirectos">Beneficiarios indirectos</label>
+        <input
+          type="number"
+          id="beneficiariosIndirectos"
+          class="form-control"
+          formControlName="beneficiariosIndirectos"
+        />
+      </div>
+  
+      <!-- Presupuesto inicial -->
+      <div class="form-group">
+        <label for="presupuestoInicial">Presupuesto inicial</label>
+        <input
+          type="number"
+          id="presupuestoInicial"
+          class="form-control"
+          formControlName="presupuestoInicial"
+        />
+      </div>
+  
+      <!-- Aliados -->
+      <div class="form-group">
+        <label for="aliados">Aliados</label>
+        <input
+          type="text"
+          id="aliados"
+          class="form-control"
+          formControlName="aliados"
+        />
+      </div>
+  
+      <!-- Botones -->
+      <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="voluntariadoForm.invalid">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

@@ -14,6 +14,8 @@ import { VoluntariosComponent } from './voluntarios/voluntarios.component';
 import { MisVoluntariadosComponent } from './mis-voluntariados/mis-voluntariados.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { VoluntariadosComponent } from './voluntariados/voluntariados.component';
+import { NuevoVoluntariadoComponent } from './nuevo-voluntariado/nuevo-voluntariado.component';
+import { EditarVoluntariadoComponent } from './editar-voluntariado/editar-voluntariado.component';
 
 export const routes: Routes = [
     {
@@ -76,6 +78,18 @@ export const routes: Routes = [
                 path: 'voluntariados',
                 component: VoluntariadosComponent   
             },
+            {
+                path: 'voluntariados/nuevo',
+                component: NuevoVoluntariadoComponent 
+            },
+            { 
+                path: 'voluntariados/:id/editar',
+                 component: EditarVoluntariadoComponent
+                
+            },
+
+
+
         ]
     },
     // Esta es la línea crucial: la ruta comodín
