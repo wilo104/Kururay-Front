@@ -1,0 +1,24 @@
+<div class="modal">
+    <div class="modal-content">
+      <h2>Asignar Voluntario</h2>
+      <button (click)="cerrar()" class="close-button">Cerrar</button>
+      <div *ngIf="cargando">Cargando voluntarios...</div>
+      <table *ngIf="!cargando">
+        <thead>
+          <tr>
+            <th>Nombre Completo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let voluntario of voluntarios">
+            <td>{{ voluntario.nombre_completo }}</td>
+            <td>
+              <button (click)="asignarVoluntario(voluntario.id)">Asignar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
+import { AsignarVoluntarioModalComponent } from '../asignar-voluntario-modal/asignar-voluntario-modal.component';
 
 @Component({
   selector: 'app-voluntariados',
   standalone: true,
-  imports: [CommonModule, NgxPaginationModule, HttpClientModule],
+  imports: [CommonModule, NgxPaginationModule, HttpClientModule,AsignarVoluntarioModalComponent],
   providers: [VoluntariadosService],
   templateUrl: './voluntariados.component.html',
-  styleUrls: ['./voluntariados.component.css']
+  styleUrls: ['./voluntariados.component.css'],
 })
 export class VoluntariadosComponent implements OnInit {
   voluntariados: any[] = [];
@@ -63,12 +64,37 @@ export class VoluntariadosComponent implements OnInit {
 
   // Método para cambiar el estado de un voluntariado
   cambiarEstado(voluntariado: any): void {
-    console.log('Cambiar estado:', voluntariado);
-    // Implementa la lógica para cambiar el estado del voluntariado
+    const nuevoEstado = voluntariado.estado === 'activo' ? 'inactivo' : 'activo';
+
+    this.voluntariadosService.cambiarEstadoVoluntariado(voluntariado.id, nuevoEstado).subscribe({
+      next: (response) => {
+        alert('Estado cambiado con éxito');
+        this.obtenerListaVoluntariados(); // Actualizar la lista
+      },
+      error: (error) => {
+        console.error('Error al cambiar el estado:', error);
+        alert('Error al cambiar el estado del voluntariado');
+      },
+    });
   }
 
   // Método para registrar un nuevo voluntariado
   registrarVoluntariado(): void {
     this.router.navigate(['/voluntariados/nuevo']);
   }
+
+  modalAbierto = false;
+  idVoluntariadoSeleccionado!: number;
+  
+  abrirModal(idVoluntariado: number): void {
+    this.modalAbierto = true;
+    this.idVoluntariadoSeleccionado = idVoluntariado;
+  }
+  
+  cerrarModal(): void {
+    this.modalAbierto = false;
+  }
+  
+
+
 }

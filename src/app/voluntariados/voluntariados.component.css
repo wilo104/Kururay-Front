@@ -1,0 +1,16 @@
+.badge-success {
+    background-color: #28a745 !important; /* Verde */
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  
+  .badge-danger {
+    background-color: #dc3545 !important; /* Rojo */
+    color: white !important;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  

@@ -24,6 +24,9 @@ throw new Error('Method not implemented.');
   ordenActual: string | undefined;
   UsuarioService: any;
   usuarios: any;
+  mostrarModal: boolean = false;
+  voluntariosNoAsignados: any[] = [];
+  idVoluntariado: number | null = null; // ID dinámico del voluntariado
 
   constructor(private voluntariosService: VoluntariosService ,private router: Router) {}
 
@@ -44,6 +47,47 @@ throw new Error('Method not implemented.');
       }
     );
   }
+
+  abrirModal(): void {
+    this.mostrarModal = true;
+    this.voluntariosService.getVoluntariosNoAsignados().subscribe(
+      (data: any[]) => {
+        this.voluntariosNoAsignados = data;
+      },
+      (error) => {
+        console.error('Error al obtener voluntarios no asignados:', error);
+      }
+    );
+  }
+
+  cerrarModal(): void {
+    this.mostrarModal = false;
+    this.obtenerListaVoluntarios(); // Actualiza la tabla principal después de cerrar el modal
+  }
+
+  asignarVoluntario(idVoluntario: number): void {
+    if (!this.idVoluntariado) {
+      console.error('No hay un ID de voluntariado seleccionado');
+      return;
+    }
+
+    const asignacion = {
+      id_voluntariado: this.idVoluntariado,
+      id_voluntario: idVoluntario,
+    };
+
+  
+  }
+
+
+
+
+
+
+
+
+
+
 
   // Método para cambiar el estado del voluntario
   cambiarEstadoVoluntario(voluntario: any): void {

@@ -15,6 +15,18 @@ export class VoluntariosService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  getVoluntariosNoAsignados(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/voluntariados/voluntarios/no-asignados`);
+  }
+
+  asignarVoluntario(idVoluntariado: number, idVoluntario: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/voluntarios/asignar`, { id_voluntariado: idVoluntariado, id_voluntario: idVoluntario });
+  }
+
+
+
+
+
   // Registrar un voluntario
   registrarVoluntario(voluntario: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/registro`, voluntario);
@@ -57,6 +69,15 @@ export class VoluntariosService {
     return this.http.get(`${this.apiUrl}/${voluntariadoId}/feedback`);
   }
   
+ 
+
+
+
+
+
+
+
+
 
 
 }

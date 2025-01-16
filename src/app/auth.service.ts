@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-
 interface LoginResponse {
   [x: string]: any;
   id: any;
   token: string;
   tipo_usuario: string;
 }
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthService {
 
 
   
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, ) {}
 
   login(loginObj: { dni: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.loginUrl, loginObj);

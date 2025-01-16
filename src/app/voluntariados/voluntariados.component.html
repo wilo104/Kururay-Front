@@ -1,10 +1,12 @@
 <div *ngIf="isAdmin || isRecursosHumanos || isMentor; else accesoRestringido">
     <div class="card-container">
       <div class="mb-2">
-        <button *ngIf="isAdmin || isRecursosHumanos" 
-                class="btn btn-success" 
-                (click)="registrarVoluntariado()" 
-                [disabled]="!isAdmin && isRecursosHumanos">
+        <button
+          *ngIf="isAdmin || isRecursosHumanos"
+          class="btn btn-success"
+          (click)="registrarVoluntariado()"
+          [disabled]="!isAdmin && isRecursosHumanos"
+        >
           Nuevo Voluntariado
         </button>
       </div>
@@ -23,38 +25,68 @@
               </tr>
             </thead>
             <tbody>
-              <!-- Aplicar la directiva paginate -->
-              <tr *ngFor="let voluntariado of voluntariados | paginate: { id: 'voluntariados-pagination', itemsPerPage: 10, currentPage: p }">
-                <td>{{ voluntariado.id }}</td>
+              <tr
+                *ngFor="let voluntariado of voluntariados | paginate: { id: 'voluntariados-pagination', itemsPerPage: 10, currentPage: p }"
+              >
+                <td>{{ voluntariado.id}}</td>
                 <td>{{ voluntariado.nombre }}</td>
                 <td>{{ voluntariado.tipo }}</td>
                 <td>{{ voluntariado.fecha_inicio }}</td>
                 <td>
-                  <span class="badge" [ngClass]="voluntariado.estado_voluntario ? 'badge-success' : 'badge-danger'" style="color: white;">
-                    {{ voluntariado.estado_voluntario ? 'Activo' : 'Inactivo' }}
+                  <span
+                    class="badge"
+                    [ngClass]="{
+                      'badge-success': voluntariado.estado_voluntariado === true,
+                      'badge-danger': voluntariado.estado_voluntariado === false
+                    }"
+                  >
+                    {{ voluntariado.estado_voluntariado ? 'Activo' : 'Inactivo' }}
                   </span>
                 </td>
                 <td>
-                  <button *ngIf="isAdmin" class="btn btn-primary btn-sm" (click)="editarVoluntariado(voluntariado)">Editar</button>
-                  <button *ngIf="isAdmin || isRecursosHumanos" 
-                          class="btn btn-sm" 
-                          [ngClass]="voluntariado.estado_voluntario ? 'btn-danger' : 'btn-success'" 
-                          (click)="cambiarEstado(voluntariado)">
-                    {{ voluntariado.estado_voluntario ? 'Baja' : 'Alta' }}
+                  <button
+                    class="btn btn-primary btn-sm"
+                    (click)="editarVoluntariado(voluntariado)"
+                  >
+                    Editar
                   </button>
-                  <button *ngIf="isMentor" class="btn btn-info btn-sm">Ver</button>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    (click)="cambiarEstado(voluntariado)"
+                  >
+                    {{ voluntariado.estado_voluntario ? 'Desactivar' : 'Activar' }}
+                  </button>
+                  <button
+                    *ngIf="isMentor"
+                    class="btn btn-info btn-sm"
+                  >
+                    Ver
+                  </button>
+                  <button
+                    class="btn btn-success btn-sm"
+                    (click)="abrirModal(voluntariado.id)"
+                  >
+                    Asignar Voluntario
+                  </button>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <pagination-controls 
-          class="pagination justify-content-center" 
-          id="voluntariados-pagination" 
-          (pageChange)="p = $event">
-        </pagination-controls>
+        <pagination-controls
+          class="pagination justify-content-center"
+          id="voluntariados-pagination"
+          (pageChange)="p = $event"
+        ></pagination-controls>
       </div>
     </div>
+  
+    <!-- Modal -->
+    <app-asignar-voluntario-modal
+      *ngIf="modalAbierto"
+      [idVoluntariado]="idVoluntariadoSeleccionado"
+      (cerrarModal)="cerrarModal()"
+    ></app-asignar-voluntario-modal>
   </div>
   
   <ng-template #accesoRestringido>
