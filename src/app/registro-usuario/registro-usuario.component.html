@@ -1,7 +1,7 @@
 <div class="container mt-3">
-  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
     <div class="row mb-3">
-      <div class="col-md-4">
+      <div class="col-md-6">
         <label for="dni" class="form-label">DNI (8 dígitos)</label>
         <input type="text" class="form-control" id="dni" formControlName="dni" placeholder="DNI">
         <div
@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-6">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="Nombre">
         <div
@@ -22,9 +22,7 @@
       </div>
     </div>
 
-
     <div class="row mb-3">
-
       <div class="col-md-6">
         <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
         <input type="text" class="form-control" id="apellido_paterno" formControlName="apellido_paterno"
@@ -32,7 +30,7 @@
         <div
           *ngIf="registroForm.controls['apellido_paterno'].invalid && (registroForm.controls['apellido_paterno'].dirty || registroForm.controls['apellido_paterno'].touched)"
           class="text-danger">
-          El Apellido paterno es Requerido.
+          El apellido paterno es requerido.
         </div>
       </div>
 
@@ -43,13 +41,13 @@
         <div
           *ngIf="registroForm.controls['apellido_materno'].invalid && (registroForm.controls['apellido_materno'].dirty || registroForm.controls['apellido_materno'].touched)"
           class="text-danger">
-          El Apellido materno es Requerido
+          El apellido materno es requerido.
         </div>
       </div>
     </div>
 
     <div class="row mb-3">
-      <div class="col">
+      <div class="col-md-6">
         <label for="correo" class="form-label">Correo Electrónico</label>
         <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="Correo Electrónico">
         <div
@@ -58,7 +56,8 @@
           El correo es requerido y debe ser una dirección válida.
         </div>
       </div>
-      <div class="col">
+
+      <div class="col-md-6">
         <label for="telefono" class="form-label">Teléfono (9 dígitos)</label>
         <input type="text" class="form-control" id="telefono" formControlName="telefono" placeholder="Teléfono">
         <div
@@ -70,7 +69,20 @@
     </div>
 
     <div class="row mb-3">
-    
+      <div class="col-md-6">
+        <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
+        <select class="form-select" id="tipo_usuario" formControlName="tipo_usuario">
+          <option value="" disabled selected>Selecciona un tipo</option>
+          <option value="ADMINISTRADOR">Administrador</option>
+          <option value="RRHH">RRHH</option>
+        </select>
+        <div
+          *ngIf="registroForm.controls['tipo_usuario'].invalid && (registroForm.controls['tipo_usuario'].dirty || registroForm.controls['tipo_usuario'].touched)"
+          class="text-danger">
+          Debes seleccionar un tipo de usuario.
+        </div>
+      </div>
+
       <div class="col-md-6">
         <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
         <input type="date" class="form-control" id="fecha_nacimiento" formControlName="fecha_nacimiento">
@@ -80,120 +92,11 @@
           La fecha de nacimiento es requerida.
         </div>
       </div>
-    
-      <div class="col-md-6">
-        <label for="area" class="form-label">Área</label>
-        <select class="form-select" id="area" formControlName="area">
-          <option value="" disabled selected>Selecciona un área</option>
-          <option *ngFor="let area of areas" [value]="area">{{ area }}</option>
-        </select>
-      </div>
-   
-    
-    
-    </div>
-
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="rol" class="form-label">Rol</label>
-        <select class="form-select" id="rol" formControlName="rol">
-          <option value="" disabled selected>Selecciona un Rol </option>
-          <option *ngFor="let rol of roles" [value]="rol">{{ rol }}</option>
-        </select>
-      </div>
-    
-      <div class="col-md-6">
-        <label for="categoria" class="form-label">Categoria</label>
-        <select class="form-select" id="categoria" formControlName="categoria">
-          <option value="" disabled selected>Selecciona una categoria </option>
-          <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
-        </select>
-      </div>
-      
-  
-   
-    </div>
-
-    
-    <div class="row mb-3">
-
-      <div class="col-md-6">
-        <label for="fecha_ingreso" class="form-label">Fecha de Ingreso</label>
-        <input type="date" class="form-control" id="fecha_ingreso" formControlName="fecha_ingreso">
-      </div>
-      <div class="col-md-6">
-        <label for="situacion" class="form-label">Situacion Academica</label>
-        <select class="form-select" id="situacion" formControlName="situacion">
-          <option value="" disabled selected>Selecciona una opcion</option>
-          <option *ngFor="let situacion of situaciones" [value]="situacion">{{ situacion }}</option>
-        </select>
-      </div>
- 
     </div>
 
     <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="carrera" class="form-label">Carrera</label>
-        <select class="form-select" id="carrera" formControlName="carrera">
-          <option value="" disabled selected>Selecciona una Carrera</option>
-          <option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</option>
-        </select>
-      </div>
-      <div class="col-md-6">
-        <label for="instagram" class="form-label">Instagram</label>
-        <input type="text" class="form-control" id="instagram" formControlName="instagram" placeholder="instagram">
-      </div>
-    
-   
-    </div>
-
-    <div class="row mb-3">
-      <div class="col-md-6">
-        <label for="facebook" class="form-label">Facebook</label>
-        <input type="text" class="form-control" id="facebook" formControlName="facebook" placeholder="facebook">
-      </div>
-     
-      <div class="col-md-6">
-        <label for="linkedin" class="form-label">Linkedin</label>
-        <input type="text" class="form-control" id="linkedin" formControlName="linkedin" placeholder="linkedin">
-      </div>
-     
-   
-   
-    </div>
-
-    <div classs="row mb-3">
-      <div class="col-md-6">
-        <label for="cv" class="form-label">Subir CV (PDF)</label>
-        <input type="file" class="form-control"  name="cv" id="cv" formControlName="cv" accept=".pdf">
-      </div>
-      <div class="col-md-6">
-        <label for="tipo_usuario" class="form-label">Tipo de Usuario</label>
-        <select class="form-select" id="tipo_usuario" formControlName="tipo_usuario">
-          <option value="" selected>Selecciona un tipo de usuario</option>
-          <option value="ADMINISTRADOR">Administrador del Sistema</option>
-          <option value="RRHH">RRHH</option>
-          <option value="VOLUNTARIO">VOLUNTARIO</option>
-          <!-- Más opciones aquí -->
-        </select>
-        <div *ngIf="registroForm.controls['tipo_usuario'].invalid && (registroForm.controls['tipo_usuario'].dirty || registroForm.controls['tipo_usuario'].touched)"
-          class="text-danger">
-          Debes seleccionar un tipo de usuario.
-        </div>
-      </div>
-      
-    </div>
-  
-   
-    
-      <app-modal id="RegistroModal"></app-modal>
-   
-
-
-    <div class="row mb-3" style="padding-top: 10px;">
       <div class="col text-center">
-        <button type="submit" class="btn btn-primary me-2" [disabled]="registroForm.invalid">Guardar</button> <!-- 'mr-2' para Bootstrap 4 -->
+        <button type="submit" class="btn btn-primary me-2" [disabled]="registroForm.invalid">Guardar</button>
         <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
       </div>
     </div>

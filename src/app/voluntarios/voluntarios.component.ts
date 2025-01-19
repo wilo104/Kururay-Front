@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { VoluntariosService } from '../voluntarios.service';
-import { UsuarioService } from '../usuario-service.service';
 import { NgxPaginationModule } from 'ngx-pagination';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-voluntarios',
@@ -36,7 +36,7 @@ throw new Error('Method not implemented.');
 
   obtenerListaVoluntarios(): void {
     this.isLoading = true;
-    this.voluntariosService.getVoluntarios().subscribe(
+    this.voluntariosService.obtenerVoluntarios().subscribe(
       (data: any[]) => {
         this.voluntarios = data;
         this.isLoading = false;
@@ -50,7 +50,7 @@ throw new Error('Method not implemented.');
 
   abrirModal(): void {
     this.mostrarModal = true;
-    this.voluntariosService.getVoluntariosNoAsignados().subscribe(
+    this.voluntariosService.obtenerVoluntariosNoAsignados().subscribe(
       (data: any[]) => {
         this.voluntariosNoAsignados = data;
       },
@@ -65,28 +65,7 @@ throw new Error('Method not implemented.');
     this.obtenerListaVoluntarios(); // Actualiza la tabla principal después de cerrar el modal
   }
 
-  asignarVoluntario(idVoluntario: number): void {
-    if (!this.idVoluntariado) {
-      console.error('No hay un ID de voluntariado seleccionado');
-      return;
-    }
-
-    const asignacion = {
-      id_voluntariado: this.idVoluntariado,
-      id_voluntario: idVoluntario,
-    };
-
-  
-  }
-
-
-
-
-
-
-
-
-
+ 
 
 
   // Método para cambiar el estado del voluntario
@@ -94,28 +73,17 @@ throw new Error('Method not implemented.');
     const nuevoEstado = voluntario.estado_voluntario ? 'Inactivo' : 'Activo';
     this.voluntariosService.cambiarEstadoVoluntario(voluntario.id, nuevoEstado).subscribe(
       (response) => {
-        // Actualiza el estado del voluntario en la lista local
-        voluntario.estado_voluntario = !voluntario.estado_voluntario;
+        this.obtenerListaVoluntarios(); // Recarga la lista desde el backend
+        Swal.fire('Éxito', `El estado del voluntario se cambió a ${nuevoEstado}.`, 'success');
       },
       (error) => {
         console.error('Error al cambiar el estado del voluntario:', error);
+        Swal.fire('Error', 'No se pudo cambiar el estado del voluntario.', 'error');
       }
     );
   }
-
-  obtenerListaUsuarios(ordenPor: string, direccion: string): void {
-    this.isLoading = true;
-    this.UsuarioService.obtenerUsuarios(ordenPor, direccion).subscribe(
-      (usuarios: any) => {
-        this.usuarios = usuarios;
-        this.isLoading = false;
-      },
-      (error: any) => {
-        console.error('Error al obtener la lista de usuarios:', error);
-        this.isLoading = false;
-      }
-    );
-  }
+  
+  
 
   ordenarPor(propiedad: string): void {
     console.log(`Ordenando por ${propiedad} en dirección ${this.direccionOrden}`);
@@ -128,38 +96,31 @@ throw new Error('Method not implemented.');
     }
     this.ordenActual = propiedad;
     // Hacer una llamada al backend con el nuevo orden
-    this.obtenerListaUsuarios(this.ordenActual, this.direccionOrden);
+    this.obtenerListaVoluntarios();
   }
 
   nuevoUsuario() {
-    this.router.navigate(['/registro']);
+    this.router.navigate(['/registro-voluntario']);
   }
-  verCV(usuario:any){
-    this.UsuarioService.obtenerCVUsuario(usuario.id).subscribe(
+  verCV(voluntario: any): void {
+    this.voluntariosService.obtenerCVVoluntario(voluntario.id).subscribe(
       (cv: Blob) => {
-        // Aquí puedes manejar el Blob del CV, como descargarlo o mostrarlo en un visor
         const url = window.URL.createObjectURL(cv);
-        window.open(url); // Por ejemplo, abre el CV en una nueva pestaña
+        window.open(url); // Abre el CV en una nueva pestaña
       },
-      (      error: any) => {
+      (error) => {
         console.error('Error al obtener el CV:', error);
-        // Aquí puedes manejar el error, como mostrar un mensaje al usuario
+        Swal.fire('Error', 'No se pudo obtener el CV del voluntario.', 'error');
       }
     );
+  }
+  
+  editarVoluntario(voluntario: any): void {
+    this.router.navigate([`/voluntarios/${voluntario.id}/editar`]);
   }
 
-  cambiarEstado(usuario: any) {
-    const nuevoEstado = usuario.estado_usuario ? 'baja' : 'alta';
-    this.voluntariosService.cambiarEstadoUsuario(usuario.id, nuevoEstado).subscribe(
-      (response: any) => {
-        console.log('Estado del usuario cambiado exitosamente:', response);
-        usuario.estado_usuario = !usuario.estado_usuario; // Actualizar el estado del usuario en el arreglo local
-      },
-      (error: any) => {
-        console.error('Error al cambiar el estado del usuario:', error);
-      }
-    );
-  }
+
+
 
   editarUsuario(usuario: any) {
     this.router.navigate([`/usuarios/${usuario.id}/editar`]);

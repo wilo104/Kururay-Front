@@ -43,7 +43,7 @@ export class MisVoluntariadosComponent implements OnInit {
       return;
     }
 
-    this.voluntariosService.getHistorialVoluntario(id, token).subscribe({
+    this.voluntariosService.obtenerHistorialVoluntario(id, token).subscribe({
       next: (data) => {
         this.voluntariados = data;
         this.isLoading = false;

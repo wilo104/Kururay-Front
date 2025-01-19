@@ -1,0 +1,31 @@
+<div class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Desasignar Voluntario</h5>
+      <button type="button" class="btn btn-danger" (click)="cerrar()">Cerrar</button>
+    </div>
+    <div class="modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nombre Completo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let voluntario of voluntariosAsignados">
+            <td>{{ voluntario.nombre }} {{ voluntario.apellido_paterno }} {{ voluntario.apellido_materno }}</td>
+            <td>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="desasignarVoluntario(voluntario.id_voluntario)"
+              >
+                Desasignar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

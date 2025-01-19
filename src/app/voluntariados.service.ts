@@ -77,9 +77,37 @@ export class VoluntariadosService {
       id_voluntario: idVoluntario
     }, { headers });
   }
-  
+ 
+      // Obtener voluntarios asignados
+  getVoluntariosAsignados(idVoluntariado: number): Observable<any[]> {
+    return this.http
+      .get<any[]>(`${this.baseUrl}/${idVoluntariado}/voluntarios`, { headers: this.getHeaders() })
+      .pipe(
+        catchError((error) => {
+          console.error('Error al obtener voluntarios asignados:', error);
+          return throwError('Error al cargar voluntarios asignados.');
+        })
+      );
+  }
+
+  // Desasignar un voluntario
+  desasignarVoluntario(idVoluntariado: number, idVoluntario: number): Observable<any> {
+    return this.http
+      .delete(`${this.baseUrl}/${idVoluntariado}/voluntarios/${idVoluntario}`, {
+        headers: this.getHeaders(),
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error al desasignar voluntario:', error);
+          return throwError('Error al intentar desasignar al voluntario.');
+        })
+      );
+  }
+
+
+
   cambiarEstadoVoluntariado(id: number, estado: string): Observable<any> {
-    const url = `http://localhost:3000/voluntariados/${id}/estado`;
+    const url = `${this.baseUrl}/${id}/estado`;
   
     // Obtener el token desde tu sistema de almacenamiento (localStorage, por ejemplo)
     const token = localStorage.getItem('token'); // O ajusta según dónde guardes el token
@@ -90,6 +118,16 @@ export class VoluntariadosService {
   
     return this.http.put(url, { estado_voluntariado: estadoBooleano }, { headers });
   }
+
+  getDetalleVoluntario(idVoluntario: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/voluntarios/${idVoluntario}`).pipe(
+      catchError((error) => {
+        console.error('Error al obtener detalle del voluntario:', error);
+        return throwError('Error al cargar el detalle del voluntario.');
+      })
+    );
+  }
+
 
 
 }

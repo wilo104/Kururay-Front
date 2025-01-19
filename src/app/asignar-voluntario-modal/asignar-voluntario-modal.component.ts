@@ -67,6 +67,10 @@ export class AsignarVoluntarioModalComponent {
     );
   }
 
+  
+  
+  
+
   // Cerrar el modal
   cerrar(): void {
     this.cerrarModal.emit();

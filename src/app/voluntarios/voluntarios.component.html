@@ -1,5 +1,5 @@
 <div *ngIf="isLoading; else userList">
-  <p>Cargando usuarios...</p>
+  <p>Cargando Voluntarios...</p>
 </div>
 
 <ng-template #userList>
@@ -15,12 +15,10 @@
             <tr>
               <th class="d-none d-sm-table-cell" (click)="ordenarPor('id')">ID <span *ngIf="ordenActual === 'id'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
               <th class="d-none d-sm-table-cell" (click)="ordenarPor('apellido_paterno')">Nombre Completo <span *ngIf="ordenActual === 'apellido_paterno'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
-             
               <th class="d-none d-md-table-cell" (click)="ordenarPor('dni')">DNI <span *ngIf="ordenActual === 'dni'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
               <th class="d-none d-md-table-cell" (click)="ordenarPor('correo')">Correo <span *ngIf="ordenActual === 'correo'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
               <th class="d-none d-lg-table-cell" (click)="ordenarPor('telefono')">Teléfono <span *ngIf="ordenActual === 'telefono'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
-              <th class="d-none d-lg-table-cell" (click)="ordenarPor('tipo_usuario')">Tipo Usuario <span *ngIf="ordenActual === 'tipo_usuario'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
-              <th class="d-none d-xl-table-cell" (click)="ordenarPor('estado_usuario')">Estado de usuario <span *ngIf="ordenActual === 'estado_usuario'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
+             <th class="d-none d-xl-table-cell" (click)="ordenarPor('estado_usuario')">Estado de usuario <span *ngIf="ordenActual === 'estado_usuario'">{{ direccionOrden === 'ASC' ? '▲' : '▼' }}</span></th>
             </tr>
           </thead>
           <tbody>
@@ -29,21 +27,30 @@
               <td class="d-none d-sm-table-cell">{{usuario.apellido_paterno}} {{usuario.apellido_materno}} {{ usuario.nombre}}  </td>
                 <td class="d-none d-md-table-cell">{{ usuario.dni }}</td>
               <td class="d-none d-md-table-cell">{{ usuario.correo }}</td>
-              <td class="d-none d-lg-table-cell">{{ usuario.telefono }}</td>
-              <td class="d-none d-lg-table-cell">{{ usuario.tipo_usuario }}</td>
+              <td class="d-none d-lg-table-cell">{{ usuario.celular }}</td>
+              <!-- <td class="d-none d-lg-table-cell">{{ usuario.tipo_usuario }}</td> -->
               <td class="d-none d-xl-table-cell">
-                <span class="badge" [ngClass]="usuario.estado_usuario ? 'badge-success' : 'badge-danger'" style="color: white;">
-                  {{ usuario.estado_usuario ? 'ACTIVO' : 'INACTIVO' }}
+                <span class="badge" [ngClass]="usuario.estado_voluntario ? 'badge-success' : 'badge-danger'" style="color: white;">
+                  {{ usuario.estado_voluntario ? 'ACTIVO' : 'INACTIVO' }}
                 </span>
               </td>
               <td>
-                <button class="btn btn-primary btn-sm custom-btn" (click)="editarUsuario(usuario)">Editar</button>
+                <button class="btn btn-primary btn-sm custom-btn" (click)="editarVoluntario(usuario)">Editar</button>
               </td>
               <td>
                 <button class="btn btn-primary btn-sm custom-btn" (click)="verCV(usuario)">Ver CV</button>
               </td>
               <td>
-                <button class="btn btn-danger btn-sm custom-btn" (click)="cambiarEstado(usuario)">Dar de Baja</button>
+                <button
+                [ngClass]="{
+                  'btn-danger': usuario.estado_voluntario,
+                  'btn-success': !usuario.estado_voluntario
+                }"
+                (click)="cambiarEstadoVoluntario(usuario)"
+              >
+                {{ usuario.estado_voluntario ? 'Dar de Baja' : 'Dar de Alta' }}
+              </button>
+
               </td>
               <td>
                 <button class="btn btn-info btn-sm custom-btn" (click)="restauraracceso(usuario)">Restaurar Acceso</button>

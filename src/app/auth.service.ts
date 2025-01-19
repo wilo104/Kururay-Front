@@ -27,6 +27,7 @@ export class AuthService {
 
   login(loginObj: { dni: string; password: string }): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(this.loginUrl, loginObj);
+    
   }
 
   setUserId(id: number) {

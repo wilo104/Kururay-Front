@@ -1,31 +1,34 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VoluntariosService {
-  private apiUrl = 'http://localhost:3000/voluntarios'; // URL del backend
-  private apiurl2= 'http://localhost:3000/usuarios';
-  constructor(private http: HttpClient) {}
+  private apiUrl = 'http://localhost:3000/voluntarios';
 
+  constructor(private http: HttpClient) {}
+  // Método para obtener el token desde localStorage
+  private obtenerToken(): string | null {
+    return localStorage.getItem('token'); // Recupera el token almacenado
+  }
   // Obtener la lista de voluntarios
-  getVoluntarios(): Observable<any[]> {
+  obtenerVoluntarios(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  getVoluntariosNoAsignados(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/voluntariados/voluntarios/no-asignados`);
+  // Obtener voluntarios no asignados
+  obtenerVoluntariosNoAsignados(): Observable<any[]> {
+    const url = `${this.apiUrl}/voluntariados/voluntarios/no-asignados`;
+    return this.http.get<any[]>(url);
   }
 
+  // Asignar un voluntario a un voluntariado
   asignarVoluntario(idVoluntariado: number, idVoluntario: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/voluntarios/asignar`, { id_voluntariado: idVoluntariado, id_voluntario: idVoluntario });
+    const url = `${this.apiUrl}/voluntarios/asignar`;
+    return this.http.post(url, { id_voluntariado: idVoluntariado, id_voluntario: idVoluntario });
   }
-
-
-
-
 
   // Registrar un voluntario
   registrarVoluntario(voluntario: any): Observable<any> {
@@ -33,51 +36,54 @@ export class VoluntariosService {
   }
 
   // Cambiar el estado de un voluntario
-  cambiarEstadoVoluntario(id: number, estado: string): Observable<any> {
+  cambiarEstadoVoluntario(id: number, nuevoEstado: string): Observable<any> {
     const url = `${this.apiUrl}/${id}/estado`;
-    return this.http.put(url, { nuevoEstado: estado });
+    return this.http.put(url, { nuevoEstado });
   }
 
-  // Obtener un voluntario por su ID
-  obtenerVoluntarioPorId(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
-  // Actualizar la información de un voluntario
-  actualizarVoluntario(id: number, voluntario: any): Observable<any> {
-    const url = `${this.apiUrl}/${id}`;
-    return this.http.put(url, voluntario);
-  }
-
-  cambiarEstadoUsuario(id: number, estado: string): Observable<any> {
-    const url = `${this.apiurl2}/${id}/estado`; // Construye la URL correctamente
-    return this.http.put(url, { nuevoEstado: estado }); // Utiliza PUT en lugar de PATCH si el backend lo espera así
-  }
-
-  getHistorialVoluntario(id: number,tokens: string | null): Observable<any> {
-    const token = tokens // Obtén el token desde localStorage (ajústalo si usas otro método)
-    //console.log(token);
-    const url = `${this.apiUrl}/${id}/historial`; // Construye la URL para obtener el historial
-    
-    // Configurar los encabezados con el token
+  // Obtener historial de un voluntario
+  obtenerHistorialVoluntario(id: number, token: string): Observable<any> {
+    const url = `${this.apiUrl}/${id}/historial`;
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    
-    // Realizar la solicitud GET con el token en los encabezados
     return this.http.get(url, { headers });
   }
-  getFeedback(voluntariadoId: number): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${voluntariadoId}/feedback`);
+
+  // Obtener feedback de un voluntariado
+  obtenerFeedback(voluntariadoId: number): Observable<any> {
+    const url = `${this.apiUrl}/${voluntariadoId}/feedback`;
+    return this.http.get(url);
+  }
+  obtenerCVVoluntario(id: number): Observable<Blob> {
+    const url = `${this.apiUrl}/${id}/cv`;
+    return this.http.get(url, { responseType: 'blob' });
   }
   
- 
+  // Obtener voluntario por ID
+  obtenerVoluntarioPorId(id: number): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Agrega el token a las cabeceras
+    });
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.get(url, { headers });
+  }
 
-
-
-
-
-
-
-
+  // Editar un voluntario
+  editarVoluntario(id: number, voluntario: FormData): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Agrega el token a las cabeceras
+    });
+    const url = `${this.apiUrl}/${id}`;
+    return this.http.put(url, voluntario, { headers });
+  }
+  
+    obtenerValoresPorNombre(nombre: string): Observable<string[]> {
+      const url = `http://localhost:3000/variables-sistema/valores?nombre=${nombre}`;
+      return this.http.get<string[]>(url);
+    }
+    
 
 
 }
+

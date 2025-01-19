@@ -33,7 +33,7 @@ export class FeedbackComponent implements OnInit {
     }
     console.log(voluntariadoId);
     // Llamar al servicio para obtener el feedback
-    this.voluntariadoService.getFeedback(voluntariadoId).subscribe(
+    this.voluntariadoService.obtenerFeedback(voluntariadoId).subscribe(
       (data) => {
         this.feedbacks = data;
         this.isLoading = false; 

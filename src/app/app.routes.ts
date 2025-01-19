@@ -16,6 +16,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { VoluntariadosComponent } from './voluntariados/voluntariados.component';
 import { NuevoVoluntariadoComponent } from './nuevo-voluntariado/nuevo-voluntariado.component';
 import { EditarVoluntariadoComponent } from './editar-voluntariado/editar-voluntariado.component';
+import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component';
+import { EditarVoluntarioComponent } from './editar-voluntario/editar-voluntario.component';
 
 export const routes: Routes = [
     {
@@ -43,6 +45,10 @@ export const routes: Routes = [
                 component: RegistroUsuarioComponent
             },
             {
+                path: 'registro-voluntario',
+                component: RegistroVoluntarioComponent
+            },
+            {
                 path: 'usuarios/:id/editar',
                 component: ActualizarUsuarioComponent
             },
@@ -66,6 +72,10 @@ export const routes: Routes = [
                 path: 'voluntarios',
                 component: VoluntariosComponent
             },
+            { path: 'voluntarios/:id/editar',
+             component: EditarVoluntarioComponent
+             },
+
             {
                 path:'mis-voluntariados',
                 component: MisVoluntariadosComponent

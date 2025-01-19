@@ -43,6 +43,7 @@
                     {{ voluntariado.estado_voluntariado ? 'Activo' : 'Inactivo' }}
                   </span>
                 </td>
+              
                 <td>
                   <button
                     class="btn btn-primary btn-sm"
@@ -68,6 +69,15 @@
                   >
                     Asignar Voluntario
                   </button>
+
+                  <button
+                  class="btn btn-danger btn-sm"
+                  (click)="abrirModalDesasignar(voluntariado.id)"
+                >
+                  Desasignar Voluntarios
+                </button>
+
+
                 </td>
               </tr>
             </tbody>
@@ -87,8 +97,21 @@
       [idVoluntariado]="idVoluntariadoSeleccionado"
       (cerrarModal)="cerrarModal()"
     ></app-asignar-voluntario-modal>
+
+      <app-desasignar-voluntario-modal
+      *ngIf="modalDesasignarAbierto"
+      [idVoluntariado]="idVoluntariadoSeleccionado"
+      (cerrarModal)="cerrarModalDesasignar()"
+    ></app-desasignar-voluntario-modal>
+
+    
+
+
   </div>
   
+
+
+
   <ng-template #accesoRestringido>
     <p class="alert alert-danger">Acceso Restringido</p>
   </ng-template>

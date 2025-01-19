@@ -32,11 +32,12 @@ throw new Error('Method not implemented.');
   obtenerListaUsuarios(ordenPor: string, direccion: string): void {
     this.isLoading = true;
     this.usuarioService.obtenerUsuarios(ordenPor, direccion).subscribe(
-      (usuarios) => {
+      (usuarios: any[]) => {
         this.usuarios = usuarios;
         this.isLoading = false;
+        console.log(usuarios);
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al obtener la lista de usuarios:', error);
         this.isLoading = false;
       }
@@ -67,7 +68,7 @@ throw new Error('Method not implemented.');
         const url = window.URL.createObjectURL(cv);
         window.open(url); // Por ejemplo, abre el CV en una nueva pestaña
       },
-      error => {
+      (      error: any) => {
         console.error('Error al obtener el CV:', error);
         // Aquí puedes manejar el error, como mostrar un mensaje al usuario
       }
@@ -77,11 +78,11 @@ throw new Error('Method not implemented.');
   cambiarEstado(usuario: any) {
     const nuevoEstado = usuario.estado_usuario ? 'baja' : 'alta';
     this.usuarioService.cambiarEstadoUsuario(usuario.id, nuevoEstado).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Estado del usuario cambiado exitosamente:', response);
         usuario.estado_usuario = !usuario.estado_usuario; // Actualizar el estado del usuario en el arreglo local
       },
-      (error) => {
+      (error: any) => {
         console.error('Error al cambiar el estado del usuario:', error);
       }
     );
