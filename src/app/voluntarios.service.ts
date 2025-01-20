@@ -24,12 +24,6 @@ export class VoluntariosService {
     return this.http.get<any[]>(url);
   }
 
-  // Asignar un voluntario a un voluntariado
-  asignarVoluntario(idVoluntariado: number, idVoluntario: number): Observable<any> {
-    const url = `${this.apiUrl}/voluntarios/asignar`;
-    return this.http.post(url, { id_voluntariado: idVoluntariado, id_voluntario: idVoluntario });
-  }
-
   // Registrar un voluntario
   registrarVoluntario(voluntario: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/registro`, voluntario);
@@ -49,10 +43,15 @@ export class VoluntariosService {
   }
 
   // Obtener feedback de un voluntariado
-  obtenerFeedback(voluntariadoId: number): Observable<any> {
-    const url = `${this.apiUrl}/${voluntariadoId}/feedback`;
-    return this.http.get(url);
+  obtenerFeedback(voluntariadoId: number, voluntarioId: number): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Agrega el token al encabezado
+    });
+    const url = `${this.apiUrl}/${voluntariadoId}/${voluntarioId}/feedback`; // Ajusta la URL
+    return this.http.get(url, { headers });
   }
+  
   obtenerCVVoluntario(id: number): Observable<Blob> {
     const url = `${this.apiUrl}/${id}/cv`;
     return this.http.get(url, { responseType: 'blob' });

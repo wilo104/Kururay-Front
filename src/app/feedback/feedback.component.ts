@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { VoluntariosService } from '../voluntarios.service';
-import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
 import { CommonModule } from '@angular/common'; 
 import { HttpClientModule } from '@angular/common/http'; 
 
@@ -13,36 +12,47 @@ import { HttpClientModule } from '@angular/common/http';
   styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
+  @Input() voluntariadoId!: number;
+  @Input() voluntarioId!: number;
+  @Output() cerrarModal = new EventEmitter<void>(); // Evento para cerrar el modal
+
   feedbacks: any[] = [];
   isLoading: boolean = true; 
   errorMessage: string = '';
 
-  // Inyecta ActivatedRoute en el constructor
-  constructor(
-    private voluntariadoService: VoluntariosService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private voluntariadoService: VoluntariosService) {}
 
   ngOnInit(): void {
-    // Obtener el ID del voluntariado desde la URL
-    const voluntariadoId = Number(this.route.snapshot.paramMap.get('voluntariadoId'));
-    if (isNaN(voluntariadoId)) {
-      console.error('El ID del voluntariado no es válido.');
+
+    console.log('FeedbackComponent inicializado con:', {
+      voluntariadoId: this.voluntariadoId,
+      voluntarioId: this.voluntarioId,
+    });
+
+    if (!this.voluntariadoId || !this.voluntarioId) {
+      console.error('Faltan IDs de voluntariado o voluntario.');
       this.isLoading = false;
       return;
     }
-    console.log(voluntariadoId);
-    // Llamar al servicio para obtener el feedback
-    this.voluntariadoService.obtenerFeedback(voluntariadoId).subscribe(
+    this.obtenerFeedback();
+  }
+
+  obtenerFeedback(): void {
+    this.voluntariadoService.obtenerFeedback(this.voluntariadoId, this.voluntarioId).subscribe(
       (data) => {
+        console.log('Feedback recibido:', data); // Asegúrate de que llegan los datos
         this.feedbacks = data;
         this.isLoading = false; 
       },
       (error) => {
-        this.errorMessage = 'Error al obtener el feedback';
-        console.error(error);
+        console.error('Error al obtener el feedback:', error);
         this.isLoading = false;
       }
     );
   }
+  
+  cerrar(): void {
+    this.cerrarModal.emit(); // Emite el evento para cerrar el modal
+  }
+
 }

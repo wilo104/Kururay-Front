@@ -1,0 +1,42 @@
+.modal-header.bg-danger {
+    background-color: #dc3545 !important; /* Rojo similar al asignar */
+    color: white;
+  }
+  
+  .table-danger {
+    background-color: #f8d7da; /* Fondo rojo claro para el encabezado de la tabla */
+    color: #721c24; /* Texto oscuro para contraste */
+  }
+  
+  .modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 1rem); /* Centrado vertical */
+  }
+  
+  .modal-content {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+  
+  .table {
+    font-size: 0.9rem;
+  }
+  
+  .table th,
+  .table td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .btn-close {
+    color: white;
+    opacity: 0.9;
+  }
+  
+  .btn-close:hover {
+    color: white;
+    opacity: 1;
+  }
+  

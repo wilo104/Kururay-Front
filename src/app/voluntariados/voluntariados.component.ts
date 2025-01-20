@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
-import { AsignarVoluntarioModalComponent } from '../asignar-voluntario-modal/asignar-voluntario-modal.component';
-import { DesasignarVoluntarioModalComponent } from '../desasignar-voluntario-modal/desasignar-voluntario-modal.component';
 @Component({
   selector: 'app-voluntariados',
   standalone: true,
@@ -13,9 +11,7 @@ import { DesasignarVoluntarioModalComponent } from '../desasignar-voluntario-mod
     CommonModule,
     NgxPaginationModule,
     HttpClientModule,
-    AsignarVoluntarioModalComponent,
-    DesasignarVoluntarioModalComponent,
-  
+   
   ],
   providers: [VoluntariadosService],
   templateUrl: './voluntariados.component.html',
@@ -91,37 +87,15 @@ export class VoluntariadosComponent implements OnInit {
     this.router.navigate(['/voluntariados/nuevo']);
   }
 
-  // Abrir y cerrar modales
-  abrirModal(idVoluntariado: number): void {
-    this.modalAbierto = true;
-    this.idVoluntariadoSeleccionado = idVoluntariado;
-  }
 
-  cerrarModal(): void {
-    this.modalAbierto = false;
-  }
+ 
+  
 
-  abrirModalDesasignar(idVoluntariado: number): void {
-    console.log('Abrir modal de desasignar para voluntariado:', idVoluntariado); // Debugging
-    this.modalDesasignarAbierto = true;
-    this.idVoluntariadoSeleccionado = idVoluntariado;
+
+  verDetalle(id: number): void {
+    this.router.navigate([`/voluntariados/${id}/detalle`]);
   }
   
-  cerrarModalDesasignar(): void {
-    this.modalDesasignarAbierto = false;
-  }
-
-  // obtenerListaVoluntariados(): void {
-  //   this.voluntariadosService.getVoluntariados().subscribe(
-  //     (data) => {
-  //       this.voluntariados = data;
-  //     },
-  //     (error) => {
-  //       console.error('Error al obtener la lista de voluntariados:', error);
-  //     }
-  //   );
-  // }
-
  
 
  }

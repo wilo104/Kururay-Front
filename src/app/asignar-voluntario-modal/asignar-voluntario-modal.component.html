@@ -1,25 +1,39 @@
-<div class="modal">
+<div class="modal" tabindex="-1" style="display: block; background-color: rgba(0,0,0,0.5)">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
-      <h2>Asignar Voluntario</h2>
-      <button (click)="cerrar()" class="close-button">Cerrar</button>
-      <div *ngIf="cargando">Cargando voluntarios...</div>
-      <table *ngIf="!cargando">
-        <thead>
-          <tr>
-            <th>Nombre Completo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let voluntario of voluntarios">
-            <td>{{ voluntario.nombre_completo }}</td>
-            <td>
-              <button (click)="asignarVoluntario(voluntario.id)">Asignar</button>
-            
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <!-- Encabezado del Modal -->
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Asignar Voluntario</h5>
+        <button type="button" class="btn-close" (click)="cerrar()" aria-label="Close"></button>
+      </div>
+
+      <!-- Cuerpo del Modal -->
+      <div class="modal-body">
+        <div *ngIf="cargando" class="text-center">
+          <p>Cargando voluntarios...</p>
+        </div>
+
+        <div *ngIf="!cargando" class="table-responsive">
+          <table class="table table-hover table-striped align-middle">
+            <thead class="table-danger">
+              <tr>
+                <th>Nombre Completo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let voluntario of voluntarios">
+                <td>{{ voluntario.nombre_completo }}</td>
+                <td>
+                  <button class="btn btn-success btn-sm" (click)="asignarVoluntario(voluntario.id)">
+                    Asignar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-  
+</div>

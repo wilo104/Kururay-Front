@@ -1,8 +1,9 @@
-<div class="container">
-    <h2>Nuevo Voluntariado</h2>
-    <form [formGroup]="nuevoVoluntariadoForm" (ngSubmit)="guardarVoluntariado()">
+<div class="container mt-4">
+  <h2 class="text-center">Nuevo Voluntariado</h2>
+  <form [formGroup]="nuevoVoluntariadoForm" (ngSubmit)="guardarVoluntariado()">
+    <div class="row">
       <!-- Nombre -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="nombre">Nombre del voluntariado</label>
         <input
           type="text"
@@ -11,100 +12,178 @@
           formControlName="nombre"
           placeholder="Ingrese el nombre del voluntariado"
         />
-        <div *ngIf="nuevoVoluntariadoForm.get('nombre')?.invalid && nuevoVoluntariadoForm.get('nombre')?.touched" class="text-danger">
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('nombre')?.invalid && nuevoVoluntariadoForm.get('nombre')?.touched"
+          class="text-danger"
+        >
           El nombre es obligatorio y debe tener al menos 3 caracteres.
         </div>
       </div>
-  
+
       <!-- Tipo -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="tipo">Tipo de voluntariado</label>
         <select id="tipo" class="form-control" formControlName="tipo">
           <option value="">Seleccione un tipo</option>
           <option *ngFor="let tipo of tipos" [value]="tipo">{{ tipo }}</option>
         </select>
-        <div *ngIf="nuevoVoluntariadoForm.get('tipo')?.invalid && nuevoVoluntariadoForm.get('tipo')?.touched" class="text-danger">
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('tipo')?.invalid && nuevoVoluntariadoForm.get('tipo')?.touched"
+          class="text-danger"
+        >
           Seleccione un tipo de voluntariado.
         </div>
       </div>
-  
-      <!-- Fecha de inicio -->
-      <div class="form-group">
+
+      <!-- Fechas -->
+      <div class="form-group col-md-6">
         <label for="fechaInicio">Fecha de inicio</label>
-        <input type="date" id="fechaInicio" class="form-control" formControlName="fecha_inicio" />
-        <div *ngIf="nuevoVoluntariadoForm.get('fecha_inicio')?.invalid && nuevoVoluntariadoForm.get('fecha_inicio')?.touched" class="text-danger">
+        <input
+          type="date"
+          id="fechaInicio"
+          class="form-control"
+          formControlName="fecha_inicio"
+        />
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('fecha_inicio')?.invalid && nuevoVoluntariadoForm.get('fecha_inicio')?.touched"
+          class="text-danger"
+        >
           La fecha de inicio es obligatoria.
         </div>
       </div>
-  
-      <!-- Fecha de cierre proyectada -->
-      <div class="form-group">
+
+      <div class="form-group col-md-6">
         <label for="fechaCierreProyectada">Fecha de cierre proyectada</label>
-        <input type="date" id="fechaCierreProyectada" class="form-control" formControlName="fecha_fin" />
-        <div *ngIf="nuevoVoluntariadoForm.get('fecha_fin')?.invalid && nuevoVoluntariadoForm.get('fecha_fin')?.touched" class="text-danger">
+        <input
+          type="date"
+          id="fechaCierreProyectada"
+          class="form-control"
+          formControlName="fecha_fin"
+        />
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('fecha_fin')?.invalid && nuevoVoluntariadoForm.get('fecha_fin')?.touched"
+          class="text-danger"
+        >
           La fecha de cierre es obligatoria.
         </div>
       </div>
-  
-      <!-- Objetivo general -->
-      <div class="form-group">
+    </div>
+
+    <!-- Objetivos -->
+    <div class="row">
+      <div class="form-group col-12">
         <label for="objetivoGeneral">Objetivo general</label>
-        <input type="text" id="objetivoGeneral" class="form-control" formControlName="objetivoGeneral" />
-        <div *ngIf="nuevoVoluntariadoForm.get('objetivoGeneral')?.invalid && nuevoVoluntariadoForm.get('objetivoGeneral')?.touched" class="text-danger">
+        <input
+          type="text"
+          id="objetivoGeneral"
+          class="form-control"
+          formControlName="objetivoGeneral"
+          placeholder="Describa el objetivo general"
+        />
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('objetivoGeneral')?.invalid && nuevoVoluntariadoForm.get('objetivoGeneral')?.touched"
+          class="text-danger"
+        >
           El objetivo general es obligatorio.
         </div>
       </div>
-  
-      <!-- Objetivos específicos -->
-      <div *ngFor="let i of [1, 2, 3, 4, 5]; let idx = index" class="form-group">
-        <label [for]="'objetivoEspecifico' + (idx + 1)">Objetivo específico {{ idx + 1 }}</label>
+
+      <div
+        class="form-group col-md-6"
+        *ngFor="let i of [1, 2, 3, 4, 5]; let idx = index"
+      >
+        <label [for]="'objetivoEspecifico' + (idx + 1)">
+          Objetivo específico {{ idx + 1 }}
+        </label>
         <input
           type="text"
           [id]="'objetivoEspecifico' + (idx + 1)"
           class="form-control"
           [formControlName]="'objetivoEspecifico' + (idx + 1)"
-          placeholder="Ingrese el objetivo específico {{ idx + 1 }}"
+          placeholder="Describa el objetivo específico {{ idx + 1 }}"
         />
       </div>
-  
-      <!-- Público objetivo -->
-      <div class="form-group">
+    </div>
+
+    <!-- Público objetivo -->
+    <div class="row">
+      <div class="form-group col-md-6">
         <label for="publicoObjetivo">Público objetivo</label>
-        <input type="text" id="publicoObjetivo" class="form-control" formControlName="publicoObjetivo" />
-        <div *ngIf="nuevoVoluntariadoForm.get('publicoObjetivo')?.invalid && nuevoVoluntariadoForm.get('publicoObjetivo')?.touched" class="text-danger">
+        <input
+          type="text"
+          id="publicoObjetivo"
+          class="form-control"
+          formControlName="publicoObjetivo"
+        />
+        <div
+          *ngIf="nuevoVoluntariadoForm.get('publicoObjetivo')?.invalid && nuevoVoluntariadoForm.get('publicoObjetivo')?.touched"
+          class="text-danger"
+        >
           El público objetivo es obligatorio.
         </div>
       </div>
-  
-      <!-- Beneficiarios directos -->
-      <div class="form-group">
+
+      <!-- Beneficiarios -->
+      <div class="form-group col-md-3">
         <label for="beneficiariosDirectos">Beneficiarios directos</label>
-        <input type="number" id="beneficiariosDirectos" class="form-control" formControlName="beneficiariosDirectos" />
+        <input
+          type="number"
+          id="beneficiariosDirectos"
+          class="form-control"
+          formControlName="beneficiariosDirectos"
+        />
       </div>
-  
-      <!-- Beneficiarios indirectos -->
-      <div class="form-group">
+
+      <div class="form-group col-md-3">
         <label for="beneficiariosIndirectos">Beneficiarios indirectos</label>
-        <input type="number" id="beneficiariosIndirectos" class="form-control" formControlName="beneficiariosIndirectos" />
+        <input
+          type="number"
+          id="beneficiariosIndirectos"
+          class="form-control"
+          formControlName="beneficiariosIndirectos"
+        />
       </div>
-  
-      <!-- Presupuesto inicial -->
-      <div class="form-group">
+    </div>
+
+    <!-- Presupuesto y Aliados -->
+    <div class="row">
+      <div class="form-group col-md-6">
         <label for="presupuestoInicial">Presupuesto inicial</label>
-        <input type="number" id="presupuestoInicial" class="form-control" formControlName="presupuestoInicial" />
+        <input
+          type="number"
+          id="presupuestoInicial"
+          class="form-control"
+          formControlName="presupuestoInicial"
+        />
       </div>
-  
-      <!-- Aliados -->
-      <div class="form-group">
+
+      <div class="form-group col-md-6">
         <label for="aliados">Aliados</label>
-        <input type="text" id="aliados" class="form-control" formControlName="aliados" />
+        <input
+          type="text"
+          id="aliados"
+          class="form-control"
+          formControlName="aliados"
+        />
       </div>
-  
-      <!-- Botones -->
-      <div class="form-group text-center">
-        <button type="submit" class="btn btn-primary" [disabled]="nuevoVoluntariadoForm.invalid">Guardar</button>
-        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- Botones -->
+    <div class="form-group text-center mt-4">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="nuevoVoluntariadoForm.invalid"
+      >
+        Guardar
+      </button>
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="onCancel()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

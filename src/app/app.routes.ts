@@ -18,6 +18,7 @@ import { NuevoVoluntariadoComponent } from './nuevo-voluntariado/nuevo-voluntari
 import { EditarVoluntariadoComponent } from './editar-voluntariado/editar-voluntariado.component';
 import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component';
 import { EditarVoluntarioComponent } from './editar-voluntario/editar-voluntario.component';
+import { VerDetalleVoluntariadoComponent } from './ver-detalle-voluntariado/ver-detalle-voluntariado.component';
 
 export const routes: Routes = [
     {
@@ -92,6 +93,9 @@ export const routes: Routes = [
                 path: 'voluntariados/nuevo',
                 component: NuevoVoluntariadoComponent 
             },
+            { path: 'voluntariados/:id/detalle',
+              component: VerDetalleVoluntariadoComponent
+            },   
             { 
                 path: 'voluntariados/:id/editar',
                  component: EditarVoluntariadoComponent

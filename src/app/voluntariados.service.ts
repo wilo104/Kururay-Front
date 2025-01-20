@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -124,6 +124,36 @@ export class VoluntariadosService {
       catchError((error) => {
         console.error('Error al obtener detalle del voluntario:', error);
         return throwError('Error al cargar el detalle del voluntario.');
+      })
+    );
+  }
+
+  obtenerVoluntariadoPorId(id: number): Observable<any> {
+    const token = localStorage.getItem('token'); // Obtén el token almacenado
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.http.get(`${this.baseUrl}/${id}`, { headers });
+  }
+  
+
+  obtenerEvidencias(voluntariadoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${voluntariadoId}/evidencias`, { headers: this.getHeaders() }).pipe(
+      tap((data) => console.log('Evidencias recibidas:', data)),
+      catchError((error) => {
+        console.error('Error al obtener evidencias:', error);
+        return throwError('Error al cargar evidencias.');
+      })
+    );
+  }
+
+  obtenerAsistencias(voluntariadoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/${voluntariadoId}/asistencias`, { headers: this.getHeaders() }).pipe(
+      tap((data) => console.log('Asistencias recibidas:', data)),
+      catchError((error) => {
+        console.error('Error al obtener asistencias:', error);
+        return throwError('Error al cargar asistencias.');
       })
     );
   }

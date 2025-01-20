@@ -1,90 +1,98 @@
-<div class="container">
-    <h2>Editar Voluntario</h2>
-    <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+<div class="container form-container">
+  <h2 class="form-title">Editar Voluntario</h2>
+  <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
+    <div class="row">
       <!-- Nombre -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="nombre">Nombre</label>
         <input id="nombre" formControlName="nombre" class="form-control" />
       </div>
-  
+
       <!-- Apellido Paterno -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="apellido_paterno">Apellido Paterno</label>
         <input id="apellido_paterno" formControlName="apellido_paterno" class="form-control" />
       </div>
-  
+    </div>
+
+    <div class="row">
       <!-- Apellido Materno -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="apellido_materno">Apellido Materno</label>
         <input id="apellido_materno" formControlName="apellido_materno" class="form-control" />
       </div>
-  
+
       <!-- Correo -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="correo">Correo</label>
         <input id="correo" formControlName="correo" class="form-control" type="email" />
       </div>
-  
+    </div>
+
+    <div class="row">
       <!-- Teléfono -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="telefono">Teléfono</label>
         <input id="telefono" formControlName="telefono" class="form-control" type="text" />
       </div>
-  
+
       <!-- Fecha de Nacimiento -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="fecha_nacimiento">Fecha de Nacimiento</label>
         <input id="fecha_nacimiento" formControlName="fecha_nacimiento" class="form-control" type="date" />
       </div>
-  
+    </div>
+
+    <div class="row">
       <!-- Área -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="area">Área</label>
         <select id="area" formControlName="area" class="form-control">
           <option value="" disabled>Seleccione un área</option>
           <option *ngFor="let area of areas" [value]="area">{{ area }}</option>
         </select>
       </div>
-  
-     
-     <!-- Situación Académica -->
-        <div class="form-group">
-            <label for="situacion">Situación Académica</label>
-            <select id="situacion" formControlName="situacion" class="form-control">
-            <option value="" disabled>Seleccione una situación</option>
-            <option *ngFor="let situacion of situaciones" [value]="situacion">{{ situacion }}</option>
-            </select>
-        </div>
-  
+
+      <!-- Situación Académica -->
+      <div class="form-group col-md-6">
+        <label for="situacion">Situación Académica</label>
+        <select id="situacion" formControlName="situacion" class="form-control">
+          <option value="" disabled>Seleccione una situación</option>
+          <option *ngFor="let situacion of situaciones" [value]="situacion">{{ situacion }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row">
       <!-- Carrera -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="carrera">Carrera</label>
         <select id="carrera" formControlName="carrera" class="form-control">
           <option value="" disabled>Seleccione una carrera</option>
           <option *ngFor="let carrera of carreras" [value]="carrera">{{ carrera }}</option>
         </select>
       </div>
-  
+
       <!-- Categoría -->
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="categoria">Categoría</label>
         <select id="categoria" formControlName="categoria" class="form-control">
           <option value="" disabled>Seleccione una categoría</option>
           <option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</option>
         </select>
       </div>
-  
-      <!-- Actualizar CV -->
-      <div class="form-group">
-        <label for="cv">Actualizar CV</label>
-        <input id="cv" type="file" class="form-control" (change)="onFileChange($event)" accept=".pdf" />
-      </div>
-  
-      <!-- Botones -->
-      <div class="form-group mt-3">
-        <button type="submit" class="btn btn-success">Guardar Cambios</button>
-        <button type="button" class="btn btn-secondary" (click)="router.navigate(['/voluntarios'])">Cancelar</button>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+
+    <!-- Actualizar CV -->
+    <div class="form-group">
+      <label for="cv">Actualizar CV</label>
+      <input id="cv" type="file" class="form-control" (change)="onFileChange($event)" accept=".pdf" />
+    </div>
+
+    <!-- Botones -->
+    <div class="form-buttons">
+      <button type="submit" class="btn btn-success">Guardar Cambios</button>
+      <button type="button" class="btn btn-secondary" (click)="router.navigate(['/voluntarios'])">Cancelar</button>
+    </div>
+  </form>
+</div>
