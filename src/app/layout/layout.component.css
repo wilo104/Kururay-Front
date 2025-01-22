@@ -127,3 +127,99 @@ span {
     right: 20px; /* Ajusta la posición hacia la derecha para evitar solapamientos */
   }
 }
+
+/* Barra superior */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa; /* Color de fondo */
+  padding: 10px 20px; /* Espaciado */
+  border-bottom: 1px solid #ddd; /* Línea divisoria */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ancho completo */
+  z-index: 1001; /* Por encima de otros elementos */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-message {
+  font-size: 16px;
+  color: #333; /* Color del texto */
+  font-weight: bold;
+  margin-right: 15px; /* Espaciado con el botón */
+}
+
+.logout-button {
+  display: flex;
+  align-items: center;
+}
+
+.logout-button button {
+  background-color: #f8f9fa; /* Fondo del botón */
+  color: #333; /* Color del texto */
+  border: 1px solid #ddd; /* Borde sutil */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espaciado interno */
+  font-size: 14px; /* Tamaño del texto */
+  cursor: pointer; /* Indica clickeabilidad */
+}
+
+.logout-button button:hover {
+  background-color: #e2e6ea; /* Color al pasar el mouse */
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 768px) {
+  .top-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .logout-button {
+    margin-top: 10px;
+  }
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa; /* Fondo claro */
+  border-bottom: 1px solid #ddd; /* Borde sutil */
+  font-family: 'Roboto', sans-serif; /* Fuente moderna */
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Espaciado entre el saludo y el botón */
+  font-size: 16px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+}
+
+.user-info i {
+  margin-right: 8px; /* Espaciado entre el icono y el texto */
+  color: #007bff; /* Color azul para el icono */
+}
+
+.logout-button button {
+  background-color: #fff; /* Fondo blanco */
+  color: #007bff; /* Texto azul */
+  border: 1px solid #007bff; /* Borde azul */
+  padding: 5px 12px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 14px; /* Tamaño del texto */
+  cursor: pointer; /* Puntero tipo clic */
+}
+
+.logout-button button:hover {
+  background-color: #007bff; /* Fondo azul al pasar el mouse */
+  color: #fff; /* Texto blanco */
+}

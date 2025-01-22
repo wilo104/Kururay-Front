@@ -1,0 +1,182 @@
+<div class="container">
+    <h2 class="text-center mb-4">Registrar Beneficiario</h2>
+    <form (ngSubmit)="guardarBeneficiario()">
+      <!-- Tipo de Beneficiario -->
+       
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <select
+          id="tipo"
+          class="form-control"
+          [(ngModel)]="beneficiario.tipo"
+          name="tipo"
+          (change)="onTipoChange()"
+          required
+        >
+          <option value="" disabled selected>Seleccione el tipo</option>
+          <option value="Persona">Persona</option>
+          <option value="Comunidad">Comunidad</option>
+          <option value="Organización">Organización</option>
+        </select>
+      </div>
+
+      <!-- Campos específicos para Persona -->
+      <div *ngIf="esPersona">
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input
+            id="dni"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el DNI"
+            maxlength="8"
+            [(ngModel)]="beneficiario.dni"
+            name="dni"
+            required
+          />
+        </div>
+      </div>
+
+      <div *ngIf="esPersona">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el nombre"
+            [(ngModel)]="beneficiario.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="form-group">
+            <label for="genero">Género</label>
+            <select
+              id="genero"
+              class="form-control"
+              [(ngModel)]="beneficiario.genero"
+              name="genero"
+              required
+            >
+              <option value="" disabled selected>Seleccione el género</option>
+              <option value="Masculino">Masculino</option>
+              <option value="Femenino">Femenino</option>
+            </select>
+          </div>
+          
+        <div class="form-group">
+          <label for="edad">Edad</label>
+          <input
+            id="edad"
+            type="number"
+            class="form-control"
+            placeholder="Ingrese la edad"
+            [(ngModel)]="beneficiario.edad"
+            name="edad"
+          />
+        </div>
+      </div>
+  
+      <!-- Campos específicos para Comunidad -->
+      <div *ngIf="esComunidad">
+        <div class="form-group">
+          <label for="nombre-comunidad">Nombre de la Comunidad</label>
+          <input
+            id="nombre-comunidad"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el nombre de la comunidad"
+            [(ngModel)]="beneficiario.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="representante">Representante</label>
+          <input
+            id="representante"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el nombre del representante"
+            [(ngModel)]="beneficiario.representante"
+            name="representante"
+            required
+          />
+        </div>
+      </div>
+  
+      <!-- Campos específicos para Organización -->
+      <div *ngIf="esOrganizacion">
+        <div class="form-group">
+          <label for="nombre-organizacion">Nombre de la Organización</label>
+          <input
+            id="nombre-organizacion"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el nombre de la organización"
+            [(ngModel)]="beneficiario.nombre"
+            name="nombre"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="ruc">RUC</label>
+          <input
+            id="ruc"
+            type="text"
+            class="form-control"
+            placeholder="Ingrese el RUC"
+            maxlength="11"
+            [(ngModel)]="beneficiario.ruc"
+            name="ruc"
+            required
+          />
+        </div>
+      </div>
+  
+  
+      <!-- Campos comunes -->
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input
+          id="direccion"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese la dirección"
+          [(ngModel)]="beneficiario.direccion"
+          name="direccion"
+        />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input
+          id="telefono"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el teléfono"
+          [(ngModel)]="beneficiario.telefono"
+          name="telefono"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          placeholder="Ingrese el email"
+          [(ngModel)]="beneficiario.email"
+          name="email"
+        />
+      </div>
+  
+
+      <!-- Botones -->
+      <div class="button-group text-center mt-4">
+        <button type="submit" class="btn btn-success me-3">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

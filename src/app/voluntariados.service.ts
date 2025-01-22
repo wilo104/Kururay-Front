@@ -158,6 +158,54 @@ export class VoluntariadosService {
     );
   }
 
+    //EVIDENCIAS 
+    obtenerCalculosEvidencia(voluntariadoId: number): Observable<any> {
+      return this.http
+        .get(`${this.baseUrl}/${voluntariadoId}/evidencias/calculos`, {
+          headers: this.getHeaders(),
+        })
+        .pipe(
+          catchError((error) => {
+            console.error('Error al obtener cálculos de evidencia:', error);
+            return throwError('Error al calcular los valores.');
+          })
+        );
+    }
+    
+    
 
+
+
+
+    registrarEvidencia(idVoluntariado: number, evidencia: any): Observable<any> {
+      const token = localStorage.getItem('token'); 
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+    
+      return this.http.post(`${this.baseUrl}/${idVoluntariado}/evidencias`, evidencia, { headers });
+    }
+
+
+    eliminarEvidencia(idEvidencia: number): Observable<any> {
+      return this.http.delete(`${this.baseUrl}/evidencias/${idEvidencia}`, {
+        headers: this.getHeaders(),
+      }).pipe(
+        catchError((error) => {
+          console.error('Error al eliminar la evidencia:', error);
+          return throwError('Error al intentar eliminar la evidencia.');
+        })
+      );
+    }
+    
+    obtenerEvidenciaPorId(id: number): Observable<any> {
+      return this.http.get<any>(`http://localhost:3000/evidencias/${id}`, { headers: this.getHeaders() }).pipe(
+        catchError((error) => {
+          console.error('Error al obtener la evidencia:', error);
+          return throwError('Error al cargar la evidencia.');
+        })
+      );
+    }
+    
 
 }

@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   token: string | null | undefined;
   id: string | null | undefined;
 
+  nombreUsuario: string | null = null; // Declarar la propiedad
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -28,6 +29,7 @@ export class LayoutComponent implements OnInit {
     this.token = this.authService.gettoken();
     this.id = this.authService.getid_usuario();
     this.checkScreenWidth(); // Comprueba el tamaño de la pantalla al iniciar
+    this.nombreUsuario = this.authService.getNombreUsuario();
   }
 
   // Escucha los cambios de tamaño de la ventana y ajusta el estado sidebarCollapsed
@@ -54,4 +56,5 @@ export class LayoutComponent implements OnInit {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
+
 }

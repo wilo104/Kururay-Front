@@ -1,46 +1,86 @@
-<div class="modal" tabindex="-1" style="display: block; background-color: rgba(0, 0, 0, 0.5)">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <!-- Cabecera del Modal -->
-      <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">Feedback del Voluntario</h5>
-        <button type="button" class="btn-close text-white" (click)="cerrar()" aria-label="Close"></button>
+<div class="feedback-container">
+  <h2 class="text-center">Feedback del Voluntario</h2>
+
+  <button class="btn btn-primary" (click)="regresar()">Regresar</button>
+  <button *ngIf="role === 'MENTOR'" class="btn btn-success ms-3" (click)="registrarFeedback()">
+    Registrar Feedback
+  </button>
+
+  <!-- Loading -->
+  <div *ngIf="isLoading; else feedbackList" class="text-center">
+    <p>Cargando feedback...</p>
+  </div>
+
+  <!-- Tabla de Feedback -->
+  <ng-template #feedbackList>
+    <div *ngIf="feedbacks.length > 0; else noFeedback">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle">
+          <thead class="table-danger">
+            <tr>
+              <th>ID</th>
+              <th>Fecha</th>
+              <th>Tipo</th>
+              <th>Adicional</th>
+              <th>Mentor</th>
+              <th *ngIf="role === 'MENTOR'">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let feedback of feedbacks">
+              <td>{{ feedback.feedback_id }}</td>
+              <td>{{ feedback.feedback_fecha | date: 'MMM d, y' }}</td>
+              <td>{{ feedback.tipo }}</td>
+              <td>{{ feedback.adicional }}</td>
+              <td>{{ feedback.mentor }}</td>
+              <td *ngIf="role === 'MENTOR'">
+                
+                <button
+                class="btn btn-primary"
+                (click)="editarFeedback(feedback.feedback_id)"
+              >
+                Editar
+              </button>
+  
+              <button
+              class="btn btn-danger"
+              (click)="abrirModalEliminar(feedback.feedback_id)"
+            >
+              Eliminar
+            </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+    <ng-template #noFeedback>
+      <p>No hay feedback registrado para este voluntario.</p>
+    </ng-template>
+  </ng-template>
+</div>
 
-      <!-- Cuerpo del Modal -->
+<div
+  *ngIf="modalAbierto"
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  style="display: block; background-color: rgba(0, 0, 0, 0.5);"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Eliminación</h5>
+        <button type="button" class="close" (click)="cerrarModalEliminar()">
+          &times;
+        </button>
+      </div>
       <div class="modal-body">
-        <!-- Loading -->
-        <div *ngIf="isLoading; else feedbackList" class="text-center">
-          <p>Cargando feedback...</p>
-        </div>
-
-        <!-- Tabla de Feedback -->
-        <ng-template #feedbackList>
-          <div class="table-responsive">
-            <table class="table table-hover align-middle">
-              <thead class="table-danger">
-                <tr>
-                  <th>ID</th>
-                  <th>Fecha</th>
-                  <th>Reconocimiento</th>
-                  <th>Oportunidad de Mejora</th>
-                  <th>Adicional</th>
-                  <th>Mentor</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let feedback of feedbacks">
-                  <td>{{ feedback.id }}</td>
-                  <td>{{ feedback.fecha | date: 'MMM d, y' }}</td>
-                  <td>{{ feedback.reconocimiento }}</td>
-                  <td>{{ feedback.oportunidad_mejora }}</td>
-                  <td>{{ feedback.adicional }}</td>
-                  <td>{{ feedback.mentor }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </ng-template>
+        <p>¿Estás seguro de que deseas eliminar este feedback?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="eliminarFeedbackConfirmado()">Eliminar</button>
+        <button class="btn btn-secondary" (click)="cerrarModalEliminar()">Cancelar</button>
       </div>
     </div>
   </div>

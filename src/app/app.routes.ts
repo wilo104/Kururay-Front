@@ -19,6 +19,15 @@ import { EditarVoluntariadoComponent } from './editar-voluntariado/editar-volunt
 import { RegistroVoluntarioComponent } from './registro-voluntario/registro-voluntario.component';
 import { EditarVoluntarioComponent } from './editar-voluntario/editar-voluntario.component';
 import { VerDetalleVoluntariadoComponent } from './ver-detalle-voluntariado/ver-detalle-voluntariado.component';
+import { ListaBenefactoresComponent } from './lista-benefactores/lista-benefactores.component';
+import { RegistroBenefactoresComponent } from './registro-benefactores/registro-benefactores.component';
+import { ListaBeneficiariosComponent } from './lista-beneficiarios/lista-beneficiarios.component';
+import { RegistroBeneficiariosComponent } from './registro-beneficiarios/registro-beneficiarios.component';
+import { EditarBeneficiariosComponent } from './editar-beneficiarios/editar-beneficiarios.component';
+import { EditarBenefactorComponent } from './editar-benefactor/editar-benefactor.component';
+import { EditarFeedbackComponent } from './editar-feedback/editar-feedback.component';
+import { RegistrarFeedbackComponent } from './registrar-feedback/registrar-feedback.component';
+import { RegistrarEvidenciaComponent } from './registrar-evidencia/registrar-evidencia.component';
 
 export const routes: Routes = [
     {
@@ -81,10 +90,10 @@ export const routes: Routes = [
                 path:'mis-voluntariados',
                 component: MisVoluntariadosComponent
             },
-            {
-                path: 'feedback/:voluntariadoId',
-                component: FeedbackComponent   
-            },
+            // {
+            //     path: 'feedback/:voluntariadoId',
+            //     component: FeedbackComponent   
+            // },
             {
                 path: 'voluntariados',
                 component: VoluntariadosComponent   
@@ -96,14 +105,58 @@ export const routes: Routes = [
             { path: 'voluntariados/:id/detalle',
               component: VerDetalleVoluntariadoComponent
             },   
+            { path: 'voluntariados/:voluntariadoId/voluntarios/:voluntarioId/feedback',
+             component: FeedbackComponent 
+            },
             { 
                 path: 'voluntariados/:id/editar',
                  component: EditarVoluntariadoComponent
                 
             },
 
-
-
+            { path: 'benefactores', 
+                component: ListaBenefactoresComponent 
+            },
+            {
+                path: 'benefactores/registro',
+                component: RegistroBenefactoresComponent
+            },
+            { path: 'beneficiarios', component: ListaBeneficiariosComponent },
+            // { path: 'beneficiarios/registro', component: RegistroBeneficiariosComponent },
+            {
+                path: 'beneficiarios/nuevo',
+                component: RegistroBeneficiariosComponent,
+              },
+              {
+                path: 'beneficiarios/:id/editar',
+                component: EditarBeneficiariosComponent,
+              },
+              {
+                path: 'benefactores/:id/editar',
+                component: EditarBenefactorComponent,
+              },
+            
+              {
+                path: 'voluntariados/:voluntariadoId/voluntarios/:voluntarioId/feedback/registrar',
+                component: RegistrarFeedbackComponent,
+            },
+            
+          
+                {
+                  path: 'voluntariados/:voluntariadoId/voluntarios/:voluntarioId/feedback/:feedbackId/editar',
+                  component: EditarFeedbackComponent,
+                },
+                {
+                  path: 'voluntariados/:voluntariadoId/voluntarios/:voluntarioId/feedback',
+                  component: FeedbackComponent,
+                },
+                {
+                    path: 'voluntariados/:id/evidencias/registrar',
+                    component: RegistrarEvidenciaComponent, 
+                  },
+              
+              
+              
         ]
     },
     // Esta es la línea crucial: la ruta comodín

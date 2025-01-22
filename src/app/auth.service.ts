@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+
 interface LoginResponse {
   [x: string]: any;
   id: any;
   token: string;
   tipo_usuario: string;
+  nombre_completo: string; 
 }
 
 
@@ -20,7 +22,7 @@ export class AuthService {
   private id: any;
   private userId = new BehaviorSubject<number | null>(null);
 
-
+  private nombre_completo: string = '';
 
   
   constructor(private http: HttpClient, ) {}
@@ -103,4 +105,20 @@ export class AuthService {
       localStorage.removeItem('usertipo_usuario');
     }
   }
+
+  setNombreUsuario(nombre: string): void {
+    this.nombre_completo = nombre;
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('nombreUsuario', nombre);
+    }
+  }
+  
+  getNombreUsuario(): string | null {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('nombreUsuario'); // Recupera el nombre completo
+    }
+    return null;
+  }
+
+
 }

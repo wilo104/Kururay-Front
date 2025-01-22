@@ -1,0 +1,83 @@
+<div class="container">
+  <h2 class="text-center mb-4">Registrar Evidencia</h2>
+  <form (ngSubmit)="guardar()">
+
+    <div class="form-group mb-3">
+      <label for="fechaEvidencia">Fecha de Evidencia</label>
+      <input
+          id="fechaEvidencia"
+          type="date"
+          class="form-control"
+          [(ngModel)]="evidencia.fecha_evidencia"
+          name="fechaEvidencia"
+          required
+        />
+
+    </div>
+    
+    <div class="form-group mb-3">
+      <label for="descripcion">Descripción</label>
+      <textarea
+        id="descripcion"
+        class="form-control"
+        [(ngModel)]="evidencia.descripcion"
+        name="descripcion"
+        maxlength="1000"
+        rows="4"
+        placeholder="Ingrese una descripción"
+        required
+      ></textarea>
+    </div>
+    
+    <div class="form-group mb-3">
+      <label for="porcentaje">Porcentaje de Participación</label>
+      <input
+        id="porcentaje"
+        type="number"
+        class="form-control"
+        [(ngModel)]="porcentajeParticipacion"
+        name="porcentaje"
+        readonly
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="incidentes">Incidentes</label>
+      <textarea
+        id="incidentes"
+        class="form-control"
+        [(ngModel)]="evidencia.incidentes"
+        name="incidentes"
+        maxlength="1000"
+        rows="4"
+        required
+      ></textarea>
+    </div>
+    <div class="form-group mb-3">
+      <label for="asistenciaVoluntarios">Asistencia de Voluntarios (calculado)</label>
+      <input
+        id="asistenciaVoluntarios"
+        type="number"
+        class="form-control"
+        [(ngModel)]="asistenciaVoluntarios"
+        name="asistenciaVoluntarios"
+        readonly
+      />
+    </div>
+    <div class="form-group mb-3">
+      <label for="asistenciaMentores">Asistencia de Mentores</label>
+        <input
+        id="asistenciaMentores"
+        type="number"
+        class="form-control"
+        [(ngModel)]="evidencia.asistencia_mentores"
+        name="asistenciaMentores"
+        required
+        placeholder="Ingrese asistencia de mentores"
+      />
+    </div>
+    <div class="d-flex justify-content-center mt-4">
+      <button type="submit" class="btn btn-primary me-3">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

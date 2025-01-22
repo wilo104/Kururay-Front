@@ -1,0 +1,83 @@
+<div class="container">
+    <h2 class="text-center mb-4">Registrar Feedback del Voluntario</h2>
+    <form (ngSubmit)="guardarFeedback()">
+      <!-- Fecha -->
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input
+          id="fecha"
+          type="date"
+          class="form-control"
+          [(ngModel)]="feedback.fecha"
+          name="fecha"
+          required
+        />
+      </div>
+  
+      <!-- Tipo de Feedback -->
+      <div class="form-group">
+        <label for="tipo">Tipo de Feedback</label>
+        <select
+          id="tipo"
+          class="form-control"
+          [(ngModel)]="feedback.tipo"
+          name="tipo"
+          required
+        >
+          <option value="" disabled selected>Seleccione el tipo</option>
+          <option value="Reconocimiento">Reconocimiento</option>
+          <option value="Oportunidad de Mejora">Oportunidad de Mejora</option>
+        </select>
+      </div>
+  
+      <!-- Descripción -->
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea
+          id="descripcion"
+          class="form-control"
+          [(ngModel)]="feedback.descripcion"
+          name="descripcion"
+          maxlength="500"
+          rows="4"
+          placeholder="Describa el feedback"
+          required
+        ></textarea>
+      </div>
+  
+      <!-- Adicional -->
+      <div class="form-group">
+        <label for="adicional">Adicional (opcional)</label>
+        <textarea
+          id="adicional"
+          class="form-control"
+          [(ngModel)]="feedback.adicional"
+          name="adicional"
+          maxlength="500"
+          rows="2"
+          placeholder="Información adicional"
+        ></textarea>
+      </div>
+  
+      <!-- Mentor (automático y deshabilitado) -->
+      <div class="form-group">
+        <label for="mentor">Mentor</label>
+        <input
+          id="mentor"
+          type="text"
+          class="form-control"
+          [(ngModel)]="feedback.mentor"
+          name="mentor"
+          readonly
+          disabled
+        />
+      </div>
+  
+      <!-- Botones -->
+      <div class="d-flex justify-content-center mt-4">
+        <button type="submit" class="btn btn-success me-3">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

@@ -1,0 +1,118 @@
+<div class="container">
+    <h2 class="text-center mb-4">Editar Beneficiario</h2>
+    <form (ngSubmit)="actualizarBeneficiario()">
+      <!-- Tipo (deshabilitado) -->
+      <div class="form-group">
+        <label for="tipo">Tipo</label>
+        <input
+          id="tipo"
+          class="form-control"
+          [(ngModel)]="beneficiario.tipo"
+          name="tipo"
+          readonly
+        />
+      </div>
+  
+      <!-- Campos específicos según el tipo -->
+      <div *ngIf="esPersona">
+        <div class="form-group">
+          <label for="dni">DNI</label>
+          <input
+            id="dni"
+            type="text"
+            class="form-control"
+            [(ngModel)]="beneficiario.dni"
+            name="dni"
+          />
+        </div>
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            id="nombre"
+            type="text"
+            class="form-control"
+            [(ngModel)]="beneficiario.nombre"
+            name="nombre"
+          />
+        </div>
+        <div class="form-group">
+          <label for="genero">Género</label>
+          <select
+            id="genero"
+            class="form-control"
+            [(ngModel)]="beneficiario.genero"
+            name="genero"
+          >
+            <option value="" disabled>Seleccione el género</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+          </select>
+        </div>
+      </div>
+  
+      <div *ngIf="esComunidad">
+        <div class="form-group">
+          <label for="representante">Representante</label>
+          <input
+            id="representante"
+            type="text"
+            class="form-control"
+            [(ngModel)]="beneficiario.representante"
+            name="representante"
+          />
+        </div>
+      </div>
+  
+      <div *ngIf="esOrganizacion">
+        <div class="form-group">
+          <label for="ruc">RUC</label>
+          <input
+            id="ruc"
+            type="text"
+            class="form-control"
+            [(ngModel)]="beneficiario.ruc"
+            name="ruc"
+          />
+        </div>
+      </div>
+  
+      <!-- Campos comunes -->
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input
+          id="direccion"
+          type="text"
+          class="form-control"
+          [(ngModel)]="beneficiario.direccion"
+          name="direccion"
+        />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input
+          id="telefono"
+          type="text"
+          class="form-control"
+          [(ngModel)]="beneficiario.telefono"
+          name="telefono"
+        />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          class="form-control"
+          [(ngModel)]="beneficiario.email"
+          name="email"
+        />
+      </div>
+  
+      <!-- Botones -->
+      <div class="button-group text-center mt-4">
+        <button type="submit" class="btn btn-success me-3">Actualizar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

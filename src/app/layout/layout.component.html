@@ -93,7 +93,7 @@
       </li>
 
       <li class="nav-item" *ngIf="tipo_usuario === 'MENTOR'">
-        <a class="nav-link" routerLink="/mentor-voluntariados">
+        <a class="nav-link" routerLink="/voluntariados">
           <i class="fas fa-chalkboard-teacher"></i>
           <span class="link-text">Voluntariados</span>
         </a>
@@ -108,6 +108,15 @@
   </div>
 </div>
 
-<div class="logout-button">
-  <button class="btn btn-light btn-sm" (click)="logout()">Cerrar Sesión</button>
+<div class="header-container">
+  <div class="user-info">
+    <i class="fas fa-user"></i> <!-- Icono de usuario -->
+    <span class="welcome-message">Bienvenido, {{ nombreUsuario || 'Usuario' }}</span>
+  </div>
+  <div class="logout-button">
+    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">
+      Cerrar Sesión
+    </button>
+  </div>
 </div>
+

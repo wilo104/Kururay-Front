@@ -66,7 +66,7 @@
             </button>
             <button
               class="btn btn-secondary"
-              (click)="abrirFeedbackModal(voluntario.id)"
+              (click)="abrirFeedback(voluntario.id)"
             >
               Ver Feedback
             </button>
@@ -76,9 +76,10 @@
     </table>
   
     <h3>Evidencias</h3>
-    <button class="btn btn-primary mb-3" *ngIf="isMentor">
+    <button class="btn btn-primary mb-3" *ngIf="isMentor" (click)="registrarEvidencia()">
       Registrar Evidencia
     </button>
+    
     <table>
       <thead>
         <tr>
@@ -92,8 +93,18 @@
           <td>{{ evidencia.fecha_evidencia }}</td>
           <td>{{ evidencia.descripcion }}</td>
           <td>
-            <button class="btn btn-info">Ver</button>
+        
+            <button class="btn btn-info" (click)="abrirDetalleEvidencia(evidencia.id)">Ver</button>
+
+            <button
+              class="btn btn-danger"
+              *ngIf="isMentor"
+              (click)="confirmarEliminarEvidencia(evidencia.id)"
+            >
+              Eliminar
+            </button>
           </td>
+          
         </tr>
       </tbody>
     </table>
@@ -130,12 +141,7 @@
        (cerrarModal)="cerrarModal()"
      ></app-asignar-voluntario-modal>
   
-     <app-feedback
-     *ngIf="modalFeedbackAbierto"
-     [voluntariadoId]="idVoluntariadoSeleccionado"
-     [voluntarioId]="idVoluntario"
-     (cerrarModal)="cerrarFeedbackModal()"
-   ></app-feedback>
+
   
    <!-- Tabla de Voluntarios -->
 <div class="table-responsive">
@@ -181,6 +187,28 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" (click)="cerrarDetalleVoluntario()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal" [ngClass]="{ 'd-block': modalDetalleEvidenciaAbierto }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalle de la Evidencia</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="cerrarDetalleEvidencia()"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Fecha:</strong> {{ evidenciaSeleccionada?.fecha_evidencia }}</p>
+          <p><strong>Descripción:</strong> {{ evidenciaSeleccionada?.descripcion }}</p>
+          <p><strong>Incidentes:</strong> {{ evidenciaSeleccionada?.incidentes }}</p>
+          <p><strong>Asistencia de Mentores:</strong> {{ evidenciaSeleccionada?.asistencia_mentores }}</p>
+          <p><strong>Asistencia de Voluntarios:</strong> {{ evidenciaSeleccionada?.asistencia_voluntarios }}</p>
+          <p><strong>Porcentaje de Participación:</strong> {{ evidenciaSeleccionada?.porcentaje_participacion }}%</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarDetalleEvidencia()">Cerrar</button>
         </div>
       </div>
     </div>

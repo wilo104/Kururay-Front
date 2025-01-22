@@ -1,0 +1,127 @@
+<div class="container">
+  <h2 class="text-center mb-4">Editar Benefactor</h2>
+  <form class="benefactor-form" (ngSubmit)="actualizarBenefactor()">
+    <div class="form-grid">
+      <!-- Nombre del Benefactor -->
+      <div class="form-group">
+        <label for="nombre">Nombre del Benefactor</label>
+        <input
+          id="nombre"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el nombre del benefactor"
+          [(ngModel)]="benefactor.nombre"
+          name="nombre"
+          required
+        />
+      </div>
+
+      <!-- Tipo de Benefactor -->
+      <div class="form-group">
+        <label for="tipo">Tipo de Benefactor</label>
+        <select
+          id="tipo"
+          class="form-control"
+          [(ngModel)]="benefactor.tipo"
+          name="tipo"
+          (change)="onTipoChange()"
+          required
+        >
+          <option value="" disabled>Seleccione un tipo</option>
+          <option value="persona natural">Persona Natural</option>
+          <option value="empresa">Empresa</option>
+        </select>
+      </div>
+
+      <!-- Nombre del Contacto -->
+      <div class="form-group">
+        <label for="nombre-contacto">Nombre del Contacto</label>
+        <input
+          id="nombre-contacto"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el nombre del contacto"
+          [(ngModel)]="benefactor.nombre_contacto"
+          name="nombre_contacto"
+          required
+        />
+      </div>
+
+      <!-- Celular del Contacto -->
+      <div class="form-group">
+        <label for="celular">Celular del Contacto</label>
+        <input
+          id="celular"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el celular del contacto"
+          maxlength="9"
+          [(ngModel)]="benefactor.celular_contacto"
+          name="celular_contacto"
+          required
+        />
+      </div>
+
+      <!-- Dirección -->
+      <div class="form-group">
+        <label for="direccion">Dirección</label>
+        <input
+          id="direccion"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese la dirección"
+          [(ngModel)]="benefactor.direccion"
+          name="direccion"
+          required
+        />
+      </div>
+
+      <!-- Razón Social -->
+      <div class="form-group" *ngIf="esEmpresa">
+        <label for="razon-social">Razón Social</label>
+        <input
+          id="razon-social"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese la razón social"
+          [(ngModel)]="benefactor.razon_social"
+          name="razon_social"
+        />
+      </div>
+
+      <!-- RUC -->
+      <div class="form-group" *ngIf="esEmpresa">
+        <label for="ruc">RUC</label>
+        <input
+          id="ruc"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el RUC"
+          maxlength="11"
+          [(ngModel)]="benefactor.ruc"
+          name="ruc"
+        />
+      </div>
+
+      <!-- DNI -->
+      <div class="form-group" *ngIf="esPersonaNatural">
+        <label for="dni">DNI</label>
+        <input
+          id="dni"
+          type="text"
+          class="form-control"
+          placeholder="Ingrese el DNI"
+          maxlength="8"
+          [(ngModel)]="benefactor.dni"
+          name="dni"
+        />
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="button-group text-center mt-4">
+      <button type="submit" class="btn btn-success me-3" [disabled]="!formValido()">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

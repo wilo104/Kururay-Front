@@ -3,15 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VoluntariadosService } from '../voluntariados.service';
 import { CommonModule } from '@angular/common';
 import { AsignarVoluntarioModalComponent } from '../asignar-voluntario-modal/asignar-voluntario-modal.component';
+import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
-import { FeedbackComponent } from '../feedback/feedback.component';
+
 @Component({
   selector: 'app-ver-detalle-voluntariado',
   standalone: true,
-  imports: [CommonModule, AsignarVoluntarioModalComponent,FeedbackComponent],
+  imports: [CommonModule, AsignarVoluntarioModalComponent],
   templateUrl: './ver-detalle-voluntariado.component.html',
   styleUrls: ['./ver-detalle-voluntariado.component.css'],
-  providers: [VoluntariadosService],
+  providers: [VoluntariadosService,AuthService],
 })
 export class VerDetalleVoluntariadoComponent implements OnInit {
   voluntariado: any = {};
@@ -23,18 +24,24 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   modalDesasignarAbierto: boolean = false;
   idVoluntariadoSeleccionado!: number;
   modalFeedbackAbierto = false; // Controla la apertura del modal de Feedback
-idVoluntario!: number; // ID del voluntario seleccionado para feedback
-voluntarioSeleccionado: any = null; // Para almacenar la información del voluntario seleccionado
-modalDetalleVoluntarioAbierto = false; // Controla la apertura del modal
+  idVoluntario!: number; // ID del voluntario seleccionado para feedback
+  voluntarioSeleccionado: any = null; // Para almacenar la información del voluntario seleccionado
+  modalDetalleVoluntarioAbierto = false; // Controla la apertura del modal
+  evidenciaSeleccionada: any = null;
+  modalDetalleEvidenciaAbierto = false;
+  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private voluntariadosService: VoluntariadosService
+    private voluntariadosService: VoluntariadosService,
+    private authService: AuthService 
   ) {}
 
   ngOnInit(): void {
     const id = +this.route.snapshot.paramMap.get('id')!;
     this.idVoluntariadoSeleccionado=id;
+    this.isMentor = this.authService.gettipo_usuario() === 'MENTOR';
     this.cargarVoluntariado(id);
     this.cargarVoluntarios(id);
     this.cargarEvidencias(id);
@@ -147,12 +154,14 @@ actualizarListaVoluntarios(): void {
       });
     }
  
-    abrirFeedbackModal(voluntarioId: number): void {
-      console.log('Abriendo modal de feedback para el voluntario:', voluntarioId);
-      this.idVoluntario = voluntarioId; // Asigna el ID del voluntario
-      this.modalFeedbackAbierto = true; // Cambia el estado a true
-      console.log('Estado del modalFeedbackAbierto:', this.modalFeedbackAbierto);
+    abrirFeedback(voluntarioId: number): void {
+      if (!voluntarioId || !this.idVoluntariadoSeleccionado) {
+        console.error('Faltan los IDs necesarios para navegar a Feedback.');
+        return;
+      }
+      this.router.navigate([`/voluntariados/${this.idVoluntariadoSeleccionado}/voluntarios/${voluntarioId}/feedback`]);
     }
+    
     
     cerrarFeedbackModal(): void {
       this.modalFeedbackAbierto = false; // Cierra el modal
@@ -168,5 +177,62 @@ actualizarListaVoluntarios(): void {
       this.modalDetalleVoluntarioAbierto = false; // Cierra el modal
       this.voluntarioSeleccionado = null; // Limpia el voluntario seleccionado
     }
+
+
+    registrarEvidencia(): void {
+      console.log("si esta entrando aquí eh");
+      this.router.navigate([`/voluntariados/${this.idVoluntariadoSeleccionado}/evidencias/registrar`]);
+    }
+    
+    confirmarEliminarEvidencia(idEvidencia: number): void {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: 'No podrás revertir esta acción.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.eliminarEvidencia(idEvidencia);
+        }
+      });
+    }
+    
+    eliminarEvidencia(idEvidencia: number): void {
+      this.voluntariadosService.eliminarEvidencia(idEvidencia).subscribe({
+        next: () => {
+          Swal.fire('Eliminado', 'La evidencia ha sido eliminada.', 'success');
+          this.cargarEvidencias(this.idVoluntariadoSeleccionado);
+        },
+        error: (err) => {
+          console.error('Error al eliminar la evidencia:', err);
+          Swal.fire('Error', 'No se pudo eliminar la evidencia.', 'error');
+        },
+      });
+    }
+    
+    abrirDetalleEvidencia(idEvidencia: number): void {
+      this.voluntariadosService.obtenerEvidenciaPorId(idEvidencia).subscribe({
+        next: (evidencia) => {
+          console.log('Evidencia cargada:', evidencia);
+          this.evidenciaSeleccionada = evidencia; // Cargar los detalles de la evidencia
+          this.modalDetalleEvidenciaAbierto = true; // Abrir el modal
+        },
+        error: (error) => {
+          console.error('Error al cargar la evidencia:', error);
+          Swal.fire('Error', 'No se pudo cargar la evidencia.', 'error');
+        },
+      });
+    }
+    
+    cerrarDetalleEvidencia(): void {
+      this.modalDetalleEvidenciaAbierto = false; // Cerrar el modal
+      this.evidenciaSeleccionada = null; // Limpiar los datos
+    }
+    
+
 
 }

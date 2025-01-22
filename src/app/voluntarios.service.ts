@@ -43,12 +43,12 @@ export class VoluntariosService {
   }
 
   // Obtener feedback de un voluntariado
-  obtenerFeedback(voluntariadoId: number, voluntarioId: number): Observable<any> {
+  obtenerFeedback(voluntarioId: number): Observable<any> {
     const token = this.obtenerToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`, // Agrega el token al encabezado
     });
-    const url = `${this.apiUrl}/${voluntariadoId}/${voluntarioId}/feedback`; // Ajusta la URL
+    const url = `${this.apiUrl}/${voluntarioId}/feedback`; // Ajusta la URL
     return this.http.get(url, { headers });
   }
   
@@ -81,6 +81,43 @@ export class VoluntariosService {
       const url = `http://localhost:3000/variables-sistema/valores?nombre=${nombre}`;
       return this.http.get<string[]>(url);
     }
+    
+    eliminarFeedback(feedbackId: number): Observable<any> {
+      const token = this.obtenerToken();
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.delete(`${this.apiUrl}/feedback/${feedbackId}`, { headers });
+    }
+    
+    
+    registrarFeedback(feedback: any): Observable<any> {
+      const token = this.obtenerToken();
+      const headers = new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+      });
+  
+      return this.http.post(`${this.apiUrl}/feedback`, feedback, { headers });
+  }
+   
+  obtenerFeedbackPorId(feedbackId: number): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.get(`${this.apiUrl}/feedback/${feedbackId}`, { headers });
+  }
+  
+  editarFeedback(feedbackId: number, feedback: any): Observable<any> {
+    const token = this.obtenerToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put(`${this.apiUrl}/feedback/${feedbackId}`, feedback, { headers });
+  }
+  
+
+
     
 
 

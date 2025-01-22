@@ -1,12 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { BenefactoresService } from '../benefactores.service';
+import { RouterModule, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination'; // Para paginación
 
 @Component({
   selector: 'app-lista-benefactores',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule],
   templateUrl: './lista-benefactores.component.html',
-  styleUrl: './lista-benefactores.component.css'
+  styleUrls: ['./lista-benefactores.component.css'],
+  providers: [BenefactoresService],
 })
-export class ListaBenefactoresComponent {
+export class ListaBenefactoresComponent implements OnInit {
+onPageChange($event: number) {
+throw new Error('Method not implemented.');
+}
+  benefactores: any[] = [];
+  currentPage: number = 1;
+
+  constructor(
+    private benefactoresService: BenefactoresService,
+    private router: Router // Inyección del Router para redirigir
+  ) {}
+
+  ngOnInit(): void {
+    this.cargarBenefactores();
+  }
+
+  cargarBenefactores(): void {
+    this.benefactoresService.obtenerBenefactores().subscribe({
+      next: (data) => {
+        this.benefactores = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar benefactores:', error);
+        Swal.fire('Error', 'No se pudieron cargar los benefactores', 'error');
+      },
+    });
+  }
+
+  // Redirige a la pantalla de registro de benefactores
+  nuevoBenefactor(): void {
+    console.log('Redirigiendo al formulario de registro');
+    this.router.navigate(['/benefactores/registro']);
+}
+
+editarBenefactor(benefactor: any): void {
+  this.router.navigate([`/benefactores/${benefactor.id}/editar`]);
+}
 
 }
