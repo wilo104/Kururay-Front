@@ -13,7 +13,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 })
 export class ListaBeneficiariosComponent implements OnInit {
   beneficiarios: any[] = [];
-  currentPage: number = 1; // Para paginación
+  p: number = 1;
   constructor(
     private beneficiariosService: BeneficiariosService,
     private router: Router 
@@ -39,7 +39,8 @@ export class ListaBeneficiariosComponent implements OnInit {
     }
 
     onPageChange(page: number): void {
-      this.currentPage = page;
-      // Implementa lógica de paginación si es necesario
+      console.log('Cambiando a la página:', page); // Depuración
+      this.p = page;
     }
+    
 }

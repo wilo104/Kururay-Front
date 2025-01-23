@@ -75,18 +75,20 @@ throw new Error('Method not implemented.');
     );
   }
 
-  cambiarEstado(usuario: any) {
-    const nuevoEstado = usuario.estado_usuario ? 'baja' : 'alta';
-    this.usuarioService.cambiarEstadoUsuario(usuario.id, nuevoEstado).subscribe(
-      (response: any) => {
-        console.log('Estado del usuario cambiado exitosamente:', response);
-        usuario.estado_usuario = !usuario.estado_usuario; // Actualizar el estado del usuario en el arreglo local
+  cambiarEstadoUsuario(id: number, nuevoEstado: boolean): void {
+    this.usuarioService.cambiarEstado(id, nuevoEstado).subscribe({
+      next: (response) => {
+        console.log('Estado cambiado con éxito:', response);
+        this.obtenerListaUsuarios(this.ordenActual, this.direccionOrden);
       },
-      (error: any) => {
+      error: (error) => {
         console.error('Error al cambiar el estado del usuario:', error);
-      }
-    );
+        alert(`Error al cambiar el estado del usuario: ${error.error.message}`);
+      },
+    });
   }
+  
+  
 
   editarUsuario(usuario: any) {
     this.router.navigate([`/usuarios/${usuario.id}/editar`]);

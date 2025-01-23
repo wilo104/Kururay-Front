@@ -21,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let beneficiario of beneficiarios">
+          <tr *ngFor="let beneficiario of beneficiarios | paginate: { itemsPerPage: 10, currentPage: p }">
             <td>{{ beneficiario.id }}</td>
             <td>{{ beneficiario.nombre || '-' }}</td>
             <td>{{ beneficiario.dni || '-' }}</td>
@@ -39,6 +39,9 @@
         </tbody>
       </table>
     </div>
-    <pagination-controls class="pagination justify-content-center" (pageChange)="onPageChange($event)"></pagination-controls>
+    <pagination-controls
+      class="pagination justify-content-center"
+      (pageChange)="onPageChange($event)"
+    ></pagination-controls>
   </div>
 </div>

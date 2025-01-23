@@ -15,11 +15,9 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Para paginación
   providers: [BenefactoresService],
 })
 export class ListaBenefactoresComponent implements OnInit {
-onPageChange($event: number) {
-throw new Error('Method not implemented.');
-}
+  currentPage: number = 1; // Página inicial
   benefactores: any[] = [];
-  currentPage: number = 1;
+  
 
   constructor(
     private benefactoresService: BenefactoresService,
@@ -34,6 +32,7 @@ throw new Error('Method not implemented.');
     this.benefactoresService.obtenerBenefactores().subscribe({
       next: (data) => {
         this.benefactores = data;
+        this.currentPage=1;
       },
       error: (error) => {
         console.error('Error al cargar benefactores:', error);
@@ -51,5 +50,8 @@ throw new Error('Method not implemented.');
 editarBenefactor(benefactor: any): void {
   this.router.navigate([`/benefactores/${benefactor.id}/editar`]);
 }
-
+onPageChange(page: number): void {
+  console.log('Cambiando a la página:', page);
+  this.currentPage = page;
+}
 }

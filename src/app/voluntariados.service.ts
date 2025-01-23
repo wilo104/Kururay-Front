@@ -207,5 +207,24 @@ export class VoluntariadosService {
       );
     }
     
+    cambiarEstadoAlta(id: number, estadoAlta: boolean): Observable<any> {
+      const token = localStorage.getItem('token'); // Obtén el token almacenado
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
+      });
+    
+      const body = { estado_alta: estadoAlta }; // Cuerpo de la solicitud
+      return this.http.patch(`${this.baseUrl}/${id}/estado-alta`, body, { headers });
+    }
+    aprobarVoluntariado(id: number): Observable<any> {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+    
+      return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
+    }
+    
+  
 
 }

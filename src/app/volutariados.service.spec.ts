@@ -64,7 +64,19 @@ export class VoluntariadosService {
     );
   }
   
+  cambiarEstadoAlta(id: number, estadoAlta: boolean): Observable<any> {
+    const body = { estado_alta: estadoAlta };
+    return this.http.patch(`${this.baseUrl}/${id}/estado-alta`, body);
+}
 
+aprobarVoluntariado(id: number): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+
+  return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
+}
 
   
 

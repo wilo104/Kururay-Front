@@ -21,6 +21,7 @@
               <th>ID</th>
               <th>Fecha</th>
               <th>Tipo</th>
+              <th>Descripcion</th>
               <th>Adicional</th>
               <th>Mentor</th>
               <th *ngIf="role === 'MENTOR'">Acciones</th>
@@ -31,6 +32,7 @@
               <td>{{ feedback.feedback_id }}</td>
               <td>{{ feedback.feedback_fecha | date: 'MMM d, y' }}</td>
               <td>{{ feedback.tipo }}</td>
+              <td>{{ feedback.descripcion }}</td>
               <td>{{ feedback.adicional }}</td>
               <td>{{ feedback.mentor }}</td>
               <td *ngIf="role === 'MENTOR'">

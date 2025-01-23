@@ -2,33 +2,25 @@
   <aside id="sidebar" [class.active]="sidebarActive" [class.collapsed]="sidebarCollapsed">
     <div class="sidebar-header">
       <button class="btn btn-dark btn-sm toggle-button" (click)="toggleSidebar()">
-        <span class="menu-icon">&#9776;</span> <!-- Ícono de menú -->
+        <span class="menu-icon">&#9776;</span>
       </button>
-      <!-- Ícono del logo para mostrar cuando el sidebar está colapsado -->
-      <span class="logo-icon" *ngIf="sidebarCollapsed"></span>
-      <!-- Nombre/link que se oculta cuando el sidebar está colapsado -->
-      <a class="nav-link" *ngIf="!sidebarCollapsed" routerLink="/dashboard"> KURURAY LLACTAY</a>
+      <span class="logo-text" *ngIf="!sidebarCollapsed">KURURAY LLACTAY</span>
     </div>
 
-    <nav class="navbar navbar-dark" >
+    <nav class="navbar navbar-dark">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" routerLink="/dashboard">
             <i class="fas fa-tachometer-alt"></i>
-          
             <span class="link-text" *ngIf="!sidebarCollapsed">Dashboard</span>
           </a>
         </li>
-       
         <li class="nav-item" *ngIf="tipo_usuario === 'ADMINISTRADOR'">
           <a class="nav-link" routerLink="/voluntarios">
             <i class="fas fa-user-cog"></i>
             <span class="link-text" *ngIf="!sidebarCollapsed">Voluntarios</span>
           </a>
         </li>
-
-
-
         <li class="nav-item" *ngIf="tipo_usuario === 'ADMINISTRADOR' || tipo_usuario === 'RRHH'">
           <a class="nav-link" routerLink="/voluntariados">
             <i class="fas fa-users"></i>
@@ -71,52 +63,25 @@
             <span class="link-text" *ngIf="!sidebarCollapsed">Variables del Sistema</span>
           </a>
         </li>
-
-        <li class="nav-item" >
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/usuarios', id, 'actualizar-clave']">
             <i class="fas fa-key"></i>
             <span class="link-text" *ngIf="!sidebarCollapsed">Actualizar Mi Contraseña</span>
           </a>
         </li>
-
-        <li class="nav-item"  *ngIf="tipo_usuario === 'VOLUNTARIO'">
-          <a class="nav-link" routerLink="/mis-voluntariados">
-            <i class="fas fa-heart"></i>
-            <span class="link-text">Mis Voluntariados</span>
-          </a>
-      </li>
-      <li class="nav-item" *ngIf="tipo_usuario === 'VOLUNTARIO'">
-          <a class="nav-link" routerLink="/mis-datos">
-            <i class="fas fa-id-card"></i>
-            <span class="link-text">Mis Datos</span>
-          </a>
-      </li>
-
-      <li class="nav-item" *ngIf="tipo_usuario === 'MENTOR'">
-        <a class="nav-link" routerLink="/voluntariados">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <span class="link-text">Voluntariados</span>
-        </a>
-    </li>
-
-    </ul>
-  </nav>
- </aside>
+      </ul>
+    </nav>
+  </aside>
 
   <div class="content">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </div>
-</div>
 
-<div class="header-container">
-  <div class="user-info">
-    <i class="fas fa-user"></i> <!-- Icono de usuario -->
-    <span class="welcome-message">Bienvenido, {{ nombreUsuario || 'Usuario' }}</span>
+  <div class="user-menu">
+    <i class="fas fa-user-circle" (click)="toggleDropdown()"></i>
+    <div class="user-menu-dropdown" *ngIf="dropdownOpen">
+      <span>{{ nombreUsuario || 'Usuario' }}</span>
+      <button class="btn btn-outline-secondary btn-sm" (click)="logout()">Cerrar Sesión</button>
+    </div>
   </div>
-  <div class="logout-button">
-    <button class="btn btn-outline-secondary btn-sm" (click)="logout()">
-      Cerrar Sesión
-    </button>
-  </div>
-</div>
-
+  

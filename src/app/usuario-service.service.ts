@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -59,4 +59,18 @@ export class UsuarioService {
     const url = `${this.apiUrl}/${id}/cv`;
     return this.http.get(url, { responseType: 'blob' });
   }
+
+// UsuarioService
+cambiarEstado(id: number, estado: boolean): Observable<any> {
+  const token = localStorage.getItem('token'); // Recupera el token del almacenamiento local
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
+  });
+
+  const url = `http://localhost:3000/usuarios/${id}/estado`;
+  return this.http.patch(url, { estado_usuario: estado }, { headers });
+}
+
+
+  
 }

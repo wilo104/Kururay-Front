@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-voluntariados',
   standalone: true,
@@ -53,6 +54,7 @@ export class VoluntariadosComponent implements OnInit {
     this.voluntariadosService.getVoluntariados().subscribe(
       (data) => {
         this.voluntariados = data;
+        this.p = 1; 
       },
       (error) => {
         console.error('Error al obtener la lista de voluntariados:', error);
@@ -95,6 +97,19 @@ export class VoluntariadosComponent implements OnInit {
   verDetalle(id: number): void {
     this.router.navigate([`/voluntariados/${id}/detalle`]);
   }
+ 
+  toggleEstado(voluntariado: any): void {
+    const nuevoEstado = !voluntariado.estado_alta;
+
+    this.voluntariadosService.cambiarEstadoAlta(voluntariado.id, nuevoEstado).subscribe({
+        next: () => {
+            voluntariado.estado_alta = nuevoEstado; // Actualiza el estado localmente
+            Swal.fire('Éxito', `Estado cambiado a ${nuevoEstado ? 'De Alta' : 'De Baja'}`, 'success');
+        },
+        error: () => Swal.fire('Error', 'No se pudo cambiar el estado.', 'error'),
+    });
+}
+
   
  
 

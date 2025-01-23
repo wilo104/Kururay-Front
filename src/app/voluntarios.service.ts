@@ -14,9 +14,16 @@ export class VoluntariosService {
     return localStorage.getItem('token'); // Recupera el token almacenado
   }
   // Obtener la lista de voluntarios
+  // Obtener la lista de voluntarios con paginación
   obtenerVoluntarios(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    const token = localStorage.getItem('token'); // O donde almacenes tu token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Asegúrate de usar el prefijo correcto
+    });
+
+    return this.http.get<any[]>(this.apiUrl, { headers });
   }
+
 
   // Obtener voluntarios no asignados
   obtenerVoluntariosNoAsignados(): Observable<any[]> {

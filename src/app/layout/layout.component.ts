@@ -21,6 +21,7 @@ export class LayoutComponent implements OnInit {
   token: string | null | undefined;
   id: string | null | undefined;
 
+
   nombreUsuario: string | null = null; // Declarar la propiedad
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -51,6 +52,12 @@ export class LayoutComponent implements OnInit {
     // Alternar el estado del sidebar
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
+
+  dropdownOpen: boolean = false;
+
+toggleDropdown(): void {
+  this.dropdownOpen = !this.dropdownOpen;
+}
 
   logout() {
     this.authService.logout();

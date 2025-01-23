@@ -102,8 +102,18 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   }
 
   aprobarVoluntariado(): void {
-    alert('Funcionalidad de aprobación aún no implementada.');
+    this.voluntariadosService.aprobarVoluntariado(this.idVoluntariadoSeleccionado).subscribe({
+      next: () => {
+        Swal.fire('Éxito', 'Voluntariado aprobado con éxito.', 'success');
+        this.cargarVoluntariado(this.idVoluntariadoSeleccionado); // Actualizar estado dinámico
+      },
+      error: (error) => {
+        console.error('Error al aprobar voluntariado:', error);
+        Swal.fire('Error', 'No se pudo aprobar el voluntariado. Intente nuevamente.', 'error');
+      }
+    });
   }
+  
 
   cerrarVoluntariado(): void {
     alert('Funcionalidad de cierre aún no implementada.');

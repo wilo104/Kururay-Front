@@ -4,12 +4,13 @@
       <div>
         <button class="btn btn-secondary" (click)="retroceder()">Retroceder</button>
         <button
-          class="btn btn-success"
-          *ngIf="!isMentor"
-          (click)="aprobarVoluntariado()"
-        >
-          Aprobar Voluntariado
-        </button>
+        class="btn btn-success"
+        *ngIf="!isMentor && voluntariado.estado_dinamico === 'Pendiente'"
+        (click)="aprobarVoluntariado()"
+      >
+        Aprobar Voluntariado
+      </button>
+      
         <button
           class="btn btn-danger"
           *ngIf="!isMentor"
@@ -31,7 +32,7 @@
       </div>
       <div>
         <label>Estado:</label>
-        <input [value]="voluntariado.estado" disabled />
+        <input [value]="voluntariado.estado_dinamico" disabled />
       </div>
     </form>
   
@@ -90,7 +91,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let evidencia of evidencias">
-          <td>{{ evidencia.fecha_evidencia }}</td>
+          <td>{{ evidencia.fecha_evidencia | date: 'dd/MM/yyyy' }}</td>
           <td>{{ evidencia.descripcion }}</td>
           <td>
         
@@ -144,7 +145,7 @@
 
   
    <!-- Tabla de Voluntarios -->
-<div class="table-responsive">
+<!-- <div class="table-responsive">
     <table class="table table-striped table-hover align-middle">
       <thead>
         <tr>
@@ -168,7 +169,7 @@
       </tbody>
     </table>
   </div>
-  
+   -->
   <!-- Modal Detalle Voluntario -->
   <div class="modal" [ngClass]="{ 'd-block': modalDetalleVoluntarioAbierto }">
     <div class="modal-dialog">
@@ -200,7 +201,8 @@
           <button type="button" class="btn-close" aria-label="Close" (click)="cerrarDetalleEvidencia()"></button>
         </div>
         <div class="modal-body">
-          <p><strong>Fecha:</strong> {{ evidenciaSeleccionada?.fecha_evidencia }}</p>
+          <p><strong>Fecha:</strong> {{ evidenciaSeleccionada?.fecha_evidencia | date: 'dd/MM/yyyy' }}</p>
+
           <p><strong>Descripción:</strong> {{ evidenciaSeleccionada?.descripcion }}</p>
           <p><strong>Incidentes:</strong> {{ evidenciaSeleccionada?.incidentes }}</p>
           <p><strong>Asistencia de Mentores:</strong> {{ evidenciaSeleccionada?.asistencia_mentores }}</p>

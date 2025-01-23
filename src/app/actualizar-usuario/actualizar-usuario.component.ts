@@ -6,6 +6,7 @@ import { UsuarioService } from '../usuario-service.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-actualizar-usuario',
   standalone: true,
@@ -53,10 +54,12 @@ export class ActualizarUsuarioComponent implements OnInit{
       this.usuarioService.actualizarUsuario(userId, this.editUserForm.value).subscribe(
         () => {
          // this.notificationService.showSuccess('Actualizado correctamente');
+             Swal.fire('Éxito', 'Usuario Actualizado');
+           
           this.router.navigate(['/usuarios']);
         },
         error => {
-          this.notificationService.showError('ActualizarUsuarioModal','No es posible realizar la actualización');
+        Swal.fire('ActualizarUsuarioModal','No es posible realizar la actualización');
         }
       );
     } else {

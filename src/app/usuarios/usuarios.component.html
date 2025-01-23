@@ -29,7 +29,7 @@
               <td class="d-none d-sm-table-cell">{{usuario.apellido_paterno}} {{usuario.apellido_materno}} {{ usuario.nombre}}  </td>
                 <td class="d-none d-md-table-cell">{{ usuario.dni }}</td>
               <td class="d-none d-md-table-cell">{{ usuario.correo }}</td>
-              <td class="d-none d-lg-table-cell">{{ usuario.telefono }}</td>
+              <td class="d-none d-lg-table-cell">{{ usuario.celular }}</td>
               <td class="d-none d-lg-table-cell">{{ usuario.tipo_usuario }}</td>
               <td class="d-none d-xl-table-cell">
                 <span class="badge" [ngClass]="usuario.estado_usuario ? 'badge-success' : 'badge-danger'" style="color: white;">
@@ -39,12 +39,26 @@
               <td>
                 <button class="btn btn-primary btn-sm custom-btn" (click)="editarUsuario(usuario)">Editar</button>
               </td>
-              <td>
+              <!-- <td>
                 <button class="btn btn-primary btn-sm custom-btn" (click)="verCV(usuario)">Ver CV</button>
-              </td>
+              </td> -->
               <td>
-                <button class="btn btn-danger btn-sm custom-btn" (click)="cambiarEstado(usuario)">Dar de Baja</button>
+                <button
+                  *ngIf="!usuario.estado_usuario"
+                  class="btn btn-success btn-sm custom-btn"
+                  (click)="cambiarEstadoUsuario(usuario.id, true)"
+                >
+                  Dar de Alta
+                </button>
+                <button
+                  *ngIf="usuario.estado_usuario"
+                  class="btn btn-danger btn-sm custom-btn"
+                  (click)="cambiarEstadoUsuario(usuario.id, false)"
+                >
+                  Dar de Baja
+                </button>
               </td>
+              
               <td>
                 <button class="btn btn-info btn-sm custom-btn" (click)="restauraracceso(usuario)">Restaurar Acceso</button>
               </td>

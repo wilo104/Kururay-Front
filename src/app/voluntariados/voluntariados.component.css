@@ -1,89 +1,119 @@
+/* Contenedor principal */
+.card-container {
+  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo de la tabla */
+.thead-highlight th {
+  background-color: #343a40; /* Gris oscuro */
+  color: #ffffff; /* Blanco */
+  text-align: center;
+  font-weight: bold;
+  padding: 0.75rem;
+}
+
+.table {
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table th,
+.table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 0.75rem;
+}
+
+/* Hover para las filas */
+.table-hover tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Botones */
+button {
+  padding: 5px 10px;
+  font-size: 0.875rem;
+  border-radius: 6px;
+}
+
+.btn-primary {
+  background-color: #0056b3; /* Azul oscuro */
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #003d80;
+}
+
+.btn-info {
+  background-color: #17a2b8; /* Celeste */
+  color: white;
+}
+
+.btn-info:hover {
+  background-color: #138496;
+}
+
+.btn-warning {
+  background-color: #ffc107; /* Amarillo */
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Botón de Nuevo Voluntariado */
+.btn-new-volunteer {
+  background-color: #8B0000; /* Rojo oscuro */
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+.btn-new-volunteer:hover {
+  background-color: #a00000;
+}
+
+/* Etiquetas de estado */
+.badge {
+  font-size: 14px;
+  padding: 5px 10px;
+  border-radius: 12px;
+}
+
 .badge-success {
-    background-color: #28a745 !important; /* Verde */
-    color: white !important;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 14px;
+  background-color: #28a745; /* Verde */
+  color: white;
+}
+
+.badge-danger {
+  background-color: #dc3545; /* Rojo */
+  color: white;
+}
+
+/* Paginador */
+.pagination {
+  margin-top: 1rem;
+  justify-content: center;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .d-flex {
+    flex-wrap: wrap;
+    gap: 8px;
   }
-  
-  .badge-danger {
-    background-color: #dc3545 !important; /* Rojo */
-    color: white !important;
-    padding: 5px 10px;
-    border-radius: 10px;
-    font-size: 14px;
-  }
-  .card-container {
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card {
-    margin-top: 20px;
-    padding: 1rem;
-  }
-  
-  .table-responsive {
-    overflow-x: auto;
-  }
-  
-  .table {
-    margin-bottom: 1rem;
-  }
-  
-  .table th,
-  .table td {
-    text-align: center;
-    vertical-align: middle;
-    padding: 0.75rem;
-  }
-  
-  .badge {
-    font-size: 14px;
-    padding: 5px 10px;
-    border-radius: 12px;
-  }
-  
+
   .btn {
-    margin: 0 2px;
+    width: 100%; /* Botones ocupan todo el ancho */
+    margin-bottom: 5px;
   }
-  .btn-nuevo {
-    background-color: #8B0000; /* Rojo oscuro */
-    color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-nuevo:hover {
-    background-color: #6B0000; /* Rojo más oscuro al pasar el mouse */
-  }
-  
-  .pagination {
-    margin-top: 1rem;
-    justify-content: center;
-  }
-  
-  thead th {
-    background-color: #343a40;
-    color: #ffffff;
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  .btn-new-volunteer {
-    background-color: #8B0000; /* Rojo oscuro similar al menú */
-    color: white;
-    font-weight: bold;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-  }
-  
+}
