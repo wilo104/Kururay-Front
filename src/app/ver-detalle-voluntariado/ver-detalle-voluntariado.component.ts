@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { AsignarVoluntarioModalComponent } from '../asignar-voluntario-modal/asignar-voluntario-modal.component';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ver-detalle-voluntariado',
   standalone: true,
-  imports: [CommonModule, AsignarVoluntarioModalComponent],
+  imports: [CommonModule, AsignarVoluntarioModalComponent,ReactiveFormsModule],
   templateUrl: './ver-detalle-voluntariado.component.html',
   styleUrls: ['./ver-detalle-voluntariado.component.css'],
   providers: [VoluntariadosService,AuthService],
@@ -29,13 +30,17 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   modalDetalleVoluntarioAbierto = false; // Controla la apertura del modal
   evidenciaSeleccionada: any = null;
   modalDetalleEvidenciaAbierto = false;
-  
+  modalDetalleAsistenciaAbierto = false; // Controla la apertura del modal
+  asistenciaSeleccionada: any = null; // Almacena los detalles de la asistencia seleccionada
+  voluntariosAsistencia: any[] = []; // Almacena los voluntarios y sus estados
 
+  cerrarVoluntariadoForm!: FormGroup;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private voluntariadosService: VoluntariadosService,
-    private authService: AuthService 
+    private authService: AuthService ,
+    private fb: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +51,11 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
     this.cargarVoluntarios(id);
     this.cargarEvidencias(id);
     this.cargarAsistencias(id);
+    this.cerrarVoluntariadoForm = this.fb.group({
+      presupuestoEjecutado: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      logros: ['', [Validators.required, Validators.maxLength(1000)]],
+    });
+
   }
 
   cargarVoluntariado(id: number): void {
@@ -101,6 +111,10 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
     this.router.navigate(['/voluntariados']);
   }
 
+
+
+
+
   aprobarVoluntariado(): void {
     this.voluntariadosService.aprobarVoluntariado(this.idVoluntariadoSeleccionado).subscribe({
       next: () => {
@@ -116,7 +130,20 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   
 
   cerrarVoluntariado(): void {
-    alert('Funcionalidad de cierre aún no implementada.');
+    if (this.cerrarVoluntariadoForm.valid) {
+      const formData = this.cerrarVoluntariadoForm.value;
+      this.voluntariadosService.cerrarVoluntariado(this.idVoluntariadoSeleccionado, formData).subscribe({
+        next: () => {
+          Swal.fire('Éxito', 'Voluntariado cerrado correctamente.', 'success');
+          this.router.navigate(['/voluntariados']);
+        },
+        error: () => {
+          Swal.fire('Error', 'No se ha podido cerrar el proyecto.', 'error');
+        },
+      });
+    } else {
+      Swal.fire('Error', 'Complete correctamente todos los campos.', 'error');
+    }
   }
 
   abrirModal(idVoluntariado: number): void {
@@ -243,6 +270,34 @@ actualizarListaVoluntarios(): void {
       this.evidenciaSeleccionada = null; // Limpiar los datos
     }
     
-
+    irARegistrarAsistencia(idVoluntariado: number): void {
+      this.router.navigate(['/registrar-asistencia', idVoluntariado]);
+    }
+    
+    abrirDetalleAsistencia(idAsistencia: number): void {
+      // Obtener detalles de la asistencia y voluntarios
+      this.voluntariadosService.obtenerDetalleAsistencia(idAsistencia).subscribe({
+        next: (data) => {
+          this.asistenciaSeleccionada = data.asistencia;
+          this.voluntariosAsistencia = data.voluntarios;
+          this.modalDetalleAsistenciaAbierto = true;
+        },
+        error: (err) => {
+          console.error('Error al cargar los detalles de la asistencia:', err);
+          Swal.fire('Error', 'No se pudieron cargar los detalles de la asistencia.', 'error');
+        },
+      });
+    }
+    cerrarDetalleAsistencia(): void {
+      this.modalDetalleAsistenciaAbierto = false;
+      this.asistenciaSeleccionada = null;
+      this.voluntariosAsistencia = [];
+    }
+    irAEditarAsistencia(idAsistencia: number): void {
+      this.router.navigate(['/editar-asistencia', idAsistencia], {
+        queryParams: { idVoluntariado: this.idVoluntariadoSeleccionado }
+      });
+    }
+    
 
 }

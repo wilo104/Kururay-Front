@@ -1,0 +1,88 @@
+<div class="container">
+    <h3>Editar Asistencia</h3>
+    <form [formGroup]="asistenciaForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input
+          id="fecha"
+          type="date"
+          formControlName="fecha"
+          class="form-control"
+          required
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="nombreSesion">Nombre de la sesión:</label>
+        <input
+          id="nombreSesion"
+          type="text"
+          formControlName="nombreSesion"
+          class="form-control"
+          maxlength="255"
+          required
+        />
+      </div>
+  
+      <div formArrayName="estados" class="form-group">
+        <div
+          *ngFor="let grupo of estados.controls; let i = index"
+          [formGroupName]="i"
+          class="estado-item"
+        >
+          <p><strong>{{ voluntarios[i]?.nombre }}</strong></p>
+          <div class="form-check">
+            <label>
+              <input
+                type="radio"
+                formControlName="estado"
+                value="Presente"
+                class="form-check-input"
+              />
+              Presente
+            </label>
+          </div>
+          <div class="form-check">
+            <label>
+              <input
+                type="radio"
+                formControlName="estado"
+                value="Falta"
+                class="form-check-input"
+              />
+              Falta
+            </label>
+          </div>
+          <div class="form-check">
+            <label>
+              <input
+                type="radio"
+                formControlName="estado"
+                value="Tardanza"
+                class="form-check-input"
+              />
+              Tardanza
+            </label>
+          </div>
+        </div>
+      </div>
+  
+      <div class="form-actions">
+        <button
+          type="submit"
+          class="btn btn-success"
+          [disabled]="asistenciaForm.invalid"
+        >
+          Guardar
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+  

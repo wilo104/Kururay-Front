@@ -21,7 +21,7 @@
             <span class="link-text" *ngIf="!sidebarCollapsed">Voluntarios</span>
           </a>
         </li>
-        <li class="nav-item" *ngIf="tipo_usuario === 'ADMINISTRADOR' || tipo_usuario === 'RRHH'">
+        <li class="nav-item" *ngIf="tipo_usuario === 'ADMINISTRADOR' || tipo_usuario === 'RRHH' || tipo_usuario === 'MENTOR'">
           <a class="nav-link" routerLink="/voluntariados">
             <i class="fas fa-users"></i>
             <span class="link-text" *ngIf="!sidebarCollapsed">Voluntariados</span>

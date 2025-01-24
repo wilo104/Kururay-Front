@@ -1,0 +1,38 @@
+<form [formGroup]="asistenciaForm" (ngSubmit)="onSubmit()">
+    <label for="fecha">Fecha:</label>
+    <input id="fecha" type="date" formControlName="fecha" required />
+  
+    <label for="nombreSesion">Nombre de la sesión:</label>
+    <input
+      id="nombreSesion"
+      type="text"
+      formControlName="nombreSesion"
+      maxlength="255"
+      required
+    />
+  
+    <div formArrayName="estados">
+      <div
+        *ngFor="let grupo of estados.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <p>{{ voluntarios[i]?.nombre }}</p>
+        <label>
+          <input type="radio" formControlName="estado" value="Presente" />
+          Presente
+        </label>
+        <label>
+          <input type="radio" formControlName="estado" value="Falta" />
+          Falta
+        </label>
+        <label>
+          <input type="radio" formControlName="estado" value="Tardanza" />
+          Tardanza
+        </label>
+      </div>
+    </div>
+  
+    <button type="submit">Guardar</button>
+    <button type="button" (click)="cancelar()">Cancelar</button>
+  </form>
+  

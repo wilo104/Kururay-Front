@@ -28,6 +28,8 @@ import { EditarBenefactorComponent } from './editar-benefactor/editar-benefactor
 import { EditarFeedbackComponent } from './editar-feedback/editar-feedback.component';
 import { RegistrarFeedbackComponent } from './registrar-feedback/registrar-feedback.component';
 import { RegistrarEvidenciaComponent } from './registrar-evidencia/registrar-evidencia.component';
+import { RegistrarAsistenciaComponent } from './registrar-asistencia/registrar-asistencia.component';
+import { EditarAsistenciaComponent } from './editar-asistencia/editar-asistencia.component';
 
 export const routes: Routes = [
     {
@@ -154,7 +156,12 @@ export const routes: Routes = [
                     path: 'voluntariados/:id/evidencias/registrar',
                     component: RegistrarEvidenciaComponent, 
                   },
-              
+                  {
+                    path: 'registrar-asistencia/:id',
+                    component: RegistrarAsistenciaComponent,
+                  },
+                  { path: 'editar-asistencia/:id', component: EditarAsistenciaComponent }, // Nueva ruta
+
               
               
         ]

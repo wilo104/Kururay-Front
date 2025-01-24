@@ -124,6 +124,26 @@ export class VoluntariosService {
   }
   
 
+// Registrar asistencia
+registrarAsistencia(asistencia: any): Observable<any> {
+  const token = this.obtenerToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+  // Ajustamos la URL eliminando el prefijo "voluntarios" que no corresponde
+  return this.http.post(`http://localhost:3000/voluntariados/${asistencia.voluntariado_id}/asistencias`, asistencia, { headers });
+}
+
+// Obtener voluntarios asignados a un voluntariado
+obtenerVoluntariosPorVoluntariado(idVoluntariado: number): Observable<any[]> {
+  const token = this.obtenerToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
+  // Ajustamos la URL eliminando el prefijo "voluntarios" que no corresponde
+  return this.http.get<any[]>(`http://localhost:3000/voluntariados/${idVoluntariado}/voluntarios`, { headers });
+}
+
 
     
 

@@ -224,7 +224,32 @@ export class VoluntariadosService {
     
       return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
     }
-    
-  
+   
+    cerrarVoluntariado(id: number, data: any) {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.post(`${this.baseUrl}/${id}/cerrar`, data,{headers});
 
+
+    }
+    
+    obtenerDetalleAsistencia(idAsistencia: number): Observable<any> {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      });
+      return this.http.get<any>(`${this.baseUrl}/asistencias/${idAsistencia}/detalle`, { headers });
+    }
+    
+    actualizarAsistencia(id: number, asistencia: any): Observable<any> {
+      const token = localStorage.getItem('token');
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`, // Incluye el token en las cabeceras
+      });
+      return this.http.put(`http://localhost:3000/voluntariados/asistencias/${id}`, asistencia, { headers });
+    }
+    
+   
 }

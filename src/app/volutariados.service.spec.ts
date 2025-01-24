@@ -78,7 +78,10 @@ aprobarVoluntariado(id: number): Observable<any> {
   return this.http.post(`${this.baseUrl}/${id}/aprobar`, {}, { headers });
 }
 
-  
+cerrarVoluntariado(id: number, data: any) {
+  return this.http.post(`${this.baseUrl}/${id}/cerrar`, data);
+}
+
 
 
 }

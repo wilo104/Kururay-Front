@@ -67,6 +67,11 @@ cambiarEstado(id: number, estado: boolean): Observable<any> {
     Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
   });
 
+
+
+
+
+  
   const url = `http://localhost:3000/usuarios/${id}/estado`;
   return this.http.patch(url, { estado_usuario: estado }, { headers });
 }

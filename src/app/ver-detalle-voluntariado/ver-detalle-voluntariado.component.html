@@ -1,139 +1,158 @@
-<div class="detalle-voluntariado">
-    <header>
-      <h2>Detalle del Voluntariado</h2>
-      <div>
-        <button class="btn btn-secondary" (click)="retroceder()">Retroceder</button>
-        <button
+<div class="container-fluid detalle-voluntariado">
+  <div class="row">
+    <div class="col-md-12">
+  <header>
+    <h2>Detalle del Voluntariado</h2>
+    <div class="header-actions">
+      <button class="btn btn-secondary" (click)="retroceder()">Retroceder</button>
+      <button
         class="btn btn-success"
         *ngIf="!isMentor && voluntariado.estado_dinamico === 'Pendiente'"
         (click)="aprobarVoluntariado()"
       >
         Aprobar Voluntariado
       </button>
-      
-        <button
-          class="btn btn-danger"
-          *ngIf="!isMentor"
-          (click)="cerrarVoluntariado()"
-        >
-          Cerrar Voluntariado
-        </button>
-      </div>
-    </header>
-  
-    <form>
-      <div>
-        <label>Nombre:</label>
-        <input [value]="voluntariado.nombre" disabled />
-      </div>
-      <div>
-        <label>Tipo:</label>
-        <input [value]="voluntariado.tipo" disabled />
-      </div>
-      <div>
-        <label>Estado:</label>
-        <input [value]="voluntariado.estado_dinamico" disabled />
-      </div>
-    </form>
-  
-    <h3>Voluntarios</h3>
-    <button
-      class="btn btn-success btn-sm mb-3"
-      (click)="abrirModal(voluntariado.id)"
-    >
-      Asignar Voluntario
-    </button>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>DNI</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let voluntario of voluntarios">
-          <td>{{ voluntario.id }}</td>
-          <td>{{ voluntario.nombre }}</td>
-          <td>{{ voluntario.dni }}</td>
-          <td class="actions">
-            <button class="btn btn-primary btn-sm" (click)="abrirDetalleVoluntario(voluntario)">Ver</button>
-            <button
-              class="btn btn-warning"
-              (click)="desasignarVoluntario(voluntario.id)"
-            >
-              Desasignar
-            </button>
-            <button
-              class="btn btn-secondary"
-              (click)="abrirFeedback(voluntario.id)"
-            >
-              Ver Feedback
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <h3>Evidencias</h3>
-    <button class="btn btn-primary mb-3" *ngIf="isMentor" (click)="registrarEvidencia()">
-      Registrar Evidencia
-    </button>
-    
-    <table>
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Descripción</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let evidencia of evidencias">
-          <td>{{ evidencia.fecha_evidencia | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ evidencia.descripcion }}</td>
-          <td>
-        
-            <button class="btn btn-info" (click)="abrirDetalleEvidencia(evidencia.id)">Ver</button>
+      <button
+        class="btn btn-danger"
+        *ngIf="!isMentor"
+        (click)="cerrarVoluntariado()"
+      >
+        Cerrar Voluntariado
+      </button>
+    </div>
+  </header>
 
-            <button
-              class="btn btn-danger"
-              *ngIf="isMentor"
-              (click)="confirmarEliminarEvidencia(evidencia.id)"
-            >
-              Eliminar
-            </button>
-          </td>
-          
-        </tr>
-      </tbody>
-    </table>
-  
-    <h3>Asistencias</h3>
-    <button class="btn btn-primary mb-3" *ngIf="isMentor">
-      Registrar Asistencia
-    </button>
-    <table>
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Total Asistentes</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let asistencia of asistencias">
-          <td>{{ asistencia.fecha_asistencia }}</td>
-          <td>{{ asistencia.total_asistentes }}</td>
-          <td>
-            <button class="btn btn-info">Ver</button>
-            <button class="btn btn-warning" *ngIf="isMentor">Editar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <section class="voluntariado-info">
+    <div class="info-block">
+      <label>Nombre:</label>
+      <input [value]="voluntariado.nombre" disabled />
+    </div>
+    <div class="info-block">
+      <label>Tipo:</label>
+      <input [value]="voluntariado.tipo" disabled />
+    </div>
+    <div class="info-block">
+      <label>Estado:</label>
+      <input [value]="voluntariado.estado_dinamico" disabled />
+    </div>
+  </section>
+
+  <h3>Voluntarios</h3>
+  <button
+    class="btn btn-success btn-sm mb-3"
+    (click)="abrirModal(voluntariado.id)"
+  >
+    Asignar Voluntario
+  </button>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>DNI</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let voluntario of voluntarios">
+        <td>{{ voluntario.id }}</td>
+        <td>{{ voluntario.nombre }}</td>
+        <td>{{ voluntario.dni }}</td>
+        <td class="actions">
+          <button class="btn btn-primary btn-sm" (click)="abrirDetalleVoluntario(voluntario)">Ver</button>
+          <button
+            class="btn btn-warning"
+            (click)="desasignarVoluntario(voluntario.id)"
+          >
+            Desasignar
+          </button>
+          <button
+            class="btn btn-secondary"
+            (click)="abrirFeedback(voluntario.id)"
+          >
+            Ver Feedback
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Evidencias</h3>
+  <button class="btn btn-primary mb-3" *ngIf="isMentor" (click)="registrarEvidencia()">
+    Registrar Evidencia
+  </button>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Descripción</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let evidencia of evidencias">
+        <td>{{ evidencia.fecha_evidencia | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ evidencia.descripcion }}</td>
+        <td>
+          <button class="btn btn-info" (click)="abrirDetalleEvidencia(evidencia.id)">Ver</button>
+          <button
+            class="btn btn-danger"
+            *ngIf="isMentor"
+            (click)="confirmarEliminarEvidencia(evidencia.id)"
+          >
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Asistencias</h3>
+  <button class="btn btn-primary mb-3" *ngIf="isMentor" (click)="irARegistrarAsistencia(voluntariado.id)">
+    Registrar Asistencia
+  </button>
+  <table class="responsive-table">
+    <thead>
+      <tr>
+        <th>Fecha</th>
+        <th>Total Asistentes</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let asistencia of asistencias">
+        <td>{{ asistencia.fecha_asistencia | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ asistencia.total_asistentes }}</td>
+        <td>
+          <button class="btn btn-info" (click)="abrirDetalleAsistencia(asistencia.id)">Ver</button>
+          <button class="btn btn-warning" *ngIf="isMentor" (click)="irAEditarAsistencia(asistencia.id)">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Cerrar Voluntariado</h3>
+  <form [formGroup]="cerrarVoluntariadoForm" (ngSubmit)="cerrarVoluntariado()" class="cerrar-voluntariado-form">
+    <div class="form-group">
+      <label>Presupuesto Ejecutado:</label>
+      <input formControlName="presupuestoEjecutado" type="number" />
+      <small *ngIf="cerrarVoluntariadoForm.get('presupuestoEjecutado')?.invalid && cerrarVoluntariadoForm.get('presupuestoEjecutado')?.touched">
+        El presupuesto es obligatorio y debe ser un número.
+      </small>
+    </div>
+    <div class="form-group">
+      <label>Logros:</label>
+      <textarea formControlName="logros" rows="3"></textarea>
+      <small *ngIf="cerrarVoluntariadoForm.get('logros')?.invalid && cerrarVoluntariadoForm.get('logros')?.touched">
+        Los logros son obligatorios y deben tener menos de 1000 caracteres.
+      </small>
+    </div>
+    <button type="submit" class="btn btn-danger">Cerrar Voluntariado</button>
+  </form>
+</div>
+</div>
+</div>
+
        <!-- Modal -->
        <app-asignar-voluntario-modal
        *ngIf="modalAbierto"
@@ -215,4 +234,36 @@
       </div>
     </div>
   </div>
-  
+  <!-- MODAL VER DETALLE DE ASISTENCIAS  -->
+  <div class="modal" [ngClass]="{ 'd-block': modalDetalleAsistenciaAbierto }">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Detalle de Asistencia</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="cerrarDetalleAsistencia()"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Fecha:</strong> {{ asistenciaSeleccionada?.fecha_asistencia | date: 'dd/MM/yyyy' }}</p>
+          <p><strong>Nombre de la sesión:</strong> {{ asistenciaSeleccionada?.nombre_sesion }}</p>
+          <h6>Listado de Voluntarios:</h6>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let voluntario of voluntariosAsistencia">
+                <td>{{ voluntario.nombre }}</td>
+                <td>{{ voluntario.estado }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="cerrarDetalleAsistencia()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
