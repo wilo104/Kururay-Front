@@ -1,9 +1,9 @@
-<div class="container">
-    <h2 class="text-center mb-4">Registrar Beneficiario</h2>
-    <form (ngSubmit)="guardarBeneficiario()">
+<div class="container form-container">
+  <h2 class="form-title text-center">Registrar Beneficiario</h2>
+  <form (ngSubmit)="guardarBeneficiario()">
+    <div class="row">
       <!-- Tipo de Beneficiario -->
-       
-      <div class="form-group">
+      <div class="form-group col-md-6">
         <label for="tipo">Tipo</label>
         <select
           id="tipo"
@@ -19,10 +19,12 @@
           <option value="Organización">Organización</option>
         </select>
       </div>
+    </div>
 
-      <!-- Campos específicos para Persona -->
-      <div *ngIf="esPersona">
-        <div class="form-group">
+    <!-- Campos específicos para Persona -->
+    <div *ngIf="esPersona">
+      <div class="row">
+        <div class="form-group col-md-6">
           <label for="dni">DNI</label>
           <input
             id="dni"
@@ -35,10 +37,8 @@
             required
           />
         </div>
-      </div>
 
-      <div *ngIf="esPersona">
-        <div class="form-group">
+        <div class="form-group col-md-6">
           <label for="nombre">Nombre</label>
           <input
             id="nombre"
@@ -50,22 +50,25 @@
             required
           />
         </div>
-        <div class="form-group">
-            <label for="genero">Género</label>
-            <select
-              id="genero"
-              class="form-control"
-              [(ngModel)]="beneficiario.genero"
-              name="genero"
-              required
-            >
-              <option value="" disabled selected>Seleccione el género</option>
-              <option value="Masculino">Masculino</option>
-              <option value="Femenino">Femenino</option>
-            </select>
-          </div>
-          
-        <div class="form-group">
+      </div>
+
+      <div class="row">
+        <div class="form-group col-md-6">
+          <label for="genero">Género</label>
+          <select
+            id="genero"
+            class="form-control"
+            [(ngModel)]="beneficiario.genero"
+            name="genero"
+            required
+          >
+            <option value="" disabled selected>Seleccione el género</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+          </select>
+        </div>
+
+        <div class="form-group col-md-6">
           <label for="edad">Edad</label>
           <input
             id="edad"
@@ -77,10 +80,12 @@
           />
         </div>
       </div>
-  
-      <!-- Campos específicos para Comunidad -->
-      <div *ngIf="esComunidad">
-        <div class="form-group">
+    </div>
+
+    <!-- Campos específicos para Comunidad -->
+    <div *ngIf="esComunidad">
+      <div class="row">
+        <div class="form-group col-md-6">
           <label for="nombre-comunidad">Nombre de la Comunidad</label>
           <input
             id="nombre-comunidad"
@@ -92,7 +97,8 @@
             required
           />
         </div>
-        <div class="form-group">
+
+        <div class="form-group col-md-6">
           <label for="representante">Representante</label>
           <input
             id="representante"
@@ -105,10 +111,12 @@
           />
         </div>
       </div>
-  
-      <!-- Campos específicos para Organización -->
-      <div *ngIf="esOrganizacion">
-        <div class="form-group">
+    </div>
+
+    <!-- Campos específicos para Organización -->
+    <div *ngIf="esOrganizacion">
+      <div class="row">
+        <div class="form-group col-md-6">
           <label for="nombre-organizacion">Nombre de la Organización</label>
           <input
             id="nombre-organizacion"
@@ -120,7 +128,8 @@
             required
           />
         </div>
-        <div class="form-group">
+
+        <div class="form-group col-md-6">
           <label for="ruc">RUC</label>
           <input
             id="ruc"
@@ -134,10 +143,11 @@
           />
         </div>
       </div>
-  
-  
-      <!-- Campos comunes -->
-      <div class="form-group">
+    </div>
+
+    <!-- Campos comunes -->
+    <div class="row">
+      <div class="form-group col-md-6">
         <label for="direccion">Dirección</label>
         <input
           id="direccion"
@@ -148,7 +158,8 @@
           name="direccion"
         />
       </div>
-      <div class="form-group">
+
+      <div class="form-group col-md-6">
         <label for="telefono">Teléfono</label>
         <input
           id="telefono"
@@ -159,7 +170,10 @@
           name="telefono"
         />
       </div>
-      <div class="form-group">
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-6">
         <label for="email">Email</label>
         <input
           id="email"
@@ -170,13 +184,12 @@
           name="email"
         />
       </div>
-  
+    </div>
 
-      <!-- Botones -->
-      <div class="button-group text-center mt-4">
-        <button type="submit" class="btn btn-success me-3">Guardar</button>
-        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
-      </div>
-    </form>
-  </div>
-  
+    <!-- Botones -->
+    <div class="button-group text-center mt-4">
+      <button type="submit" class="btn btn-success me-3">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,147 @@
+<div class="container-fluid form-container">
+  <h2 class="text-center mb-4">Registrar Gasto</h2>
+  <form [formGroup]="gastoForm" (ngSubmit)="guardarGasto()">
+    <div class="row">
+      <!-- Descripción -->
+      <div class="col-md-6 mb-3">
+        <label for="descripcion">Descripción / Concepto</label>
+        <input
+          id="descripcion"
+          type="text"
+          class="form-control"
+          formControlName="descripcion"
+          placeholder="Ingresa la descripción del gasto"
+        />
+      </div>
+
+      <!-- Importe -->
+      <div class="col-md-6 mb-3">
+        <label for="importe">Importe</label>
+        <input
+          id="importe"
+          type="number"
+          class="form-control"
+          formControlName="importe"
+          placeholder="Ingresa el importe"
+        />
+      </div>
+
+      <!-- Voluntariado Asignado -->
+      <div class="col-md-6 mb-3">
+        <label for="voluntariado_asignado">Voluntariado Asignado</label>
+        <select
+          id="voluntariado_asignado"
+          class="form-control"
+          formControlName="voluntariado_asignado"
+        >
+          <option value="">Selecciona una opción</option>
+          <option
+            *ngFor="let voluntariado of voluntariados"
+            [value]="voluntariado.id"
+          >
+            {{ voluntariado.nombre }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Fecha del Gasto -->
+      <div class="col-md-6 mb-3">
+        <label for="fecha_gasto">Fecha del Gasto</label>
+        <input
+          id="fecha_gasto"
+          type="date"
+          class="form-control"
+          formControlName="fecha_gasto"
+        />
+      </div>
+
+      <!-- Número de Comprobante -->
+      <div class="col-md-6 mb-3">
+        <label for="nro_comprobante">Número de Comprobante</label>
+        <input
+          id="nro_comprobante"
+          type="text"
+          class="form-control"
+          formControlName="nro_comprobante"
+          placeholder="Ingresa el número de comprobante"
+        />
+      </div>
+
+      <!-- Tipo de Comprobante -->
+      <div class="col-md-6 mb-3">
+        <label for="tipo_comprobante">Tipo de Comprobante</label>
+        <select
+          id="tipo_comprobante"
+          class="form-control"
+          formControlName="tipo_comprobante"
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Factura">Factura</option>
+          <option value="Boleta de Venta">Boleta de Venta</option>
+          <option value="Recibo por Honorarios">Recibo por Honorarios</option>
+          <option value="Declaración Jurada">Declaración Jurada</option>
+          <option value="Estado de Cuenta">Estado de Cuenta</option>
+        </select>
+      </div>
+
+      <!-- Tipo de Gasto -->
+      <div class="col-md-6 mb-3">
+        <label for="tipo_gasto">Tipo de Gasto</label>
+        <select
+          id="tipo_gasto"
+          class="form-control"
+          formControlName="tipo_gasto"
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Movilidad">Movilidad</option>
+          <option value="Alimentación">Alimentación</option>
+          <option value="Materiales / Insumos">Materiales / Insumos</option>
+          <option value="Cargos Bancarios">Cargos Bancarios</option>
+        </select>
+      </div>
+
+      <!-- RUC / DNI -->
+      <div class="col-md-6 mb-3">
+        <label for="ruc_dni">RUC / DNI</label>
+        <input
+          id="ruc_dni"
+          type="text"
+          class="form-control"
+          formControlName="ruc_dni"
+          placeholder="Ingresa el RUC o DNI"
+        />
+      </div>
+
+      <!-- Razón Social / Nombre -->
+      <div class="col-md-6 mb-3">
+        <label for="razon_social_nombre">Razón Social / Nombre</label>
+        <input
+          id="razon_social_nombre"
+          type="text"
+          class="form-control"
+          formControlName="razon_social_nombre"
+          placeholder="Ingresa la razón social o nombre"
+        />
+      </div>
+
+      <!-- Observación -->
+      <div class="col-md-6 mb-3">
+        <label for="observacion">Observación</label>
+        <textarea
+          id="observacion"
+          class="form-control"
+          formControlName="observacion"
+          placeholder="Ingresa alguna observación (opcional)"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="form-actions text-center mt-4">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

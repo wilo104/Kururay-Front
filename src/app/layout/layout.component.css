@@ -137,3 +137,17 @@
     margin-left: 80px;
   }
 }
+
+.submenu {
+  list-style: none;
+  padding-left: 20px;
+  display: none;
+}
+
+.submenu.open {
+  display: block;
+}
+
+.submenu .nav-link {
+  padding-left: 10px;
+}

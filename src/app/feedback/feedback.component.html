@@ -29,8 +29,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let feedback of feedbacks">
-              <td>{{ feedback.feedback_id }}</td>
-              <td>{{ feedback.feedback_fecha | date: 'MMM d, y' }}</td>
+              <td>{{ feedback.id }}</td>
+              <td>{{ feedback.fecha | date: 'MMM d, y' }}</td>
               <td>{{ feedback.tipo }}</td>
               <td>{{ feedback.descripcion }}</td>
               <td>{{ feedback.adicional }}</td>
@@ -39,14 +39,14 @@
                 
                 <button
                 class="btn btn-primary"
-                (click)="editarFeedback(feedback.feedback_id)"
+                (click)="editarFeedback(feedback.id)"
               >
                 Editar
               </button>
   
               <button
               class="btn btn-danger"
-              (click)="abrirModalEliminar(feedback.feedback_id)"
+              (click)="abrirModalEliminar(feedback.id)"
             >
               Eliminar
             </button>

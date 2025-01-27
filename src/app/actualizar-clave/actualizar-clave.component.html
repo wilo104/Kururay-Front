@@ -1,41 +1,86 @@
-<div class="container mt-3">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2>Actualizar Contraseña</h2>
-        <form [formGroup]="updatePasswordForm" (ngSubmit)="onChangePassword()">
-          <div class="form-group">
-            <label for="currentPassword">Contraseña Actual</label>
-            <input type="password" class="form-control" id="currentPassword" formControlName="currentPassword" placeholder="Ingresa tu contraseña actual">
-            <div *ngIf="updatePasswordForm.get('currentPassword')?.invalid && (updatePasswordForm.get('currentPassword')?.dirty || updatePasswordForm.get('currentPassword')?.touched)" class="alert alert-danger">
-                La nueva contraseña es obligatoria.
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="newPassword">Nueva Contraseña</label>
-            <input type="password" class="form-control" id="newPassword" formControlName="newPassword" placeholder="Ingresa la nueva contraseña">
-            <div *ngIf="updatePasswordForm.get('newPassword')?.errors?.['required'] && (updatePasswordForm.get('newPassword')?.dirty || updatePasswordForm.get('newPassword')?.touched)" class="alert alert-danger">
-              Campo requerido.
-            </div>
-            <div *ngIf="updatePasswordForm.get('newPassword')?.errors?.['minlength'] && (updatePasswordForm.get('newPassword')?.dirty || updatePasswordForm.get('newPassword')?.touched)" class="alert alert-danger">
-              La contraseña debe tener al menos 8 caracteres.
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="confirmPassword">Confirmar Nueva Contraseña</label>
-            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirma la nueva contraseña">
-            <div *ngIf="updatePasswordForm.errors?.['passwordMismatch'] && (updatePasswordForm.get('confirmPassword')?.dirty || updatePasswordForm.get('confirmPassword')?.touched)" class="alert alert-danger">
-              Las contraseñas no coinciden.
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary" [disabled]="!updatePasswordForm.valid">Actualizar Contraseña</button>
-          <button type="button" class="btn btn-secondary" (click)="cancel()">Cancelar</button>
-
-          <!-- ...otros elementos del formulario... -->
-
-        </form>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+    <h3 class="text-center mb-4">Actualizar Contraseña</h3>
+    <form [formGroup]="updatePasswordForm" (ngSubmit)="onChangePassword()">
+      <!-- Contraseña Actual -->
+      <div class="form-group mb-3">
+        <label for="currentPassword">Contraseña Actual</label>
+        <input
+          type="password"
+          class="form-control"
+          id="currentPassword"
+          formControlName="currentPassword"
+          placeholder="Ingresa tu contraseña actual"
+        />
+        <div
+          *ngIf="updatePasswordForm.get('currentPassword')?.invalid && (updatePasswordForm.get('currentPassword')?.dirty || updatePasswordForm.get('currentPassword')?.touched)"
+          class="text-danger mt-1"
+        >
+          La contraseña actual es obligatoria.
+        </div>
       </div>
-    </div>
-    <app-modal id="ActualizarClaveModal"></app-modal>
-      
+
+      <!-- Nueva Contraseña -->
+      <div class="form-group mb-3">
+        <label for="newPassword">Nueva Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="newPassword"
+          formControlName="newPassword"
+          placeholder="Ingresa la nueva contraseña"
+        />
+        <div
+          *ngIf="updatePasswordForm.get('newPassword')?.errors?.['required'] && (updatePasswordForm.get('newPassword')?.dirty || updatePasswordForm.get('newPassword')?.touched)"
+          class="text-danger mt-1"
+        >
+          Campo requerido.
+        </div>
+        <div
+          *ngIf="updatePasswordForm.get('newPassword')?.errors?.['minlength'] && (updatePasswordForm.get('newPassword')?.dirty || updatePasswordForm.get('newPassword')?.touched)"
+          class="text-danger mt-1"
+        >
+          La contraseña debe tener al menos 8 caracteres.
+        </div>
+        <div
+          *ngIf="updatePasswordForm.get('newPassword')?.errors?.['pattern'] && (updatePasswordForm.get('newPassword')?.dirty || updatePasswordForm.get('newPassword')?.touched)"
+          class="text-danger mt-1"
+        >
+          La contraseña debe tener al menos una letra mayúscula y una minúscula.
+        </div>
+      </div>
+
+      <!-- Confirmar Contraseña -->
+      <div class="form-group mb-3">
+        <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirma la nueva contraseña"
+        />
+        <div
+          *ngIf="updatePasswordForm.errors?.['passwordMismatch'] && (updatePasswordForm.get('confirmPassword')?.dirty || updatePasswordForm.get('confirmPassword')?.touched)"
+          class="text-danger mt-1"
+        >
+          Las contraseñas no coinciden.
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-flex justify-content-between">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!updatePasswordForm.valid"
+        >
+          Actualizar Contraseña
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">
+          Cancelar
+        </button>
+      </div>
+    </form>
   </div>
-  
+</div>

@@ -1,0 +1,58 @@
+/* Estilos generales para el modal */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .modal-header {
+    background-color: #007bff; /* Azul primario */
+    color: #ffffff;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .modal-footer .btn {
+    margin-left: 10px;
+  }
+  
+  /* Estilo para la lista de benefactores */
+  .list-group-item {
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f8f9fa; /* Color gris claro al pasar el mouse */
+  }
+  
+  .list-group-item.selected {
+    background-color: #007bff; /* Azul primario para selección */
+    color: white;
+  }
+  
+  /* Estilo para el input de búsqueda */
+  .modal-body input[type='text'] {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 8px 10px;
+    width: 100%;
+  }
+  
+  /* Transición suave para abrir el modal */
+  .modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+  }
+  

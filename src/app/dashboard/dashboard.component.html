@@ -1,1 +1,28 @@
-<p>pagina de inicio reportes</p>
+<div class="dashboard-container">
+    <!-- Tarjetas de métricas -->
+    <div class="dashboard-cards">
+      <div class="card">
+        <h3>Total de Voluntarios</h3>
+        <p>{{ totalVoluntarios }}</p>
+      </div>
+      <div class="card">
+        <h3>Total de Beneficiarios</h3>
+        <p>{{ totalBeneficiarios }}</p>
+      </div>
+      <div class="card">
+        <h3>Voluntariados Activos</h3>
+        <p>{{ voluntariadosActivos }}</p>
+      </div>
+      <div class="card">
+        <h3>Total de Benefactores</h3>
+        <p>{{ totalBenefactores }}</p>
+      </div>
+    </div>
+  
+    <!-- Gráfico -->
+    <div class="chart-container">
+      <h3>Voluntarios Activos por Mes</h3>
+      <canvas id="graficoVoluntarios"></canvas>
+    </div>
+  </div>
+  

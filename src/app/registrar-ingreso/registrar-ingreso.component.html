@@ -1,0 +1,203 @@
+<div class="container">
+    <h2 class="text-center mb-4">Registrar Ingreso</h2>
+    <form [formGroup]="ingresoForm" (ngSubmit)="onSubmit()">
+      <!-- Tipo de Ingreso -->
+      <div class="form-group mb-3">
+        <label for="tipo_ingreso">Tipo de Ingreso</label>
+        <select
+          id="tipo_ingreso"
+          class="form-control"
+          formControlName="tipo_ingreso"
+          (change)="onTipoIngresoChange()"
+        >
+          <option value="">Seleccione</option>
+          <option value="MONETARIO">Monetario</option>
+          <option value="DONACIONES">Donaciones</option>
+        </select>
+        <div *ngIf="ingresoForm.get('tipo_ingreso')?.invalid && ingresoForm.get('tipo_ingreso')?.touched" class="text-danger">
+          El tipo de ingreso es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Concepto -->
+      <div class="form-group mb-3">
+        <label for="concepto">Concepto</label>
+        <input
+          id="concepto"
+          type="text"
+          class="form-control"
+          formControlName="concepto"
+          placeholder="Ingrese el concepto del ingreso"
+        />
+        <div *ngIf="ingresoForm.get('concepto')?.invalid && ingresoForm.get('concepto')?.touched" class="text-danger">
+          <small *ngIf="ingresoForm.get('concepto')?.errors?.['required']">El concepto es obligatorio.</small>
+          <small *ngIf="ingresoForm.get('concepto')?.errors?.['maxlength']">
+            El concepto no debe exceder los 255 caracteres.
+          </small>
+        </div>
+      </div>
+  
+      <!-- Fecha de Ingreso -->
+      <div class="form-group mb-3">
+        <label for="fecha_ingreso">Fecha de Ingreso</label>
+        <input
+          id="fecha_ingreso"
+          type="date"
+          class="form-control"
+          formControlName="fecha_ingreso"
+        />
+        <div *ngIf="ingresoForm.get('fecha_ingreso')?.invalid && ingresoForm.get('fecha_ingreso')?.touched" class="text-danger">
+          La fecha de ingreso es obligatoria.
+        </div>
+      </div>
+  
+      <!-- Código de Certificado -->
+      <div class="form-group mb-3">
+        <label for="codigo_certificado">Código de Certificado</label>
+        <input
+          id="codigo_certificado"
+          type="text"
+          class="form-control"
+          formControlName="codigo_certificado"
+        />
+        <div *ngIf="ingresoForm.get('codigo_certificado')?.invalid && ingresoForm.get('codigo_certificado')?.touched" class="text-danger">
+          <small *ngIf="ingresoForm.get('codigo_certificado')?.errors?.['required']">El código de certificado es obligatorio.</small>
+          <small *ngIf="ingresoForm.get('codigo_certificado')?.errors?.['maxlength']">
+            El código de certificado no debe exceder los 50 caracteres.
+          </small>
+        </div>
+      </div>
+  
+      <!-- Benefactor -->
+      <div class="form-group mb-3">
+        <label>Benefactor</label>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="openBenefactorModal()"
+        >
+          Seleccionar Benefactor
+        </button>
+        <p *ngIf="selectedBenefactor" class="mt-2">
+          Seleccionado: {{ selectedBenefactor.nombre }}
+        </p>
+      </div>
+  
+      <!-- Campos Monetarios -->
+      <div *ngIf="tipoIngreso === 'MONETARIO'" class="form-group">
+        <label for="monto">Monto</label>
+        <input
+          id="monto"
+          type="number"
+          class="form-control"
+          formControlName="monto"
+        />
+        <div *ngIf="ingresoForm.get('monto')?.invalid && ingresoForm.get('monto')?.touched" class="text-danger">
+          El monto es obligatorio y debe ser un número válido.
+        </div>
+  
+        <label for="tipo_moneda">Tipo de Moneda</label>
+        <select id="tipo_moneda" class="form-control" formControlName="tipo_moneda">
+          <option value="">Seleccione</option>
+          <option value="SOLES">SOLES</option>
+          <option value="DOLARES">DÓLARES</option>
+        </select>
+        <div *ngIf="ingresoForm.get('tipo_moneda')?.invalid && ingresoForm.get('tipo_moneda')?.touched" class="text-danger">
+          El tipo de moneda es obligatorio.
+        </div>
+  
+        <label for="tipo_ingreso_monetario">Tipo de Ingreso Monetario</label>
+        <select id="tipo_ingreso_monetario" class="form-control" formControlName="tipo_ingreso_monetario">
+          <option value="">Seleccione</option>
+          <option value="auspicio">Auspicio</option>
+          <option value="fondo">Fondo</option>
+          <option value="APCI">APCI</option>
+        </select>
+        <div *ngIf="ingresoForm.get('tipo_ingreso_monetario')?.invalid && ingresoForm.get('tipo_ingreso_monetario')?.touched" class="text-danger">
+          El tipo de ingreso monetario es obligatorio.
+        </div>
+      </div>
+  
+      <!-- Campos de Donaciones -->
+      <div *ngIf="tipoIngreso === 'DONACIONES'" class="form-group">
+        <label for="razon_social">Razón Social</label>
+        <input id="razon_social" type="text" class="form-control" formControlName="razon_social" />
+        <div *ngIf="ingresoForm.get('razon_social')?.invalid && ingresoForm.get('razon_social')?.touched" class="text-danger">
+          La razón social es obligatoria.
+        </div>
+        <div *ngIf="tipoIngreso === 'DONACIONES'" class="form-group">
+            <label for="tipo_ingreso_donacion">Tipo de Donación</label>
+            <select
+              id="tipo_ingreso_donacion"
+              class="form-control"
+              formControlName="tipo_ingreso_donacion"
+            >
+              <option value="">Seleccione</option>
+              <option value="concurso">Concurso de Plataforma</option>
+              <option value="APCI">APCI</option>
+              <option value="individual">Individual</option>
+            </select>
+            <div *ngIf="ingresoForm.get('tipo_ingreso_donacion')?.invalid && ingresoForm.get('tipo_ingreso_donacion')?.touched" class="text-danger">
+              El tipo de donación es obligatorio.
+            </div>
+          </div>
+          
+
+        <label for="ruc">RUC</label>
+        <input id="ruc" type="text" class="form-control" formControlName="ruc" />
+        <div *ngIf="ingresoForm.get('ruc')?.invalid && ingresoForm.get('ruc')?.touched" class="text-danger">
+          <small *ngIf="ingresoForm.get('ruc')?.errors?.['required']">El RUC es obligatorio.</small>
+          <small *ngIf="ingresoForm.get('ruc')?.errors?.['pattern']">El RUC debe tener 11 dígitos.</small>
+        </div>
+  
+        <label for="lugar_recojo">Lugar de Recojo</label>
+        <input id="lugar_recojo" type="text" class="form-control" formControlName="lugar_recojo" />
+        <div *ngIf="ingresoForm.get('lugar_recojo')?.invalid && ingresoForm.get('lugar_recojo')?.touched" class="text-danger">
+          El lugar de recojo es obligatorio.
+        </div>
+  
+        <label for="ubicacion_actual">Ubicación Actual</label>
+        <input id="ubicacion_actual" type="text" class="form-control" formControlName="ubicacion_actual" />
+        <div *ngIf="ingresoForm.get('ubicacion_actual')?.invalid && ingresoForm.get('ubicacion_actual')?.touched" class="text-danger">
+          La ubicación actual es obligatoria.
+        </div>
+      </div>
+  
+      <!-- Botones -->
+      <div class="form-group mt-4 d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary me-3">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Modal de Benefactores -->
+  <div id="benefactorModal" class="modal" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Benefactor</h5>
+          <button type="button" class="btn-close" (click)="closeBenefactorModal()"></button>
+        </div>
+        <div class="modal-body">
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Buscar benefactor..."
+            [(ngModel)]="searchQuery"
+            (input)="filterBenefactores()"
+          />
+          <ul class="list-group">
+            <li
+              *ngFor="let benefactor of filteredBenefactores"
+              class="list-group-item"
+              (click)="seleccionarBenefactor(benefactor)"
+            >
+              {{ benefactor.nombre }}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  

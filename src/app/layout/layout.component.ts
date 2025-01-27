@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
-import { UsuariosComponent } from "../usuarios/usuarios.component";
 
 @Component({
   selector: 'app-layout',
@@ -12,17 +11,19 @@ import { UsuariosComponent } from "../usuarios/usuarios.component";
   providers: [AuthService, AuthGuard],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, CommonModule, HttpClientModule, RouterModule]
+  imports: [RouterOutlet, CommonModule, HttpClientModule, RouterModule],
 })
 export class LayoutComponent implements OnInit {
   sidebarActive: boolean = true;
-  sidebarCollapsed: boolean = false; // Propiedad para controlar el estado comprimido
+  sidebarCollapsed: boolean = false; // Estado comprimido del sidebar
   tipo_usuario: string | null | undefined;
   token: string | null | undefined;
   id: string | null | undefined;
+  nombreUsuario: string | null = null; // Propiedad para el nombre del usuario
 
+  // Propiedad para manejar el estado del dropdown del submenú "Contabilidad Financiero"
+  financieroSubmenuOpen: boolean = false;
 
-  nombreUsuario: string | null = null; // Declarar la propiedad
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class LayoutComponent implements OnInit {
     this.nombreUsuario = this.authService.getNombreUsuario();
   }
 
-  // Escucha los cambios de tamaño de la ventana y ajusta el estado sidebarCollapsed
+  // Escucha los cambios de tamaño de la ventana y ajusta el estado del sidebar
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
     this.checkScreenWidth();
@@ -48,20 +49,26 @@ export class LayoutComponent implements OnInit {
     }
   }
 
+  // Alternar el estado del sidebar
   toggleSidebar() {
-    // Alternar el estado del sidebar
     this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
+  // Alternar el estado del dropdown del submenú "Contabilidad Financiero"
+  toggleFinancieroSubmenu() {
+    this.financieroSubmenuOpen = !this.financieroSubmenuOpen;
+  }
+
+  // Manejar el dropdown del menú superior (usuario)
   dropdownOpen: boolean = false;
 
-toggleDropdown(): void {
-  this.dropdownOpen = !this.dropdownOpen;
-}
+  toggleDropdown(): void {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
 
+  // Cerrar sesión
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
-
 }

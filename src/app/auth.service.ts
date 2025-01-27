@@ -8,6 +8,7 @@ interface LoginResponse {
   token: string;
   tipo_usuario: string;
   nombre_completo: string; 
+  clave_dni?: boolean; // Indicador opcional para clave igual a DNI
 }
 
 
@@ -32,6 +33,19 @@ export class AuthService {
     
   }
 
+  setClaveDni(claveDni: boolean): void {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('clave_dni', JSON.stringify(claveDni));
+    }
+  }
+
+  getClaveDni(): boolean {
+    if (typeof window !== 'undefined') {
+      const claveDni = localStorage.getItem('clave_dni');
+      return claveDni ? JSON.parse(claveDni) : false;
+    }
+    return false;
+  }
   setUserId(id: number) {
     this.userId.next(id);
   }

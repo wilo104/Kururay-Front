@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Listado de Gastos</h2>
+    <button (click)="registrarGasto()" class="btn btn-primary">Registrar Gasto</button>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>Descripción</th>
+          <th>Importe</th>
+          <th>Voluntariado</th>
+          <th>Fecha del Gasto</th>
+          <th>Tipo de Gasto</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let gasto of gastos">
+          <td>{{ gasto.descripcion }}</td>
+          <td>{{ gasto.importe | currency:'PEN':'symbol-narrow' }}</td>
+
+
+          <td>{{ gasto.voluntariado_nombre }}</td>
+          <td>{{ gasto.fecha_gasto| date: 'dd/MM/yyyy' }}</td>
+          <td>{{ gasto.tipo_gasto }}</td>
+          <td>
+            <button class="btn btn-warning" (click)="editarGasto(gasto.id)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

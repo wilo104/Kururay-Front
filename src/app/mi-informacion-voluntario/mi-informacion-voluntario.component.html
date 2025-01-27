@@ -1,0 +1,86 @@
+<div class="form-container">
+    <h1>Mi Información</h1>
+    <form (ngSubmit)="guardarCambios()">
+      <!-- DNI -->
+      <div>
+        <label>DNI</label>
+        <input type="text" [(ngModel)]="voluntario.dni" name="dni" disabled />
+      </div>
+  
+      <!-- Nombres -->
+      <div>
+        <label>Nombres</label>
+        <input type="text" [(ngModel)]="voluntario.nombre" name="nombre" disabled />
+      </div>
+  
+      <!-- Apellidos -->
+      <div>
+        <label>Apellidos</label>
+        <input type="text" [(ngModel)]="voluntario.apellido_paterno" name="apellido_paterno" disabled />
+        <input type="text" [(ngModel)]="voluntario.apellido_materno" name="apellido_materno" disabled />
+      </div>
+  
+      <!-- Correo -->
+      <div>
+        <label>Correo</label>
+        <input type="email" [(ngModel)]="voluntario.correo" name="correo" disabled />
+      </div>
+  
+      <!-- Fecha de Ingreso -->
+      <div>
+        <label>Fecha de Ingreso</label>
+        <input type="date" [(ngModel)]="voluntario.fecha_ingreso" name="fecha_ingreso" disabled />
+      </div>
+  
+      <!-- Fecha de Nacimiento -->
+      <div>
+        <label>Fecha de Nacimiento</label>
+        <input type="date" [(ngModel)]="voluntario.fecha_nacimiento" name="fecha_nacimiento" disabled />
+      </div>
+      <!-- Ciudad de Residencia -->
+      <div>
+        <label>Ciudad de Residencia</label>
+        <input type="text" [(ngModel)]="voluntario.ciudad_residencia" name="ciudad_residencia" />
+      </div>
+  
+      <!-- Celular -->
+      <div>
+        <label>Celular</label>
+        <input type="text" [(ngModel)]="voluntario.celular" name="celular" pattern="^[0-9]{9}$" />
+      </div>
+  
+      <!-- Grado de Instrucción -->
+      <div>
+        <label>Grado de Instrucción</label>
+        <select [(ngModel)]="voluntario.grado_instruccion" name="grado_instruccion">
+          <option value="Estudiante universitario">Estudiante universitario</option>
+          <option value="Egresado universitario">Egresado universitario</option>
+          <option value="Bachiller">Bachiller</option>
+          <option value="Titulado">Titulado</option>
+          <option value="Colegiado">Colegiado</option>
+          <option value="N.A.">N.A.</option>
+        </select>
+      </div>
+  
+      <!-- Redes Sociales -->
+      <div>
+        <label>Instagram</label>
+        <input type="text" [(ngModel)]="voluntario.instagram" name="instagram" />
+      </div>
+      <div>
+        <label>Facebook</label>
+        <input type="text" [(ngModel)]="voluntario.facebook" name="facebook" />
+      </div>
+      <div>
+        <label>LinkedIn</label>
+        <input type="text" [(ngModel)]="voluntario.linkedin" name="linkedin" />
+      </div>
+  
+      <!-- Botones -->
+      <div>
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="cancelar()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+  

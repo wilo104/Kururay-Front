@@ -50,14 +50,25 @@ export class VoluntariosService {
   }
 
   // Obtener feedback de un voluntariado
-  obtenerFeedback(voluntarioId: number): Observable<any> {
+// Obtener feedback de un voluntariado específico
+obtenerFeedback(voluntarioId: number, voluntariadoId: number): Observable<any> {
+  const token = this.obtenerToken();
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`, // Agrega el token al encabezado
+  });
+  const url = `${this.apiUrl}/feedback/${voluntarioId}/${voluntariadoId}`; // Ajusta la URL para incluir ambos IDs
+  return this.http.get(url, { headers });
+}
+
+  obtenerFeedback_vlogueado_voluntariado(voluntarioId: number, voluntariadoId: number): Observable<any> {
     const token = this.obtenerToken();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Agrega el token al encabezado
-    });
-    const url = `${this.apiUrl}/${voluntarioId}/feedback`; // Ajusta la URL
-    return this.http.get(url, { headers });
-  }
+   const headers = new HttpHeaders({
+     Authorization: `Bearer ${token}`, // Agrega el token al encabezado
+   });
+   const url = `${this.apiUrl}/feedback/${voluntarioId}/${voluntariadoId}`;
+   return this.http.get(url, { headers });
+ }
+
   
   obtenerCVVoluntario(id: number): Observable<Blob> {
     const url = `${this.apiUrl}/${id}/cv`;
@@ -144,8 +155,23 @@ obtenerVoluntariosPorVoluntariado(idVoluntariado: number): Observable<any[]> {
   return this.http.get<any[]>(`http://localhost:3000/voluntariados/${idVoluntariado}/voluntarios`, { headers });
 }
 
+//para USUARIO UNICO LOGUEADO
+obtenerInformacionVoluntario(id: number): Observable<any> {
+  const token = localStorage.getItem('token'); // Obtiene el token almacenado
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${token}`,
+  });
 
-    
+  return this.http.get(`${this.apiUrl}/unico/${id}`, { headers });
+}
+
+
+actualizarInformacionVoluntario(id: number, datos: any): Observable<any> {
+  const headers = new HttpHeaders({
+    Authorization: `Bearer ${localStorage.getItem('token')}`,
+  });
+  return this.http.put(`${this.apiUrl}/unico/${id}`, datos, { headers });
+}   
 
 
 }

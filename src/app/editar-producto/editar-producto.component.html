@@ -1,0 +1,141 @@
+<div class="container">
+    <div class="form-card">
+      <h2 class="text-center mb-4">Editar Producto</h2>
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        <!-- Nombre del Producto -->
+        <div class="form-group">
+          <label for="nombre_producto">Nombre del Producto</label>
+          <input
+            id="nombre_producto"
+            type="text"
+            class="form-control"
+            formControlName="nombre_producto"
+            placeholder="Ingrese el nombre del producto"
+          />
+        </div>
+  
+        <!-- Cantidad -->
+        <div class="form-group">
+          <label for="cantidad">Cantidad</label>
+          <input
+            id="cantidad"
+            type="number"
+            class="form-control"
+            formControlName="cantidad"
+            placeholder="Ingrese la cantidad"
+          />
+        </div>
+  
+        <!-- Tipo de Unidad -->
+        <div class="form-group">
+          <label for="tipo_unidad">Tipo de Unidad</label>
+          <select id="tipo_unidad" class="form-control" formControlName="tipo_unidad">
+            <option value="">Seleccione una opción</option>
+            <option value="unidad">Unidad</option>
+            <option value="paquete">Paquete</option>
+            <option value="lote">Lote</option>
+          </select>
+        </div>
+  
+        <!-- Tipo de Producto -->
+        <div class="form-group">
+          <label for="tipo_producto">Tipo de Producto</label>
+          <select id="tipo_producto" class="form-control" formControlName="tipo_producto">
+            <option value="">Seleccione una opción</option>
+            <option value="vestimenta">Vestimenta</option>
+            <option value="alimentación">Alimentación</option>
+            <option value="otros">Otros</option>
+          </select>
+        </div>
+  
+        <!-- Fecha de Vencimiento -->
+        <div *ngIf="productoForm.get('tipo_producto')?.value === 'alimentación'" class="form-group">
+          <label for="fecha_vencimiento">Fecha de Vencimiento</label>
+          <input
+            id="fecha_vencimiento"
+            type="date"
+            class="form-control"
+            formControlName="fecha_vencimiento"
+          />
+        </div>
+  
+        <!-- Registro Sanitario -->
+        <div *ngIf="productoForm.get('tipo_producto')?.value === 'alimentación'" class="form-group">
+          <label for="registro_sanitario">Registro Sanitario</label>
+          <input
+            id="registro_sanitario"
+            type="text"
+            class="form-control"
+            formControlName="registro_sanitario"
+            placeholder="Ingrese el registro sanitario"
+          />
+        </div>
+  
+        <!-- Motivo -->
+        <div class="form-group">
+          <label for="motivo">Motivo</label>
+          <textarea
+            id="motivo"
+            class="form-control"
+            formControlName="motivo"
+            placeholder="Ingrese el motivo (opcional)"
+          ></textarea>
+        </div>
+  
+        <!-- Costo por Unidad -->
+        <div class="form-group">
+          <label for="costo_unidad">Costo por Unidad</label>
+          <input
+            id="costo_unidad"
+            type="number"
+            class="form-control"
+            formControlName="costo_unidad"
+            placeholder="Ingrese el costo por unidad"
+          />
+        </div>
+  
+        <!-- Costo Total -->
+        <div class="form-group">
+          <label for="costo_total">Costo Total</label>
+          <input
+            id="costo_total"
+            type="number"
+            class="form-control"
+            formControlName="costo_total"
+            placeholder="Ingrese el costo total"
+          />
+        </div>
+  
+        <!-- Número de Lote -->
+        <div class="form-group">
+          <label for="numero_lote">Número de Lote</label>
+          <input
+            id="numero_lote"
+            type="text"
+            class="form-control"
+            formControlName="numero_lote"
+            placeholder="Ingrese el número de lote (opcional)"
+          />
+        </div>
+  
+        <!-- Estado -->
+        <div class="form-group">
+          <label for="estado">Estado</label>
+          <select id="estado" class="form-control" formControlName="estado">
+            <option value="">Seleccione una opción</option>
+            <option value="por_vencerse">Por vencerse</option>
+            <option value="desechado">Desechado</option>
+            <option value="vencido_en_almacen">Vencido en almacén</option>
+            <option value="entregado">Entregado</option>
+          </select>
+        </div>
+  
+        <!-- Botones -->
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

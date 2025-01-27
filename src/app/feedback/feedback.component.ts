@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { VoluntariosService } from '../voluntarios.service';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
-
+import { CommonModule } from '@angular/common'; 
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule], // Asegúrate de que esté incluido aquí
   providers: [VoluntariosService, AuthService],
   templateUrl: './feedback.component.html',
   styleUrls: ['./feedback.component.css'],
@@ -16,14 +15,15 @@ import Swal from 'sweetalert2';
 export class FeedbackComponent implements OnInit {
   voluntarioId!: number;
   voluntariadoId!: number;
-
   feedbacks: any[] = [];
   isLoading: boolean = true;
   role: string = ''; // Tipo de usuario
+  modalAbierto: boolean = false;
+  feedbackAEliminar: number | null = null;
 
   constructor(
     private voluntariadoService: VoluntariosService,
-    private authService: AuthService, // Inyección de AuthService
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router
   ) {}
@@ -31,7 +31,7 @@ export class FeedbackComponent implements OnInit {
   ngOnInit(): void {
     this.voluntariadoId = +this.route.snapshot.paramMap.get('voluntariadoId')!;
     this.voluntarioId = +this.route.snapshot.paramMap.get('voluntarioId')!;
-    this.role = this.authService.gettipo_usuario() || 'guest'; // Obtén el rol desde AuthService
+    this.role = this.authService.gettipo_usuario() || 'guest';
 
     if (!this.voluntarioId || !this.voluntariadoId) {
       console.error('Faltan IDs del voluntario o voluntariado.');
@@ -42,26 +42,31 @@ export class FeedbackComponent implements OnInit {
     this.obtenerFeedback();
   }
 
+
   obtenerFeedback(): void {
-    this.voluntariadoService.obtenerFeedback(this.voluntarioId).subscribe(
+    this.voluntariadoService.obtenerFeedback(this.voluntarioId, this.voluntariadoId).subscribe(
       (data) => {
-        console.log(data);
-        this.feedbacks = data;
+        console.log('Feedback recibido:', data); // Depuración
+        this.feedbacks = Array.isArray(data.feedbacks) ? data.feedbacks : []; // Accede a la propiedad feedbacks
         this.isLoading = false;
       },
       (error) => {
         console.error('Error al obtener el feedback:', error);
+        this.feedbacks = []; // Limpia los datos en caso de error
         this.isLoading = false;
       }
     );
   }
+  
+  
+  
+  
 
   registrarFeedback(): void {
     if (this.role === 'MENTOR') {
       this.router.navigate([`/voluntariados/${this.voluntariadoId}/voluntarios/${this.voluntarioId}/feedback/registrar`]);
-
     } else {
-      alert('No tienes permiso para registrar feedback.');
+      Swal.fire('No tienes permiso para registrar feedback.');
     }
   }
 
@@ -85,24 +90,19 @@ export class FeedbackComponent implements OnInit {
     ]);
   }
   
-  modalAbierto: boolean = false;
-  feedbackAEliminar: number | null = null;
-  
   abrirModalEliminar(feedbackId: number): void {
     this.modalAbierto = true;
     this.feedbackAEliminar = feedbackId;
   }
-  
+
   cerrarModalEliminar(): void {
     this.modalAbierto = false;
     this.feedbackAEliminar = null;
   }
 
   eliminarFeedbackConfirmado(): void {
-    console.log('ID a eliminar:', this.feedbackAEliminar);
-  
     if (this.feedbackAEliminar === null) return;
-  
+
     this.voluntariadoService.eliminarFeedback(this.feedbackAEliminar).subscribe({
       next: () => {
         Swal.fire({
@@ -111,27 +111,16 @@ export class FeedbackComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500,
         });
-  
-        // Actualizar el listado
-        this.feedbacks = this.feedbacks.filter(
-          (fb) => fb.feedback_id !== this.feedbackAEliminar
-        );
-  
+
+        this.feedbacks = this.feedbacks.filter((fb) => fb.id !== this.feedbackAEliminar);
         this.cerrarModalEliminar();
       },
       error: (err) => {
         console.error('Error al eliminar feedback:', err);
-        Swal.fire({
-          icon: 'error',
-          title: 'No fue posible eliminar el feedback.',
-        });
+        Swal.fire('No fue posible eliminar el feedback.');
       },
     });
   }
-  
-  
-
-
 
   regresar(): void {
     this.router.navigate([`/voluntariados/${this.voluntariadoId}/detalle`]);

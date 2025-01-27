@@ -46,7 +46,13 @@ export class RegistrarFeedbackComponent implements OnInit {
       return;
     }
   
-    this.voluntariosService.registrarFeedback(this.feedback).subscribe({
+    // Añadir explícitamente `id_voluntariado` al objeto `feedback`
+    const feedbackConVoluntariado = {
+      ...this.feedback,
+      id_voluntariado: this.voluntariadoId, // Añade el ID del voluntariado
+    };
+  
+    this.voluntariosService.registrarFeedback(feedbackConVoluntariado).subscribe({
       next: () => {
         Swal.fire({
           icon: 'success',

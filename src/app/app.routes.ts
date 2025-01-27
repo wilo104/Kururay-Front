@@ -30,6 +30,17 @@ import { RegistrarFeedbackComponent } from './registrar-feedback/registrar-feedb
 import { RegistrarEvidenciaComponent } from './registrar-evidencia/registrar-evidencia.component';
 import { RegistrarAsistenciaComponent } from './registrar-asistencia/registrar-asistencia.component';
 import { EditarAsistenciaComponent } from './editar-asistencia/editar-asistencia.component';
+import { ListarIngresosComponent } from './listar-ingresos/listar-ingresos.component';
+import { RegistrarIngresoComponent } from './registrar-ingreso/registrar-ingreso.component';
+import { ContabilidadFinancieraComponent } from './contabilidad-financiera/contabilidad-financiera.component';
+import { EditarIngresoComponent } from './editar-ingreso/editar-ingreso.component';
+import { ListarProductosComponent } from './listar-productos/listar-productos.component';
+import { RegistrarProductoComponent } from './registrar-producto/registrar-producto.component';
+import { EditarProductoComponent } from './editar-producto/editar-producto.component';
+import { ListarGastosComponent } from './listar-gastos/listar-gastos.component';
+import { RegistrarGastoComponent } from './registrar-gasto/registrar-gasto.component';
+import { EditarGastoComponent } from './editar-gasto/editar-gasto.component';
+import { MiInformacionVoluntarioComponent } from './mi-informacion-voluntario/mi-informacion-voluntario.component';
 
 export const routes: Routes = [
     {
@@ -39,6 +50,14 @@ export const routes: Routes = [
         path: 'login',
         component: LoginComponent
     },
+    {
+        path: 'usuarios/:id/actualizar-clave',
+        component: ActualizarClaveComponent,
+        canActivate: [AuthGuard], // Proteger la ruta
+      },
+      
+    
+   
     {
         path: '',
         component: LayoutComponent,
@@ -92,10 +111,11 @@ export const routes: Routes = [
                 path:'mis-voluntariados',
                 component: MisVoluntariadosComponent
             },
-            // {
-            //     path: 'feedback/:voluntariadoId',
-            //     component: FeedbackComponent   
-            // },
+            {
+               path: 'mi-informacion-voluntario/:id',
+                component: MiInformacionVoluntarioComponent },
+
+
             {
                 path: 'voluntariados',
                 component: VoluntariadosComponent   
@@ -161,8 +181,59 @@ export const routes: Routes = [
                     component: RegistrarAsistenciaComponent,
                   },
                   { path: 'editar-asistencia/:id', component: EditarAsistenciaComponent }, // Nueva ruta
+                  {
+                    path: 'contabilidad-financiera',
+                    children: [
+                      {
+                        path: '', // Página principal de contabilidad financiera
+                        component: ContabilidadFinancieraComponent,
+                      },
+                      {
+                        path: 'ingresos', // Ruta para listar ingresos dentro de contabilidad-financiera
+                        component: ListarIngresosComponent,
+                      },
+                      {
+                        path: 'ingresos/registrar', // Ruta para registrar un ingreso
+                        component: RegistrarIngresoComponent,
+                      },
+                      {
+                        path: 'ingresos/:id/editar',
+                        component: EditarIngresoComponent,
+                      },
+                      {
+                        path: 'ingresos/:id/productos',
+                        component: ListarProductosComponent,
+                      },
+                      {
+                        path: 'ingresos/:id/productos/registrar', // Ruta para registrar un producto
+                        component: RegistrarProductoComponent,
+                      },
+                      {
+                        path: 'ingresos/:id/productos/:productoId/editar',
+                        component: EditarProductoComponent,
+                      },
+                      {
+                        path: 'gastos', // Ruta para listar los gastos
+                        component: ListarGastosComponent,
+                      },
+                      {
+                        path: 'gastos/registrar', // Ruta para registrar un gasto
+                        component: RegistrarGastoComponent,
+                      },
+                      {
+                        path: 'gastos/:id/editar', // Ruta para editar un gasto específico
+                        component: EditarGastoComponent,
+                      },
+                      
+                      
 
-              
+
+
+                    ],
+                  },
+                  
+             
+                 
               
         ]
     },

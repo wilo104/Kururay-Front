@@ -37,10 +37,15 @@ export class UsuarioService {
   }
 
   // Actualizar la contraseña de un usuario
-  actualizarContrasena(id: number, contrasenaActual: string, nuevaContrasena: string): Observable<any> {
-    const url = `${this.apiUrl}/${id}/cambiar-contrasena`;
-    return this.http.put(url, { contrasenaActual, nuevaContrasena });
+  actualizarContrasena(contrasenaActual: string, nuevaContrasena: string): Observable<any> {
+    const token = localStorage.getItem('token'); // Recupera el token del almacenamiento local
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    const url = `http://localhost:3000/cambiar-contrasena`;
+    return this.http.put(url, { contrasenaActual, nuevaContrasena }, { headers });
   }
+  
 
   // Registrar un nuevo usuario con opción de cargar un archivo CV
   registrarUsuario(usuario: any, cvFile?: File): Observable<any> {

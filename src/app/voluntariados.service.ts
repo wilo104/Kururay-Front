@@ -251,5 +251,12 @@ export class VoluntariadosService {
       return this.http.put(`http://localhost:3000/voluntariados/asistencias/${id}`, asistencia, { headers });
     }
     
-   
+    obtenerHistorialVoluntariado(id: number): Observable<any> {
+      const token = localStorage.getItem('token'); // Obtén el token almacenado
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${token}`, // Incluye el token en los headers
+      });
+  
+      return this.http.get(`/voluntariados/${id}/historial`, { headers });
+    }
 }

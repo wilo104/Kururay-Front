@@ -34,7 +34,10 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   asistenciaSeleccionada: any = null; // Almacena los detalles de la asistencia seleccionada
   voluntariosAsistencia: any[] = []; // Almacena los voluntarios y sus estados
 
-  cerrarVoluntariadoForm!: FormGroup;
+
+  modalCerrarVoluntariadoAbierto: boolean = false; // Controla la apertura del modal de cierre
+cerrarVoluntariadoForm!: FormGroup; // Formulario reactivo para el cierre
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -51,13 +54,22 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
     this.cargarVoluntarios(id);
     this.cargarEvidencias(id);
     this.cargarAsistencias(id);
-    this.cerrarVoluntariadoForm = this.fb.group({
-      presupuestoEjecutado: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      logros: ['', [Validators.required, Validators.maxLength(1000)]],
-    });
+   // Inicializar el formulario de cierre
+   this.cerrarVoluntariadoForm = this.fb.group({
+    presupuestoEjecutado: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+    logros: ['', [Validators.required, Validators.maxLength(1000)]],
+  });
 
   }
-
+  abrirModalCerrarVoluntariado(): void {
+    this.modalCerrarVoluntariadoAbierto = true;
+  }
+  cerrarModalCerrarVoluntariado(): void {
+    this.modalCerrarVoluntariadoAbierto = false;
+    this.cerrarVoluntariadoForm.reset(); // Opcional: resetea el formulario al cerrar
+  }
+  
+  
   cargarVoluntariado(id: number): void {
     this.voluntariadosService.obtenerVoluntariadoPorId(id).subscribe({
       next: (voluntariado) => {
@@ -132,18 +144,33 @@ export class VerDetalleVoluntariadoComponent implements OnInit {
   cerrarVoluntariado(): void {
     if (this.cerrarVoluntariadoForm.valid) {
       const formData = this.cerrarVoluntariadoForm.value;
+  
       this.voluntariadosService.cerrarVoluntariado(this.idVoluntariadoSeleccionado, formData).subscribe({
         next: () => {
           Swal.fire('Éxito', 'Voluntariado cerrado correctamente.', 'success');
-          this.router.navigate(['/voluntariados']);
+          this.cargarVoluntariado(this.idVoluntariadoSeleccionado); // Actualiza el detalle del voluntariado
+          this.cerrarModalCerrarVoluntariado(); // Cierra el modal
         },
-        error: () => {
-          Swal.fire('Error', 'No se ha podido cerrar el proyecto.', 'error');
+        error: (error) => {
+          console.error('Error al cerrar el voluntariado:', error);
+          Swal.fire('Error', 'No se pudo cerrar el voluntariado. Intente nuevamente.', 'error');
         },
       });
     } else {
       Swal.fire('Error', 'Complete correctamente todos los campos.', 'error');
     }
+  }
+  
+  cargarHistorialVoluntariado(id: number): void {
+    this.voluntariadosService.obtenerHistorialVoluntariado(id).subscribe({
+      next: (historial) => {
+        console.log('Historial del voluntariado:', historial);
+        this.voluntariado = { ...this.voluntariado, ...historial };
+      },
+      error: (error) => {
+        console.error('Error al cargar el historial del voluntariado:', error);
+      },
+    });
   }
 
   abrirModal(idVoluntariado: number): void {

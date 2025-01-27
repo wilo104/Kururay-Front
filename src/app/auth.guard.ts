@@ -1,35 +1,39 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-
   constructor(private router: Router) {}
 
-  canActivate(): boolean {
-    // Verificar primero si estamos en el lado del cliente
-    if (typeof window !== 'undefined') {
-      // Verificar si el usuario está autenticado (por ejemplo, verificar si hay un token en localStorage)
-      const token = localStorage.getItem('token');
+  canActivate(route: ActivatedRouteSnapshot): boolean {
+    const token = localStorage.getItem('token');
+    const claveDni = localStorage.getItem('clave_dni') === 'true';
+    const userId = localStorage.getItem('id');
+    const routeId = route.params['id'];
 
-      if (token) {
-        // El usuario está autenticado, permitir el acceso a la ruta
-        return true;
-      } else {
-        // El usuario no está autenticado, redirigir al componente de inicio de sesión
-        this.router.navigate(['/login']);
-        console.log("esta entrando aquí pe")
-        return false;
-      
+    if (token) {
+      // Permitir acceso a "actualizar-clave" solo para el usuario correcto
+      if (route.url.some(segment => segment.path === 'actualizar-clave')) {
+        if (userId === routeId) {
+          return true; // Permitir acceso
+        } else {
+          this.router.navigate(['/dashboard']);
+          return false;
+        }
       }
+
+      // Bloquear acceso a otras rutas si clave_dni es true
+      if (claveDni) {
+        this.router.navigateByUrl(`/usuarios/${userId}/actualizar-clave`);
+        return false;
+      }
+
+      return true; // Permitir acceso
     } else {
-     // console.log("esta entrando aquí pe causa")
-      // Estamos en el servidor, no podemos acceder a localStorage aquí
-      // Aquí puedes decidir qué hacer en este caso, pero por defecto, podrías negar el acceso o manejarlo de otra manera
-      // Por ejemplo, podrías permitir el acceso y dejar que el lado del cliente maneje la redirección si es necesario
-      return true; // O false, dependiendo de tu lógica de aplicación específica
+      this.router.navigate(['/login']);
+      return false;
     }
   }
 }

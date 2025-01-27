@@ -1,0 +1,35 @@
+.container {
+    margin: 20px auto;
+    max-width: 900px;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .table th, .table td {
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  

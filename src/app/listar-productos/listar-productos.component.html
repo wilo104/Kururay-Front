@@ -1,0 +1,49 @@
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Listar Productos</h2>
+  
+    <div class="mb-3">
+      <button class="btn btn-secondary" (click)="regresar()">Regresar</button>
+      <button class="btn btn-primary ms-2" (click)="registrarProducto()">
+        Registrar Producto
+      </button>
+    </div>
+  
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Nombre del Producto</th>
+          <th>Cantidad</th>
+          <th>Tipo de Unidad</th>
+          <th>Tipo de Producto</th>
+          <th>Fecha de Vencimiento</th>
+          <th>Registro Sanitario</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{ producto.nombre_producto }}</td>
+          <td>{{ producto.cantidad }}</td>
+          <td>{{ producto.tipo_unidad }}</td>
+          <td>{{ producto.tipo_producto }}</td>
+          <td>{{ producto.fecha_vencimiento || 'N/A' }}</td>
+          <td>{{ producto.registro_sanitario || 'N/A' }}</td>
+          <td>{{ producto.estado }}</td>
+          <td>
+            <button
+            class="btn btn-warning"
+            (click)="editarProducto(producto.idproducto)">
+            Editar
+          </button>
+          
+
+            </td>
+        </tr>
+        <td>
+
+        </td>
+      </tbody>
+    </table>
+  </div>
+  
