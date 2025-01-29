@@ -3,26 +3,28 @@ import { UsuarioService } from '../usuario-service.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common'; // Necesario para directivas comunes como *ngIf
 import { NgxPaginationModule } from 'ngx-pagination'; // Asumiendo que usas este módulo para la paginación
-
+import { RestaurarClaveService } from '../restaurar-clave.service';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-usuarios',
   templateUrl: './usuarios.component.html',
   styleUrls: ['./usuarios.component.css'],
-  providers: [UsuarioService], // Define el servicio si es específico de este componente
+  providers: [UsuarioService,RestaurarClaveService], // Define el servicio si es específico de este componente
   imports: [CommonModule, NgxPaginationModule], // Importa los módulos necesarios aquí
   standalone: true,
 })
 export class UsuariosComponent implements OnInit {
-restauraracceso(_t54: any) {
-throw new Error('Method not implemented.');
-}
+
   p: number = 1;
   usuarios: any[] = [];
   isLoading: boolean = false;
   ordenActual: string = 'id'; // Establece el orden inicial por 'id'
   direccionOrden: string = 'ASC'; // Establece la dirección de orden inicial como ascendente
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(
+    private usuarioService: UsuarioService,
+     private router: Router , 
+    private restaurarClaveService:RestaurarClaveService) {}
 
   ngOnInit(): void {
     // Obtener la lista de usuarios con el orden predeterminado al iniciar
@@ -93,4 +95,18 @@ throw new Error('Method not implemented.');
   editarUsuario(usuario: any) {
     this.router.navigate([`/usuarios/${usuario.id}/editar`]);
   }
+
+  restauraracceso(id: number): void {
+    const tabla="usuarios";
+    this.restaurarClaveService.restaurarContrasena(tabla, id).subscribe({
+      next: () => {
+        Swal.fire('Éxito', 'Contraseña restaurada correctamente.', 'success');
+      },
+      error: (err) => {
+        Swal.fire('Error', 'No se pudo restaurar la contraseña.', 'error');
+        console.error(err);
+      },
+    });
+  }
+
 }

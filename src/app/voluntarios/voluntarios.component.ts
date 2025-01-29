@@ -4,19 +4,18 @@ import { Router } from '@angular/router';
 import { VoluntariosService } from '../voluntarios.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import Swal from 'sweetalert2';
+import { RestaurarClaveService } from '../restaurar-clave.service';
 
 @Component({
   selector: 'app-voluntarios',
   standalone: true,
-  providers: [VoluntariosService],
+  providers: [VoluntariosService, RestaurarClaveService],
   imports: [CommonModule, NgxPaginationModule],
   templateUrl: './voluntarios.component.html',
   styleUrls: ['./voluntarios.component.css'],
 })
 export class VoluntariosComponent {
-restauraracceso(_t46: any) {
-throw new Error('Method not implemented.');
-}
+
   voluntarios: any[] = [];
   isLoading = false;
   p: number = 1;
@@ -28,7 +27,11 @@ throw new Error('Method not implemented.');
   voluntariosNoAsignados: any[] = [];
   idVoluntariado: number | null = null; // ID dinámico del voluntariado
 
-  constructor(private voluntariosService: VoluntariosService ,private router: Router) {}
+  constructor(private voluntariosService: VoluntariosService ,
+    private router: Router,
+    private restaurarClaveService:RestaurarClaveService
+
+  ) {}
 
   ngOnInit(): void {
     this.obtenerListaVoluntarios();
@@ -125,5 +128,18 @@ throw new Error('Method not implemented.');
   editarUsuario(usuario: any) {
     this.router.navigate([`/usuarios/${usuario.id}/editar`]);
   }
+
+    restauraracceso(id: number): void {
+      const tabla="voluntarios";
+      this.restaurarClaveService.restaurarContrasena(tabla, id).subscribe({
+        next: () => {
+          Swal.fire('Éxito', 'Contraseña restaurada correctamente.', 'success');
+        },
+        error: (err) => {
+          Swal.fire('Error', 'No se pudo restaurar la contraseña.', 'error');
+          console.error(err);
+        },
+      });
+    }
 
 }

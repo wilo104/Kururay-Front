@@ -1,9 +1,43 @@
-.table-responsive {
-  overflow-x: auto;
-  margin-bottom: 1rem;
+/* Estilo de la tabla */
+.table {
+  font-size: 1rem; /* Tamaño de fuente más grande */
+  border-collapse: separate; /* Separar filas */
+  border-spacing: 0 0.5rem; /* Espaciado entre filas */
+}
+
+.table thead th {
+  text-align: center;
+  font-weight: bold;
+}
+
+.table td, .table th {
+  vertical-align: middle; /* Centrar contenido verticalmente */
+  padding: 0.75rem; /* Espaciado más cómodo */
 }
 
 .badge {
   padding: 0.5rem;
-  font-size: 0.875rem;
+  font-size: 0.875rem; /* Tamaño consistente para etiquetas */
+}
+
+/* Ajustes para botones */
+.btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.75rem;
+}
+
+/* Media queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .table {
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+  }
 }

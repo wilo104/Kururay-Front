@@ -46,7 +46,7 @@
                   >
                     {{ usuario.estado_voluntario ? 'Dar de Baja' : 'Dar de Alta' }}
                   </button>
-                  <button class="btn btn-secondary btn-sm" (click)="restauraracceso(usuario)">Restaurar Acceso</button>
+                  <button class="btn btn-secondary btn-sm" (click)="restauraracceso(usuario.id)">Restaurar Acceso</button>
                 </div>
               </td>
             </tr>
