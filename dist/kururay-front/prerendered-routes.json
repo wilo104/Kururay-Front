@@ -1,0 +1,25 @@
+{
+  "routes": [
+    "/",
+    "/benefactores",
+    "/benefactores/registro",
+    "/beneficiarios",
+    "/beneficiarios/nuevo",
+    "/contabilidad-financiera",
+    "/contabilidad-financiera/gastos",
+    "/contabilidad-financiera/gastos/registrar",
+    "/contabilidad-financiera/ingresos",
+    "/contabilidad-financiera/ingresos/registrar",
+    "/dashboard",
+    "/login",
+    "/mis-voluntariados",
+    "/registro",
+    "/registro-voluntario",
+    "/usuarios",
+    "/variable-registro",
+    "/variables-sistema",
+    "/voluntariados",
+    "/voluntariados/nuevo",
+    "/voluntarios"
+  ]
+}
