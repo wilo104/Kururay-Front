@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterModule, Router, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
 
@@ -11,7 +10,7 @@ import { AuthGuard } from '../auth.guard';
   providers: [AuthService, AuthGuard],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, CommonModule, HttpClientModule, RouterModule],
+  imports: [RouterOutlet, CommonModule, RouterModule], // Elimina HttpClientModule de aquí
 })
 export class LayoutComponent implements OnInit {
   sidebarActive: boolean = true;

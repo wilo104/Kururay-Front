@@ -1,27 +1,15 @@
-import { Component ,HostListener} from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { AuthService } from './auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';  // ✅ Importa RouterOutlet
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http'; // ✅ Asegúrate de importar esto
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule],
-  providers: [AuthService],
-
+  imports: [ CommonModule, HttpClientModule, RouterOutlet ],  // ✅ Agrega RouterOutlet
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-
 export class AppComponent {
-  constructor(private authService: AuthService ) {}
   title = 'kururay-front';
-  @HostListener('window:beforeunload', ['$event'])
-  onBeforeUnload(event: Event): void {
-    // Llama al método de cierre de sesión al cerrar la página o el navegador
-    this.authService.logout();
-  
-  }
-
 }

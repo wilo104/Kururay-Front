@@ -3,16 +3,14 @@ import { VoluntariadosService } from '../voluntariados.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { HttpClientModule } from '@angular/common/http';
 import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-voluntariados',
   standalone: true,
   imports: [
     CommonModule,
     NgxPaginationModule,
-    HttpClientModule,
-   
   ],
   providers: [VoluntariadosService],
   templateUrl: './voluntariados.component.html',

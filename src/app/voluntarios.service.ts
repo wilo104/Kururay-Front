@@ -11,7 +11,10 @@ export class VoluntariosService {
   constructor(private http: HttpClient) {}
   // Método para obtener el token desde localStorage
   private obtenerToken(): string | null {
-    return localStorage.getItem('token'); // Recupera el token almacenado
+    if (typeof window !== 'undefined' && window.localStorage) {
+      return localStorage.getItem('token'); // Recupera el token almacenado si localStorage está disponible
+    }
+    return null; // Si localStorage no está disponible, retorna null
   }
   // Obtener la lista de voluntarios
   // Obtener la lista de voluntarios con paginación

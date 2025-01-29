@@ -11,7 +11,15 @@ export class RestaurarClaveService {
   constructor(private http: HttpClient) {}
 
   restaurarContrasena(tabla: string, id: number): Observable<any> {
-    const token = localStorage.getItem('token'); // Usa el token almacenado
+    let token = null;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token'); // Usa el token almacenado solo si window y localStorage están disponibles
+    }
+
+    if (!token) {
+      throw new Error('Token no disponible');
+    }
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });

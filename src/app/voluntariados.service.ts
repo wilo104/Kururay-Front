@@ -13,14 +13,20 @@ export class VoluntariadosService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   private getHeaders(): HttpHeaders {
-    const token = this.authService.gettoken();
+    let token = '';
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token') || ''; // Si el localStorage está disponible
+    }
+    
     if (!token) {
       throw new Error('Token no disponible');
     }
+
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
   }
+
 
   getVoluntariados(): Observable<any> {
     return this.http.get(this.baseUrl, { headers: this.getHeaders() }).pipe(

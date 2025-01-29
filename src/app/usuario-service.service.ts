@@ -38,14 +38,22 @@ export class UsuarioService {
 
   // Actualizar la contraseña de un usuario
   actualizarContrasena(contrasenaActual: string, nuevaContrasena: string): Observable<any> {
-    const token = localStorage.getItem('token'); // Recupera el token del almacenamiento local
+    let token = null;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token'); // Recupera el token del almacenamiento local solo si window y localStorage están disponibles
+    }
+
+    if (!token) {
+      throw new Error('Token no disponible');
+    }
+
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
+
     const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/cambiar-contrasena`;
     return this.http.put(url, { contrasenaActual, nuevaContrasena }, { headers });
   }
-  
 
   // Registrar un nuevo usuario con opción de cargar un archivo CV
   registrarUsuario(usuario: any, cvFile?: File): Observable<any> {
@@ -65,22 +73,22 @@ export class UsuarioService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-// UsuarioService
-cambiarEstado(id: number, estado: boolean): Observable<any> {
-  const token = localStorage.getItem('token'); // Recupera el token del almacenamiento local
-  const headers = new HttpHeaders({
-    Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
-  });
+  // Cambiar el estado de un usuario (activo/inactivo)
+  cambiarEstado(id: number, estado: boolean): Observable<any> {
+    let token = null;
+    if (typeof window !== 'undefined' && window.localStorage) {
+      token = localStorage.getItem('token'); // Recupera el token del almacenamiento local solo si window y localStorage están disponibles
+    }
 
+    if (!token) {
+      throw new Error('Token no disponible');
+    }
 
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Incluye el token en el encabezado de autorización
+    });
 
-
-
-  
-  const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/usuarios/${id}/estado`;
-  return this.http.patch(url, { estado_usuario: estado }, { headers });
-}
-
-
-  
+    const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/usuarios/${id}/estado`;
+    return this.http.patch(url, { estado_usuario: estado }, { headers });
+  }
 }
