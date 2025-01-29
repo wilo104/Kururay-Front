@@ -8,7 +8,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class VoluntariadosService {
-  private baseUrl = 'http://localhost:3000/voluntariados';
+  private baseUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -199,7 +199,7 @@ export class VoluntariadosService {
     }
     
     obtenerEvidenciaPorId(id: number): Observable<any> {
-      return this.http.get<any>(`http://localhost:3000/evidencias/${id}`, { headers: this.getHeaders() }).pipe(
+      return this.http.get<any>(`https://kururayback-app-a1f8360c6979.herokuapp.com/evidencias/${id}`, { headers: this.getHeaders() }).pipe(
         catchError((error) => {
           console.error('Error al obtener la evidencia:', error);
           return throwError('Error al cargar la evidencia.');
@@ -248,7 +248,7 @@ export class VoluntariadosService {
       const headers = new HttpHeaders({
         Authorization: `Bearer ${token}`, // Incluye el token en las cabeceras
       });
-      return this.http.put(`http://localhost:3000/voluntariados/asistencias/${id}`, asistencia, { headers });
+      return this.http.put(`https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados/asistencias/${id}`, asistencia, { headers });
     }
     
     obtenerHistorialVoluntariado(id: number): Observable<any> {

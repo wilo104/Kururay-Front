@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class VoluntariosService {
-  private apiUrl = 'http://localhost:3000/voluntarios';
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/voluntarios';
 
   constructor(private http: HttpClient) {}
   // Método para obtener el token desde localStorage
@@ -96,7 +96,7 @@ obtenerFeedback(voluntarioId: number, voluntariadoId: number): Observable<any> {
   }
   
     obtenerValoresPorNombre(nombre: string): Observable<string[]> {
-      const url = `http://localhost:3000/variables-sistema/valores?nombre=${nombre}`;
+      const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/variables-sistema/valores?nombre=${nombre}`;
       return this.http.get<string[]>(url);
     }
     
@@ -142,7 +142,7 @@ registrarAsistencia(asistencia: any): Observable<any> {
     Authorization: `Bearer ${token}`,
   });
   // Ajustamos la URL eliminando el prefijo "voluntarios" que no corresponde
-  return this.http.post(`http://localhost:3000/voluntariados/${asistencia.voluntariado_id}/asistencias`, asistencia, { headers });
+  return this.http.post(`https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados/${asistencia.voluntariado_id}/asistencias`, asistencia, { headers });
 }
 
 // Obtener voluntarios asignados a un voluntariado
@@ -152,7 +152,7 @@ obtenerVoluntariosPorVoluntariado(idVoluntariado: number): Observable<any[]> {
     Authorization: `Bearer ${token}`,
   });
   // Ajustamos la URL eliminando el prefijo "voluntarios" que no corresponde
-  return this.http.get<any[]>(`http://localhost:3000/voluntariados/${idVoluntariado}/voluntarios`, { headers });
+  return this.http.get<any[]>(`https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados/${idVoluntariado}/voluntarios`, { headers });
 }
 
 //para USUARIO UNICO LOGUEADO

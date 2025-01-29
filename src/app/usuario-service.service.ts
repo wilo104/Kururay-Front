@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiUrl = 'http://localhost:3000/usuarios'; // URL base del backend para usuarios
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/usuarios'; // URL base del backend para usuarios
 
   constructor(private http: HttpClient) {}
 
@@ -42,7 +42,7 @@ export class UsuarioService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
-    const url = `http://localhost:3000/cambiar-contrasena`;
+    const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/cambiar-contrasena`;
     return this.http.put(url, { contrasenaActual, nuevaContrasena }, { headers });
   }
   
@@ -77,7 +77,7 @@ cambiarEstado(id: number, estado: boolean): Observable<any> {
 
 
   
-  const url = `http://localhost:3000/usuarios/${id}/estado`;
+  const url = `https://kururayback-app-a1f8360c6979.herokuapp.com/usuarios/${id}/estado`;
   return this.http.patch(url, { estado_usuario: estado }, { headers });
 }
 

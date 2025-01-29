@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VariablesService {
-  private apiUrl = 'http://localhost:3000/variables-sistema'; // URL del api
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/variables-sistema'; // URL del api
   constructor(private http: HttpClient) { }
 
   obtenerVariables(): Observable<any[]> {

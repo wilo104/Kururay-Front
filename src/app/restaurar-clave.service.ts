@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RestaurarClaveService {
-  private apiUrl = 'http://localhost:3000'; // Cambia según tu configuración
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com'; // Cambia según tu configuración
 
   constructor(private http: HttpClient) {}
 

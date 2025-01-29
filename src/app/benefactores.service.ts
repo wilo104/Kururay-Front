@@ -8,7 +8,7 @@ import { AuthService } from './auth.service'; // Asegúrate de tener un servicio
   providedIn: 'root',
 })
 export class BenefactoresService {
-  private apiUrl = 'http://localhost:3000/benefactores'; // Base URL para benefactores
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/benefactores'; // Base URL para benefactores
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

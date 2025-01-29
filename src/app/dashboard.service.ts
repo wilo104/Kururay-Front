@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:3000'; // URL base de tu backend
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com'; // URL base de tu backend
 
   constructor(private http: HttpClient) {}
 

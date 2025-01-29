@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class IngresosService {
-  private apiUrl = 'http://localhost:3000/ingresos';
-  private voluntariadoUrl = 'http://localhost:3000/voluntariados';
+  private apiUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/ingresos';
+  private voluntariadoUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados';
 
   constructor(private http: HttpClient) {}
 
@@ -53,7 +53,7 @@ export class IngresosService {
       Authorization: `Bearer ${token}`, // Incluye el token en el encabezado
     });
   
-    return this.http.get<any[]>('http://localhost:3000/benefactores', { headers });
+    return this.http.get<any[]>('https://kururayback-app-a1f8360c6979.herokuapp.com/benefactores', { headers });
   }
   
   

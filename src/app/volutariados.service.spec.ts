@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class VoluntariadosService {
-  private baseUrl = 'http://localhost:3000/voluntariados';
+  private baseUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/voluntariados';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 

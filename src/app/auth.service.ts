@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../environments/environment';
+
+
+
+
 
 interface LoginResponse {
   [x: string]: any;
@@ -17,7 +22,9 @@ interface LoginResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly loginUrl = 'http://localhost:3000/login';
+
+  private readonly loginUrl = `${environment.apiUrl}login`;
+ // private readonly loginUrl = 'https://kururayback-app-a1f8360c6979.herokuapp.com/login';
   private tipo_usuario: string = '';
   private token: string = '';
   private id: any;
