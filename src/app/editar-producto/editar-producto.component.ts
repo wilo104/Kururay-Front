@@ -6,12 +6,11 @@ import Swal from 'sweetalert2';
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-editar-producto',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './editar-producto.component.html',
-  styleUrls: ['./editar-producto.component.css'],
-  providers: [IngresosService],
+    selector: 'app-editar-producto',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './editar-producto.component.html',
+    styleUrls: ['./editar-producto.component.css'],
+    providers: [IngresosService]
 })
 export class EditarProductoComponent implements OnInit {
   productoForm: FormGroup;

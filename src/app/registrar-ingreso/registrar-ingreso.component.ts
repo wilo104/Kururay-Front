@@ -7,12 +7,11 @@ import Swal from 'sweetalert2';
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-registrar-ingreso',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
-  templateUrl: './registrar-ingreso.component.html',
-  styleUrls: ['./registrar-ingreso.component.css'],
-  providers: [IngresosService],
+    selector: 'app-registrar-ingreso',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule],
+    templateUrl: './registrar-ingreso.component.html',
+    styleUrls: ['./registrar-ingreso.component.css'],
+    providers: [IngresosService]
 })
 export class RegistrarIngresoComponent {
   ingresoForm: FormGroup;

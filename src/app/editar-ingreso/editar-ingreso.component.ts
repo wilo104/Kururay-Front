@@ -7,12 +7,11 @@ import Swal from 'sweetalert2';
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-editar-ingreso',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule], // Agrega FormsModule aquí
-  templateUrl: './editar-ingreso.component.html',
-  styleUrls: ['./editar-ingreso.component.css'],
-  providers: [IngresosService],
+    selector: 'app-editar-ingreso',
+    imports: [CommonModule, ReactiveFormsModule, FormsModule], // Agrega FormsModule aquí
+    templateUrl: './editar-ingreso.component.html',
+    styleUrls: ['./editar-ingreso.component.css'],
+    providers: [IngresosService]
 })
 export class EditarIngresoComponent implements OnInit {
   editarIngresoForm: FormGroup;

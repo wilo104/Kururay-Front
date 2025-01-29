@@ -7,12 +7,11 @@ import Swal from 'sweetalert2';
 import { GastosService } from '../gastos.service';
 
 @Component({
-  selector: 'app-registrar-gasto',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule], // Incluye FormsModule aquí
-  templateUrl: './registrar-gasto.component.html',
-  styleUrls: ['./registrar-gasto.component.css'],
-  providers: [GastosService],
+    selector: 'app-registrar-gasto',
+    imports: [ReactiveFormsModule, CommonModule, FormsModule], // Incluye FormsModule aquí
+    templateUrl: './registrar-gasto.component.html',
+    styleUrls: ['./registrar-gasto.component.css'],
+    providers: [GastosService]
 })
 export class RegistrarGastoComponent implements OnInit {
   gastoForm: FormGroup;

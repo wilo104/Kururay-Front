@@ -7,12 +7,11 @@ import Swal from 'sweetalert2';
 import { RestaurarClaveService } from '../restaurar-clave.service';
 
 @Component({
-  selector: 'app-voluntarios',
-  standalone: true,
-  providers: [VoluntariosService, RestaurarClaveService],
-  imports: [CommonModule, NgxPaginationModule],
-  templateUrl: './voluntarios.component.html',
-  styleUrls: ['./voluntarios.component.css'],
+    selector: 'app-voluntarios',
+    providers: [VoluntariosService, RestaurarClaveService],
+    imports: [CommonModule, NgxPaginationModule],
+    templateUrl: './voluntarios.component.html',
+    styleUrls: ['./voluntarios.component.css']
 })
 export class VoluntariosComponent {
 

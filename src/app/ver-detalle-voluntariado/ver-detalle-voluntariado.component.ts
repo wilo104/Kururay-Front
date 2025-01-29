@@ -8,12 +8,11 @@ import Swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-ver-detalle-voluntariado',
-  standalone: true,
-  imports: [CommonModule, AsignarVoluntarioModalComponent,ReactiveFormsModule],
-  templateUrl: './ver-detalle-voluntariado.component.html',
-  styleUrls: ['./ver-detalle-voluntariado.component.css'],
-  providers: [VoluntariadosService,AuthService],
+    selector: 'app-ver-detalle-voluntariado',
+    imports: [CommonModule, AsignarVoluntarioModalComponent, ReactiveFormsModule],
+    templateUrl: './ver-detalle-voluntariado.component.html',
+    styleUrls: ['./ver-detalle-voluntariado.component.css'],
+    providers: [VoluntariadosService, AuthService]
 })
 export class VerDetalleVoluntariadoComponent implements OnInit {
   voluntariado: any = {};

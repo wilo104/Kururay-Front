@@ -5,12 +5,11 @@ import { GastosService } from '../gastos.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-listar-gastos',
-  standalone: true,
-  imports: [CommonModule], // Asegúrate de que CommonModule esté importado
-  templateUrl: './listar-gastos.component.html',
-  styleUrls: ['./listar-gastos.component.css'],
-  providers: [GastosService] // Asegúrate de que el servicio esté en los providers
+    selector: 'app-listar-gastos',
+    imports: [CommonModule], // Asegúrate de que CommonModule esté importado
+    templateUrl: './listar-gastos.component.html',
+    styleUrls: ['./listar-gastos.component.css'],
+    providers: [GastosService] // Asegúrate de que el servicio esté en los providers
 })
 export class ListarGastosComponent implements OnInit {
   gastos: any[] = []; // Lista de gastos a mostrar

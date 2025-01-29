@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-listar-productos',
-  standalone: true,
-  imports: [CommonModule], // Agrega CommonModule a los imports
-  templateUrl: './listar-productos.component.html',
-  styleUrls: ['./listar-productos.component.css'],
-  providers:[IngresosService]
+    selector: 'app-listar-productos',
+    imports: [CommonModule], // Agrega CommonModule a los imports
+    templateUrl: './listar-productos.component.html',
+    styleUrls: ['./listar-productos.component.css'],
+    providers: [IngresosService]
 })
 export class ListarProductosComponent implements OnInit {
   productos: any[] = [];

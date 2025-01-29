@@ -7,12 +7,11 @@ import Swal from 'sweetalert2';
 import { GastosService } from '../gastos.service';
 
 @Component({
-  selector: 'app-editar-gasto',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule], // Asegúrate de incluir ReactiveFormsModule
-  templateUrl: './editar-gasto.component.html',
-  styleUrls: ['./editar-gasto.component.css'],
-  providers: [GastosService],
+    selector: 'app-editar-gasto',
+    imports: [ReactiveFormsModule, CommonModule, FormsModule], // Asegúrate de incluir ReactiveFormsModule
+    templateUrl: './editar-gasto.component.html',
+    styleUrls: ['./editar-gasto.component.css'],
+    providers: [GastosService]
 })
 export class EditarGastoComponent implements OnInit {
   gastoForm!: FormGroup;

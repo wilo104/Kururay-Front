@@ -8,12 +8,11 @@ import { UsuarioService } from '../usuario-service.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-registro-usuario',
-  standalone: true,
-  providers: [NotificationService, UsuarioService],
-  templateUrl: './registro-usuario.component.html',
-  styleUrls: ['./registro-usuario.component.css'],
-  imports: [ReactiveFormsModule, CommonModule],
+    selector: 'app-registro-usuario',
+    providers: [NotificationService, UsuarioService],
+    templateUrl: './registro-usuario.component.html',
+    styleUrls: ['./registro-usuario.component.css'],
+    imports: [ReactiveFormsModule, CommonModule]
 })
 export class RegistroUsuarioComponent implements OnInit {
   registroForm: FormGroup;

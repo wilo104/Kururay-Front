@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-editar-benefactor',
-  standalone: true,
-  templateUrl: './editar-benefactor.component.html',
-  styleUrls: ['./editar-benefactor.component.css'],
-  imports: [CommonModule, FormsModule],
-  providers: [BenefactoresService],
+    selector: 'app-editar-benefactor',
+    templateUrl: './editar-benefactor.component.html',
+    styleUrls: ['./editar-benefactor.component.css'],
+    imports: [CommonModule, FormsModule],
+    providers: [BenefactoresService]
 })
 export class EditarBenefactorComponent implements OnInit {
   benefactor: any = {

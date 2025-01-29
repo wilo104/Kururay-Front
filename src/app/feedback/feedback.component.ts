@@ -5,12 +5,11 @@ import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common'; 
 @Component({
-  selector: 'app-feedback',
-  standalone: true,
-  imports: [CommonModule], // Asegúrate de que esté incluido aquí
-  providers: [VoluntariosService, AuthService],
-  templateUrl: './feedback.component.html',
-  styleUrls: ['./feedback.component.css'],
+    selector: 'app-feedback',
+    imports: [CommonModule], // Asegúrate de que esté incluido aquí
+    providers: [VoluntariosService, AuthService],
+    templateUrl: './feedback.component.html',
+    styleUrls: ['./feedback.component.css']
 })
 export class FeedbackComponent implements OnInit {
   voluntarioId!: number;

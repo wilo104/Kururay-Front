@@ -7,12 +7,11 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-mis-voluntariados',
-  standalone: true,
-  imports: [CommonModule, NgxPaginationModule],
-  providers: [VoluntariosService],
-  templateUrl: './mis-voluntariados.component.html',
-  styleUrls: ['./mis-voluntariados.component.css'],
+    selector: 'app-mis-voluntariados',
+    imports: [CommonModule, NgxPaginationModule],
+    providers: [VoluntariosService],
+    templateUrl: './mis-voluntariados.component.html',
+    styleUrls: ['./mis-voluntariados.component.css']
 })
 export class MisVoluntariadosComponent implements OnInit {
   voluntariados: any[] = [];

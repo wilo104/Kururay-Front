@@ -6,12 +6,11 @@ import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-editar-feedback',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './editar-feedback.component.html',
-  styleUrls: ['./editar-feedback.component.css'],
-  providers: [AuthService, VoluntariosService],
+    selector: 'app-editar-feedback',
+    imports: [FormsModule],
+    templateUrl: './editar-feedback.component.html',
+    styleUrls: ['./editar-feedback.component.css'],
+    providers: [AuthService, VoluntariosService]
 })
 export class EditarFeedbackComponent implements OnInit {
   voluntariadoId!: number;

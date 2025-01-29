@@ -7,12 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
 @Component({
-  selector: 'app-actualizar-variable',
-  standalone: true,
-  providers:[VariablesService,NotificationService],
-  imports :[ReactiveFormsModule,ModalComponent,CommonModule],
-  templateUrl: './actualizar-variable.component.html',
-  styleUrls: ['./actualizar-variable.component.css']
+    selector: 'app-actualizar-variable',
+    providers: [VariablesService, NotificationService],
+    imports: [ReactiveFormsModule, ModalComponent, CommonModule],
+    templateUrl: './actualizar-variable.component.html',
+    styleUrls: ['./actualizar-variable.component.css']
 })
 
 export class ActualizarVariableComponent implements OnInit{

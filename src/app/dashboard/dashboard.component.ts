@@ -3,12 +3,11 @@ import { DashboardService } from '../dashboard.service';
 import { Chart } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
-  providers:[DashboardService]
+    selector: 'app-dashboard',
+    imports: [],
+    templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.css'],
+    providers: [DashboardService]
 })
 export class DashboardComponent implements OnInit {
   totalVoluntarios: number = 0;

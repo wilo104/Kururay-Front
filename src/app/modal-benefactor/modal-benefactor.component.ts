@@ -4,12 +4,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-modal-benefactor',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './modal-benefactor.component.html',
-  styleUrls: ['./modal-benefactor.component.css'],
-  providers:[IngresosService]
+    selector: 'app-modal-benefactor',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './modal-benefactor.component.html',
+    styleUrls: ['./modal-benefactor.component.css'],
+    providers: [IngresosService]
 })
 export class ModalBenefactorComponent {
   benefactores: any[] = [];

@@ -8,12 +8,11 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-actualizar-clave',
-  standalone: true,
-  providers: [AuthService, UsuarioService, NotificationService], 
-  imports: [CommonModule, ReactiveFormsModule], 
-  templateUrl: './actualizar-clave.component.html',
-  styleUrls: ['./actualizar-clave.component.css']
+    selector: 'app-actualizar-clave',
+    providers: [AuthService, UsuarioService, NotificationService],
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './actualizar-clave.component.html',
+    styleUrls: ['./actualizar-clave.component.css']
 })
 export class ActualizarClaveComponent implements OnInit {
   updatePasswordForm: FormGroup;

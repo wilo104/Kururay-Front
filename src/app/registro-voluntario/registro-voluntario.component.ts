@@ -8,12 +8,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-registro-voluntario',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './registro-voluntario.component.html',
-  styleUrls: ['./registro-voluntario.component.css'],
-  providers: [VoluntariosService, NotificationService, VariablesService],
+    selector: 'app-registro-voluntario',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './registro-voluntario.component.html',
+    styleUrls: ['./registro-voluntario.component.css'],
+    providers: [VoluntariosService, NotificationService, VariablesService]
 })
 export class RegistroVoluntarioComponent implements OnInit {
   registroForm!: FormGroup;

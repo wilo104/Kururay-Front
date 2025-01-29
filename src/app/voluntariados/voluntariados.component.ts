@@ -6,15 +6,14 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-voluntariados',
-  standalone: true,
-  imports: [
-    CommonModule,
-    NgxPaginationModule,
-  ],
-  providers: [VoluntariadosService],
-  templateUrl: './voluntariados.component.html',
-  styleUrls: ['./voluntariados.component.css'],
+    selector: 'app-voluntariados',
+    imports: [
+        CommonModule,
+        NgxPaginationModule,
+    ],
+    providers: [VoluntariadosService],
+    templateUrl: './voluntariados.component.html',
+    styleUrls: ['./voluntariados.component.css']
 })
 export class VoluntariadosComponent implements OnInit {
   voluntariados: any[] = [];

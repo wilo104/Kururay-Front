@@ -6,12 +6,11 @@ import { NgxPaginationModule } from 'ngx-pagination'; // Asumiendo que usas este
 import { RestaurarClaveService } from '../restaurar-clave.service';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-usuarios',
-  templateUrl: './usuarios.component.html',
-  styleUrls: ['./usuarios.component.css'],
-  providers: [UsuarioService,RestaurarClaveService], // Define el servicio si es específico de este componente
-  imports: [CommonModule, NgxPaginationModule], // Importa los módulos necesarios aquí
-  standalone: true,
+    selector: 'app-usuarios',
+    templateUrl: './usuarios.component.html',
+    styleUrls: ['./usuarios.component.css'],
+    providers: [UsuarioService, RestaurarClaveService], // Define el servicio si es específico de este componente
+    imports: [CommonModule, NgxPaginationModule]
 })
 export class UsuariosComponent implements OnInit {
 

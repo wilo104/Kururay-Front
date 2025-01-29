@@ -5,12 +5,11 @@ import { VariablesService } from '../variables.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
-  selector: 'app-variable-sistema',
-  standalone: true,
-  providers:[VariablesService],
-  imports: [CommonModule,NgxPaginationModule],
-  templateUrl: './variable-sistema.component.html',
-  styleUrl: './variable-sistema.component.css'
+    selector: 'app-variable-sistema',
+    providers: [VariablesService],
+    imports: [CommonModule, NgxPaginationModule],
+    templateUrl: './variable-sistema.component.html',
+    styleUrl: './variable-sistema.component.css'
 })
 export class VariableSistemaComponent {
 nuevaVariable() {

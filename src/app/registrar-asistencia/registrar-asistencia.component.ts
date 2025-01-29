@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-registrar-asistencia',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './registrar-asistencia.component.html',
-  styleUrls: ['./registrar-asistencia.component.css'],
-  providers:[VoluntariosService]
+    selector: 'app-registrar-asistencia',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './registrar-asistencia.component.html',
+    styleUrls: ['./registrar-asistencia.component.css'],
+    providers: [VoluntariosService]
 })
 export class RegistrarAsistenciaComponent implements OnInit {
   asistenciaForm!: FormGroup;

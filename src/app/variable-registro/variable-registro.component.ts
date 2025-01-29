@@ -7,12 +7,11 @@ import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
 import { VariablesService } from '../variables.service';
 @Component({
-  selector: 'app-variable-registro',
-  standalone: true,
-  providers:[NotificationService , VariablesService],
-  imports: [ReactiveFormsModule,ModalComponent,CommonModule],
-  templateUrl: './variable-registro.component.html',
-  styleUrls: ['./variable-registro.component.css']
+    selector: 'app-variable-registro',
+    providers: [NotificationService, VariablesService],
+    imports: [ReactiveFormsModule, ModalComponent, CommonModule],
+    templateUrl: './variable-registro.component.html',
+    styleUrls: ['./variable-registro.component.css']
 })
 export class VariableRegistroComponent implements OnInit {
   registroForm: FormGroup;

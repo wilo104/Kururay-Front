@@ -65,11 +65,10 @@ import { ModalService } from '../modal.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.css'],
-  standalone: true,
-  imports: [CommonModule]
+    selector: 'app-modal',
+    templateUrl: './modal.component.html',
+    styleUrls: ['./modal.component.css'],
+    imports: [CommonModule]
 })
 export class ModalComponent implements OnInit, OnDestroy {
   @Input() id: string = '';

@@ -7,12 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-editar-voluntario',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './editar-voluntario.component.html',
-  styleUrls: ['./editar-voluntario.component.css'],
-  providers: [VoluntariosService],
+    selector: 'app-editar-voluntario',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './editar-voluntario.component.html',
+    styleUrls: ['./editar-voluntario.component.css'],
+    providers: [VoluntariosService]
 })
 export class EditarVoluntarioComponent implements OnInit {
   editarForm!: FormGroup;

@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-registro-beneficiarios',
-  standalone: true,
-  templateUrl: './registro-beneficiarios.component.html',
-  styleUrls: ['./registro-beneficiarios.component.css'],
-  imports: [FormsModule, CommonModule],
-  providers: [BeneficiariosService],
+    selector: 'app-registro-beneficiarios',
+    templateUrl: './registro-beneficiarios.component.html',
+    styleUrls: ['./registro-beneficiarios.component.css'],
+    imports: [FormsModule, CommonModule],
+    providers: [BeneficiariosService]
 })
 export class RegistroBeneficiariosComponent {
   beneficiario: any = {

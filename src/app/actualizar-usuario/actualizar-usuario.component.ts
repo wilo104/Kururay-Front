@@ -8,12 +8,11 @@ import { ModalComponent } from '../modal/modal.component';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-actualizar-usuario',
-  standalone: true,
-  providers:[UsuarioService,NotificationService],
-  imports :[ReactiveFormsModule,ModalComponent,CommonModule],
-  templateUrl: './actualizar-usuario.component.html',
-  styleUrls: ['./actualizar-usuario.component.css']
+    selector: 'app-actualizar-usuario',
+    providers: [UsuarioService, NotificationService],
+    imports: [ReactiveFormsModule, ModalComponent, CommonModule],
+    templateUrl: './actualizar-usuario.component.html',
+    styleUrls: ['./actualizar-usuario.component.css']
 })
 
 export class ActualizarUsuarioComponent implements OnInit{

@@ -5,12 +5,11 @@ import { VoluntariosService } from '../voluntarios.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-mi-informacion-voluntario',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './mi-informacion-voluntario.component.html',
-  styleUrls: ['./mi-informacion-voluntario.component.css'],
-  providers:[VoluntariosService]
+    selector: 'app-mi-informacion-voluntario',
+    imports: [FormsModule],
+    templateUrl: './mi-informacion-voluntario.component.html',
+    styleUrls: ['./mi-informacion-voluntario.component.css'],
+    providers: [VoluntariosService]
 })
 export class MiInformacionVoluntarioComponent implements OnInit {
   voluntarioId!: number;

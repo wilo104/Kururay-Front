@@ -7,12 +7,11 @@ import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination'; // Para paginación
 
 @Component({
-  selector: 'app-lista-benefactores',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule],
-  templateUrl: './lista-benefactores.component.html',
-  styleUrls: ['./lista-benefactores.component.css'],
-  providers: [BenefactoresService],
+    selector: 'app-lista-benefactores',
+    imports: [CommonModule, RouterModule, FormsModule, NgxPaginationModule],
+    templateUrl: './lista-benefactores.component.html',
+    styleUrls: ['./lista-benefactores.component.css'],
+    providers: [BenefactoresService]
 })
 export class ListaBenefactoresComponent implements OnInit {
   currentPage: number = 1; // Página inicial

@@ -5,12 +5,11 @@ import { AuthService } from '../auth.service';
 import { AuthGuard } from '../auth.guard';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  providers: [AuthService, AuthGuard],
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.css'],
-  imports: [RouterOutlet, CommonModule, RouterModule], // Elimina HttpClientModule de aquí
+    selector: 'app-layout',
+    providers: [AuthService, AuthGuard],
+    templateUrl: './layout.component.html',
+    styleUrls: ['./layout.component.css'],
+    imports: [RouterOutlet, CommonModule, RouterModule]
 })
 export class LayoutComponent implements OnInit {
   sidebarActive: boolean = true;

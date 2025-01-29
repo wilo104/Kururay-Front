@@ -8,12 +8,11 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-nuevo-voluntariado',
-  templateUrl: './nuevo-voluntariado.component.html',
-  styleUrls: ['./nuevo-voluntariado.component.css'],
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule], // Elimina HttpClientModule de aquí
-  providers: [VoluntariadosService, VariablesService, AuthService],
+    selector: 'app-nuevo-voluntariado',
+    templateUrl: './nuevo-voluntariado.component.html',
+    styleUrls: ['./nuevo-voluntariado.component.css'],
+    imports: [ReactiveFormsModule, CommonModule], // Elimina HttpClientModule de aquí
+    providers: [VoluntariadosService, VariablesService, AuthService]
 })
 export class NuevoVoluntariadoComponent implements OnInit {
   tipos: string[] = [];

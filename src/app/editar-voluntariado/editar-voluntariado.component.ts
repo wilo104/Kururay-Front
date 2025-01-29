@@ -8,12 +8,11 @@ import { CommonModule, formatDate } from '@angular/common';
 import { VariablesService } from '../variables.service';
 
 @Component({
-  selector: 'app-editar-voluntariado',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './editar-voluntariado.component.html',
-  styleUrls: ['./editar-voluntariado.component.css'],
-  providers: [VoluntariadosService, VariablesService],
+    selector: 'app-editar-voluntariado',
+    imports: [ReactiveFormsModule, CommonModule],
+    templateUrl: './editar-voluntariado.component.html',
+    styleUrls: ['./editar-voluntariado.component.css'],
+    providers: [VoluntariadosService, VariablesService]
 })
 export class EditarVoluntariadoComponent implements OnInit {
   voluntariadoForm!: FormGroup;

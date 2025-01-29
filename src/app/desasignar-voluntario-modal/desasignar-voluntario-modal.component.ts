@@ -4,12 +4,11 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-desasignar-voluntario-modal',
-  standalone: true, // Asegúrate de que esto está presente
-  imports: [CommonModule],
-  templateUrl: './desasignar-voluntario-modal.component.html',
-  styleUrls: ['./desasignar-voluntario-modal.component.css'],
-  providers: [VoluntariadosService],
+    selector: 'app-desasignar-voluntario-modal', // Asegúrate de que esto está presente
+    imports: [CommonModule],
+    templateUrl: './desasignar-voluntario-modal.component.html',
+    styleUrls: ['./desasignar-voluntario-modal.component.css'],
+    providers: [VoluntariadosService]
 })
 export class DesasignarVoluntarioModalComponent {
   @Input() idVoluntariado!: number; // ID del voluntariado

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';  // ✅ Importa RouterOutlet
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; // ✅ Asegúrate de importar esto
+import { CommonModule } from '@angular/common'; // Esto es necesario si usas directivas comunes como `ngIf` o `ngFor`
+import { RouterOutlet } from '@angular/router'; // Importa RouterOutlet si usas rutas dentro del componente
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [ CommonModule, HttpClientModule, RouterOutlet ],  // ✅ Agrega RouterOutlet
+  standalone: true,  // Indica que el componente es standalone
+  imports: [CommonModule, RouterOutlet], // Importa los módulos necesarios
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

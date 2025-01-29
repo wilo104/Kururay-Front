@@ -6,12 +6,11 @@ import Swal from 'sweetalert2';
 import { IngresosService } from '../ingresos.service';
 
 @Component({
-  selector: 'app-listar-ingresos',
-  standalone: true,
-  imports: [CommonModule, FormsModule], // Agregar FormsModule aquí
-  templateUrl: './listar-ingresos.component.html',
-  styleUrls: ['./listar-ingresos.component.css'],
-  providers: [IngresosService],
+    selector: 'app-listar-ingresos',
+    imports: [CommonModule, FormsModule], // Agregar FormsModule aquí
+    templateUrl: './listar-ingresos.component.html',
+    styleUrls: ['./listar-ingresos.component.css'],
+    providers: [IngresosService]
 })
 export class ListarIngresosComponent implements OnInit {
   ingresos: any[] = [];

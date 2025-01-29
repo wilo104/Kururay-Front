@@ -6,12 +6,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-editar-beneficiarios',
-  standalone: true,
-  templateUrl: './editar-beneficiarios.component.html',
-  styleUrls: ['./editar-beneficiarios.component.css'],
-  imports: [FormsModule, CommonModule],
-  providers: [BeneficiariosService],
+    selector: 'app-editar-beneficiarios',
+    templateUrl: './editar-beneficiarios.component.html',
+    styleUrls: ['./editar-beneficiarios.component.css'],
+    imports: [FormsModule, CommonModule],
+    providers: [BeneficiariosService]
 })
 export class EditarBeneficiariosComponent implements OnInit {
   beneficiario: any = {

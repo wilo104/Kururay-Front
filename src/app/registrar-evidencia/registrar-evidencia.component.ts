@@ -6,12 +6,11 @@ import { VoluntariadosService } from '../voluntariados.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 @Component({
-  selector: 'app-registrar-evidencia',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  templateUrl: './registrar-evidencia.component.html',
-  styleUrls: ['./registrar-evidencia.component.css'],
-  providers: [VoluntariadosService,HttpClient],
+    selector: 'app-registrar-evidencia',
+    imports: [CommonModule, FormsModule],
+    templateUrl: './registrar-evidencia.component.html',
+    styleUrls: ['./registrar-evidencia.component.css'],
+    providers: [VoluntariadosService, HttpClient]
 })
 export class RegistrarEvidenciaComponent implements OnInit {
   idVoluntariado!: number;

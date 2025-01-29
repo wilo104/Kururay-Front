@@ -7,12 +7,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-editar-asistencia',
-  standalone: true,
-  templateUrl: './editar-asistencia.component.html',
-  styleUrls: ['./editar-asistencia.component.css'],
-  imports: [ReactiveFormsModule, CommonModule],
-  providers: [VoluntariadosService],
+    selector: 'app-editar-asistencia',
+    templateUrl: './editar-asistencia.component.html',
+    styleUrls: ['./editar-asistencia.component.css'],
+    imports: [ReactiveFormsModule, CommonModule],
+    providers: [VoluntariadosService]
 })
 export class EditarAsistenciaComponent implements OnInit {
   asistenciaForm!: FormGroup;

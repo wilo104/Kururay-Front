@@ -5,12 +5,11 @@ import { VoluntariosService } from '../voluntarios.service';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
 @Component({
-  selector: 'app-registrar-feedback',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './registrar-feedback.component.html',
-  styleUrls: ['./registrar-feedback.component.css'],
-  providers: [AuthService, VoluntariosService],
+    selector: 'app-registrar-feedback',
+    imports: [FormsModule],
+    templateUrl: './registrar-feedback.component.html',
+    styleUrls: ['./registrar-feedback.component.css'],
+    providers: [AuthService, VoluntariosService]
 })
 export class RegistrarFeedbackComponent implements OnInit {
   voluntariadoId!: number;

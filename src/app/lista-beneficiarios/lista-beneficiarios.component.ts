@@ -4,12 +4,11 @@ import { BeneficiariosService } from '../beneficiarios.service';
 import { Router } from '@angular/router'; 
 import { NgxPaginationModule } from 'ngx-pagination';
 @Component({
-  selector: 'app-lista-beneficiarios',
-  standalone: true,
-  imports: [CommonModule,NgxPaginationModule],
-  templateUrl: './lista-beneficiarios.component.html',
-  styleUrls: ['./lista-beneficiarios.component.css'],
-  providers:[BeneficiariosService]
+    selector: 'app-lista-beneficiarios',
+    imports: [CommonModule, NgxPaginationModule],
+    templateUrl: './lista-beneficiarios.component.html',
+    styleUrls: ['./lista-beneficiarios.component.css'],
+    providers: [BeneficiariosService]
 })
 export class ListaBeneficiariosComponent implements OnInit {
   beneficiarios: any[] = [];
