@@ -4,7 +4,7 @@ import {
   DecimalPipe,
   NgForOf,
   NgIf
-} from "./chunk-N4RD55UT.js";
+} from "./chunk-X6GTHVJB.js";
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -45,9 +45,9 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵtextInterpolate2
-} from "./chunk-5D2JJTZD.js";
-import "./chunk-WBQSER3X.js";
+} from "./chunk-36EIFHO2.js";
 import "./chunk-TDK5NIWS.js";
+import "./chunk-WBQSER3X.js";
 import "./chunk-RK6XMIZN.js";
 import "./chunk-YHCV7DAQ.js";
 

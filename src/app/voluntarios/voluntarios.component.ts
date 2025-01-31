@@ -123,11 +123,6 @@ export class VoluntariosComponent {
 
 
 
-
-  editarUsuario(usuario: any) {
-    this.router.navigate([`/usuarios/${usuario.id}/editar`]);
-  }
-
     restauraracceso(id: number): void {
       const tabla="voluntarios";
       this.restaurarClaveService.restaurarContrasena(tabla, id).subscribe({

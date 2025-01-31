@@ -45,7 +45,7 @@ export class EditarVoluntarioComponent implements OnInit {
       apellido_paterno: ['', [Validators.required]],
       apellido_materno: ['', [Validators.required]],
       correo: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
+      celular: ['', [Validators.required, Validators.pattern(/^\d{9}$/)]],
       fecha_nacimiento: ['', [Validators.required]],
       area: ['', [Validators.required]],
       situacion: ['', [Validators.required]], // Se mapea a grado_instruccion
@@ -83,7 +83,7 @@ export class EditarVoluntarioComponent implements OnInit {
         }
 
         if (voluntario.celular) {
-          voluntario.telefono = voluntario.celular; // Mapear celular a telefono
+          voluntario.celular = voluntario.celular; // Mapear celular a telefono
         }
 
         if (voluntario.fecha_nacimiento) {
@@ -119,6 +119,8 @@ export class EditarVoluntarioComponent implements OnInit {
       // Mapear situacion a grado_instruccion antes de enviar
       voluntarioData.grado_instruccion = voluntarioData.situacion;
       delete voluntarioData.situacion;
+     console.log(voluntarioData.fecha_nacimiento)
+   
 
       Object.keys(voluntarioData).forEach((key) => {
         formData.append(key, voluntarioData[key]);
